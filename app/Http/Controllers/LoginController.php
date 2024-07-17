@@ -20,13 +20,14 @@ class LoginController extends Controller
     }
     public function login(LoginRequest $request)
     {
-        $data = $request->only(['username', 'password']);
+        $data = $request->validated();
+        $loginSuccess = $this->loginService->login($data);
 
-        if ($this->loginService->login($data)) {
-            return redirect()->intended(route('tasks.index'));
+        if ($loginSuccess) {
+            return view('dashboard');
+        } else {
+            return back()->withErrors(['phone' => 'Hisob maʼlumotlari yaroqsiz'])->withInput();
         }
-
-        return redirect()->back()->with('error', 'Username or password is incorrect');
     }
 
     public function register(RegisterRequest $request)

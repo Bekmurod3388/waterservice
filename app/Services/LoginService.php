@@ -10,7 +10,10 @@ class LoginService
 {
     public function login(array $data)
     {
-        if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
+        $user = User::where('phone', $data['phone'])->first();
+
+        if ($user && Hash::check($data['password'], $user->password)) {
+            Auth::login($user);
             return true;
         }
 
