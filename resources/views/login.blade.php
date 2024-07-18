@@ -31,6 +31,9 @@
                 <p>Click the login button to log in</p>
                 <button class="ghost" id="signIn">Login</button>
             </div>
+            <div class="login_image">
+                <img src="{{asset("assets/Images/login-image.jpg")}}" alt="img">
+            </div>
         </div>
     </div>
 </div>
