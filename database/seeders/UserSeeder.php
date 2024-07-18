@@ -21,9 +21,19 @@ class UserSeeder extends Seeder
         ])->assignRole('admin');
 
         User::create([
-            'name' => 'user',
+            'name' => 'manager',
             'phone' => '987654321',
-            'password' => Hash::make('user'),
-        ])->assignRole('user');
+            'password' => Hash::make('admin'),
+        ])->assignRole('manager');
+        User::create([
+            'name' => 'operator',
+            'phone' => '123123123',
+            'password' => Hash::make('admin'),
+        ])->assignRole('operator');
+        User::create([
+            'name' => 'agent',
+            'phone' => '123123124',
+            'password' => Hash::make('admin'),
+        ])->assignRole('agent');
     }
 }
