@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/client', ClientController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/service', ServiceController::class);
-    Route::resource('/filter', FilterController::class);
+    Route::resource('/asdasdqweq', FilterController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
