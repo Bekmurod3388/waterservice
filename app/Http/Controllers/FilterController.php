@@ -21,7 +21,7 @@ class FilterController extends Controller
      */
     public function create()
     {
-        return view('filters.create');
+        return view('filter.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class FilterController extends Controller
 
         Filter::create($request->all());
 
-        return redirect()->route('filters.index');
+        return redirect()->route('filter.index');
     }
 
     /**
@@ -52,7 +52,7 @@ class FilterController extends Controller
      */
     public function edit(Filter $filter)
     {
-        return view('filters.edit', compact('filter'));
+        return view('filter.edit', compact('filter'));
     }
 
     /**
@@ -67,7 +67,7 @@ class FilterController extends Controller
 
         $filter->update($request->all());
 
-        return redirect()->route('filters.index');
+        return redirect()->route('filter.index');
     }
 
     /**
@@ -78,7 +78,7 @@ class FilterController extends Controller
 
         $filter->delete();
 
-        return redirect()->route('filters.index');
+        return redirect()->route('filter.index');
 
     }
 }

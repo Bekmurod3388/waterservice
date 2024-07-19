@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class,'loginPage'])->name('loginPage');
@@ -15,6 +16,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('/client', ClientController::class);
     Route::resource('/user', UserController::class);
+    Route::resource('/service', ServiceController::class);
+    Route::resource('/filter', FilterController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

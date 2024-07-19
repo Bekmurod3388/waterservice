@@ -18,7 +18,7 @@
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Oʻchirish</button>
                 </form>
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Yopish</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Yopishe</button>
             </div>
         </div>
     </div>
