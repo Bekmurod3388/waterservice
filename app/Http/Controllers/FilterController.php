@@ -12,7 +12,7 @@ class FilterController extends Controller
      */
     public function index()
     {
-        $filters = Filter::all();
+        $filters = Filter::paginate(10);
         return view('filters.index', compact('filters'));
     }
 
@@ -36,7 +36,7 @@ class FilterController extends Controller
 
         Filter::create($request->all());
 
-        return redirect()->route('filters.index');
+        return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
     }
 
     /**
@@ -45,14 +45,6 @@ class FilterController extends Controller
     public function show(Filter $filter)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Filter $filter)
-    {
-        return view('filters.edit', compact('filter'));
     }
 
     /**
@@ -67,7 +59,7 @@ class FilterController extends Controller
 
         $filter->update($request->all());
 
-        return redirect()->route('filters.index');
+        return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');
     }
 
     /**
@@ -78,7 +70,7 @@ class FilterController extends Controller
 
         $filter->delete();
 
-        return redirect()->route('filters.index');
+        return back()->with('success', 'Servis muvaffaqiyatli oʻchirildi!');
 
     }
 }

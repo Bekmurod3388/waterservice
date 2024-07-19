@@ -12,16 +12,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::paginate(10);
         return view('services.index', compact('services'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('service.create');
     }
 
     /**
@@ -36,7 +28,7 @@ class ServiceController extends Controller
 
         Service::create($request->all());
 
-        return redirect()->route('service.index');
+        return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
     }
 
     /**
@@ -45,14 +37,6 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Service $service)
-    {
-        return view('services.edit', compact('service'));
     }
 
     /**
@@ -67,7 +51,7 @@ class ServiceController extends Controller
 
         $service->update($request->all());
 
-        return redirect()->route('service.index');
+        return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');
     }
 
     /**
@@ -76,6 +60,6 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $service->delete();
-        return redirect()->route('service.index');
+        return back()->with('success', 'Servis muvaffaqiyatli oʻchirildi!');
     }
 }

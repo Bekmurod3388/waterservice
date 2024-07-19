@@ -22,7 +22,7 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('service.store') }}">
+                <form method="POST" action="{{ route('services.store') }}">
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
