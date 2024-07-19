@@ -82,6 +82,12 @@
                 <div data-i18n="Analytics">Clients</div>
             </a>
         </li>
+        <li class="menu-item @if(request()->routeIs('user.index')) active @endif">
+            <a href="{{ route('user.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="Analytics">Users</div>
+            </a>
+        </li>
         @endrole
     </ul>
 </aside>
