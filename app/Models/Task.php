@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
-    protected $fillable=['point_id','user_id','status'];
 
-    public function point(){
+    protected $fillable = ['point_id', 'user_id', 'status'];
+
+    public function point()
+    {
         return $this->belongsTo(Point::class);
     }
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

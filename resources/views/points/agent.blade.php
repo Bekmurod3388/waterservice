@@ -1,0 +1,59 @@
+<button
+    type="button"
+    class="btn btn-secondary create-new btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#basicModal">
+    <span>
+        <i class="bx bx-plus me-sm-1"></i>
+        <span class="d-none d-sm-inline-block">agent belgilash</span>
+    </span>
+</button>
+
+<div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Agent belgilash</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="">
+                    @csrf
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="nameBasic" class="form-label">Agentlarni tanlang</label>
+                                @foreach($agents as $agent)
+                                    <input type="checkbox" value="{{$agent->id}}">{{$agent->name}}
+                                @endforeach
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="nameBasic" class="form-label">Manzil</label>
+                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}"
+                                   placeholder="Full Name" required/>
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="phone" class="form-label">Servislar</label>
+                                @foreach($services as $service)
+                                <input type="checkbox" value="{{$service->id}}">{{$service->name}}{{$service->count}}
+                                @endforeach
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Yopish</button>
+                        <button type="submit" class="btn btn-primary">Saqlash</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
