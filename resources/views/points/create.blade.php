@@ -5,7 +5,7 @@
     data-bs-target="#basicModal">
     <span>
         <i class="bx bx-plus me-sm-1"></i>
-        <span class="d-none d-sm-inline-block">Yangi mijoz qo'shish</span>
+        <span class="d-none d-sm-inline-block">Manzil qo'shish</span>
     </span>
 </button>
 
@@ -13,7 +13,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Yangi mijoz qo'shish</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Manzil qo'shish</h5>
                 <button
                     type="button"
                     class="btn-close"

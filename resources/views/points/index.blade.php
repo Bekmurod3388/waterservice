@@ -18,7 +18,7 @@
                 </form>
 
 
-                @include('clients.create')
+                @include('points.create')
 
 
             </div>
@@ -35,22 +35,23 @@
                     </tr>
                     </thead>
                     <tbody>
-{{--                    @forelse($clients as $client)--}}
-{{--                        <tr>--}}
-{{--                            <td>{{ $client->id }}</td>--}}
-{{--                            <td>{{ $client->name }}</td>--}}
-{{--                            <td>{{ $client->phone }}</td>--}}
-{{--                            <td>--}}
-{{--                                <div class="d-flex">--}}
-{{--                                    @include('clients.edit')--}}
-{{--                                    <a href="#" class="btn btn-success me-2"><i class="bx bx-map"></i></a><!--Lokatsiyalar Client Filter-->--}}
-{{--                                    <a href="#" class="btn btn-primary me-2"><i class="bx bx-list-check"></i></a><!--Tasks-->--}}
-{{--                                </div>--}}
-{{--                            </td>--}}
-{{--                            @empty--}}
-{{--                                <td colspan="3" class="text-center">Ma'lumot yo'q</td>--}}
-{{--                        </tr>--}}
-{{--                    @endforelse--}}
+                    @forelse($points as $point)
+                        <tr>
+                            <td>{{ $point->id }}</td>
+                            <td>{{ $point->client->name }}</td>
+                            <td>{{ $point->client->phone }}</td>
+                            <td>{{ $point->region->name }}</td>
+                            <td>{{ $point->address }}</td>
+                            <td>
+                                <div class="d-flex">
+                                    @include('point.edit')
+
+                                </div>
+                            </td>
+                            @empty
+                                <td colspan="6" class="text-center">Ma'lumot yo'q</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
