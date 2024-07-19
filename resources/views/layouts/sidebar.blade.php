@@ -95,8 +95,8 @@
             </a>
         </li>
 
-        <li class="menu-item @if(request()->routeIs('filter.index')) active @endif">
-            <a href="{{ route('filter.index') }}" class="menu-link">
+        <li class="menu-item @if(request()->routeIs('filters.index')) active @endif">
+            <a href="{{ route('filters.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics"> Filterlar </div>
             </a>
