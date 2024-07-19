@@ -9,11 +9,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [LoginController::class,'loginPage'])->name('loginPage');
+
+Route::get('/login', [LoginController::class,'loginPage'])->name('loginPage');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', function () {
+    Route::get('/', function () {
        return view('dashboard');
     });
 
