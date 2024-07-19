@@ -39,6 +39,8 @@
                             <td>
                                 <div class="d-flex">
                                     @include('clients.edit')
+                                    <a href="#" class="btn btn-success me-2"><i class="bx bx-map"></i></a><!--Lokatsiyalar Client Filter-->
+                                    <a href="#" class="btn btn-primary me-2"><i class="bx bx-list-check"></i></a><!--Tasks-->
                                 </div>
                             </td>
                             @empty

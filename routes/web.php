@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ClientFilterController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -16,6 +17,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::resource('/client', ClientController::class);
+    Route::resource('client/{client}/filters',ClientFilterController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/service', ServiceController::class);
     Route::resource('/filters', FilterController::class);

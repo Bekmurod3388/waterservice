@@ -20,7 +20,7 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('filter.update', $filter->id) }}">
+                <form method="POST" action="{{ route('filters.update', $filter->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="row g-2">

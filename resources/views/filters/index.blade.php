@@ -43,7 +43,7 @@
 
                                     @include('filters.edit')
 
-                                    <form method="POST" action="{{route('filter.destroy',$filter->id)}}">
+                                    <form method="POST" action="{{route('filters.destroy',$filter->id)}}">
 
                                         @csrf
                                         @method('DELETE')
