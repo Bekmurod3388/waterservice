@@ -34,7 +34,7 @@ class MockDataSeeder extends Seeder
 
         Point::query()->firstOrCreate([
             'client_id' => $client->id,
-            'region_id' => Region::query()->inRandomOrder()->first(),
+            'region_id' => Region::query()->inRandomOrder()->first()->id,
             'address' => 'test address',
             'filter_id' => $filter->id,
             'filter_expire' => 3,
