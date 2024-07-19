@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Services\StoreRequest;
+use App\Http\Requests\Services\UpdateRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -19,13 +21,8 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            "cost" => 'required',
-        ]);
-
         Service::create($request->all());
 
         return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
@@ -42,13 +39,8 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Service $service)
+    public function update(UpdateRequest $request, Service $service)
     {
-        $request->validate([
-            'name' => 'required',
-            "cost" => 'required',
-        ]);
-
         $service->update($request->all());
 
         return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');

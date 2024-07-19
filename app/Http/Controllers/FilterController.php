@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Filters\StoreRequest;
+use App\Http\Requests\Filters\UpdateRequest;
 use App\Models\Filter;
 use Illuminate\Http\Request;
 
@@ -27,13 +29,8 @@ class FilterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        request()->validate([
-            'name' => 'required',
-            'cost' => 'required',
-        ]);
-
         Filter::create($request->all());
 
         return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
@@ -50,13 +47,8 @@ class FilterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Filter $filter)
+    public function update(UpdateRequest $request, Filter $filter)
     {
-        request()->validate([
-            'name' => 'required',
-            'cost' => 'required',
-        ]);
-
         $filter->update($request->all());
 
         return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');
