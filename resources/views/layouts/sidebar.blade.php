@@ -69,7 +69,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
+        <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
@@ -80,6 +80,20 @@
             <a href="{{ route('client.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Clients</div>
+            </a>
+        </li>
+
+        <li class="menu-item @if(request()->routeIs('service.index')) active @endif">
+            <a href="{{ route('service.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Analytics">Servislar</div>
+            </a>
+        </li>
+
+        <li class="menu-item @if(request()->routeIs('filter.index')) active @endif">
+            <a href="{{ route('filter.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Analytics"> Filterlar </div>
             </a>
         </li>
         @endrole
