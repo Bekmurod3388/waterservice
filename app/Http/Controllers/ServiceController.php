@@ -21,7 +21,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('services.create');
+        return view('service.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class ServiceController extends Controller
 
         Service::create($request->all());
 
-        return redirect()->route('services.index');
+        return redirect()->route('service.index');
     }
 
     /**
@@ -67,7 +67,7 @@ class ServiceController extends Controller
 
         $service->update($request->all());
 
-        return redirect()->route('services.index');
+        return redirect()->route('service.index');
     }
 
     /**
@@ -76,6 +76,6 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $service->delete();
-        return redirect()->route('services.index');
+        return redirect()->route('service.index');
     }
 }
