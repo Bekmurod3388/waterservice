@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Table /</span> Clients</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Table /</span> Users</h4>
 
         @include('alerts.success-alert')
         @include('alerts.error-alert')
@@ -18,9 +18,7 @@
                     </button>
                 </form>
 
-
-                @include('clients.create')
-
+                @include('users.create')
 
             </div>
             <div class="table-responsive text-nowrap">
@@ -39,7 +37,8 @@
                             <td>{{ $user->phone }}</td>
                             <td>
                                 <div class="d-flex">
-                                    @include('clients.edit')
+                                    @include('users.edit')
+                                    @include('users.delete')
                                 </div>
                             </td>
                         </tr>

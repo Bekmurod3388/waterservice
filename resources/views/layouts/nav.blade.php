@@ -55,8 +55,15 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
+                                    @php
+                                        $user = \Illuminate\Support\Facades\Auth::user();
+                                    @endphp
+                                    <span class="fw-semibold d-block">{{ $user->name }}</span>
+                                    <small class="text-muted">
+                                        @foreach($user->getRoleNames() as $role)
+                                            {{ $role }}
+                                        @endforeach
+                                    </small>
                                 </div>
                             </div>
                         </a>
