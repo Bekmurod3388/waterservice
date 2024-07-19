@@ -26,8 +26,8 @@
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">To'liq ismi</label>
-                            <select class="form-control">
+                            <label for="region_id" class="form-label">Tuman</label>
+                            <select id="region_id" class="form-control" name="region_id">
                                 @foreach($regions as $region)
                                     <option value="{{ $region->id }}">{{ $region->name }}</option>
                                 @endforeach
@@ -36,21 +36,27 @@
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Manzil</label>
-                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}"
+                            <label for="address" class="form-label">Manzil</label>
+                            <input type="text" id="address" class="form-control" name="address" value="{{ old('address') }}"
                                    placeholder="Full Name" required/>
                         </div>
                     </div>
-
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="phone" class="form-label">Filterlar</label>
-                            <select class="form-control">
+                            <label for="filter_id" class="form-label">Filterlar</label>
+                            <select id="filter_id" class="form-control" name="filter_id">
                                 <option disabled>Mavjud emas</option>
                                 @foreach($filters as $filter)
                                     <option value="{{ $filter->id }}">{{ $filter->name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="expire" class="form-label">Manzil</label>
+                            <input type="number" id="expire" class="form-control" name="expire" value="{{ old('expire') ?? 6 }}"
+                                   required min="1" max="12"/>
                         </div>
                     </div>
                     <div class="modal-footer">
