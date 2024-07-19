@@ -17,43 +17,36 @@ class PointController extends Controller
     public function index()
     {
         return view('points.index', [
-            'points' => Point::all(),
+            'points' => Point::with('client')->get(),
             'regions' => Region::all(),
             'filters' => Filter::all()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $client)
     {
-        //
+        $request->validate([
+            'region_id' => 'required',
+            'address' => '',
+            'filter_id' => 'required',
+            'expire' => 'required|int',
+        ]);
+
+        Point::query()->create([
+            'client_id' => $client,
+            'region_id' => $request->get('region_id'),
+            'address' => $request->get('address'),
+            'filter_id' => $request->get('filter_id'),
+            'filter_expire_month' => now()->addMonths((int)$request->get('expire'))
+        ]);
+
+        return redirect()->back()->with('success', 'Manzil muvaffaqiyatli yaratildi!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Point $point)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Point $point)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

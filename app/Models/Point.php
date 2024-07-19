@@ -13,6 +13,11 @@ class Point extends Model
         'client_id', 'latitude', 'longitude', 'region_id', 'address', 'filter_id', 'filter_expire_month'
     ];
 
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
     public function region()
     {
         return $this->belongsTo(Region::class);
