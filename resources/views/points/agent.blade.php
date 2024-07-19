@@ -26,10 +26,12 @@
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Agentlarni tanlang</label><br>
+                            <label for="agent_id" class="form-label">Agentlarni tanlang</label><br>
+                            <select id="agent_id" class="form-control" name="agent_id">
                                 @foreach($agents as $agent)
-                                    <input type="checkbox" class="form-check-input" value="{{$agent->id}}"><span class="form-label p-1">{{$agent->name}}</span>
+                                    <option value="{{ $agent->id }}">{{ $agent->name }}</option>
                                 @endforeach
+                            </select>
                         </div>
                     </div>
 

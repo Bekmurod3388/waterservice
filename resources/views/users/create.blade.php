@@ -33,6 +33,7 @@
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="phone" class="form-label">Telefon raqami</label>
+
                             <input type="tel" id="phone" class="form-control" name="phone" placeholder="940810048"
                                    pattern="[0-9]{9}" maxlength="9" value="{{ old('phone') }}" required/>
                         </div>

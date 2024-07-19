@@ -42,7 +42,7 @@
                             <td>{{ $point->client->phone }}</td>
                             <td>{{ $point->region->name }}</td>
                             <td>{{ $point->address }}</td>
-                            <td><span class="btn btn-outline-danger">{{$point->filter_expire_month}}</span></td>
+                            <td><span class="btn btn-outline-danger">{{$point->filter_expire_date->format('Y-m-d')}}</span></td>
                             <td>
                                 <div class="d-flex">
                                     @include('points.agent')
