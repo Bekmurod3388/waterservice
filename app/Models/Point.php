@@ -10,7 +10,11 @@ class Point extends Model
     use HasFactory;
 
     protected $fillable = [
-        'client_id', 'latitude', 'longitude', 'region_id', 'address', 'filter_id', 'filter_expire_month'
+        'client_id', 'latitude', 'longitude', 'region_id', 'address', 'filter_id', 'filter_expire', 'filter_expire_date'
+    ];
+
+    protected $casts = [
+        'filter_expire_date' => 'date'
     ];
 
     public function client()
