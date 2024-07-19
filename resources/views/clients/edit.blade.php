@@ -25,7 +25,7 @@
                     @method('PUT')
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Ismi</label>
+                            <label for="nameBasic" class="form-label">To'liq ismi</label>
                             <input type="text" id="nameBasic" class="form-control" name="name" value="{{ $client->name }}"/>
                         </div>
                     </div>

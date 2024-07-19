@@ -2,7 +2,6 @@
 @section('content')
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Table /</span> Clients</h4>
 
         @include('alerts.success-alert')
         @include('alerts.error-alert')
@@ -27,9 +26,9 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Full Name</th>
-                        <th>Phone Number</th>
-                        <th>Actions</th>
+                        <th>To'liq ism</th>
+                        <th>Telefon raqami</th>
+                        <th>Harakatlar</th>
                     </tr>
                     </thead>
                     <tbody>

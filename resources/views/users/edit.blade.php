@@ -25,7 +25,7 @@
                     @method('PUT')
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="roles" class="form-label">Roles</label>
+                            <label for="roles" class="form-label">Rollar</label>
                             @foreach($roles as $role)
                                 <div class="form-check mt-3">
                                     <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $role->name }}" id="role{{ $role->id }}"

@@ -5,7 +5,7 @@
     data-bs-target="#basicModal">
     <span>
         <i class="bx bx-plus me-sm-1"></i>
-        <span class="d-none d-sm-inline-block">Add New User</span>
+        <span class="d-none d-sm-inline-block">Yangi mijoz qo'shish</span>
     </span>
 </button>
 
@@ -13,7 +13,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">User Create</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Yangi mijoz qo'shish</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -26,7 +26,7 @@
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Full Name</label>
+                            <label for="nameBasic" class="form-label">To'liq ismi</label>
                             <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name" required/>
                         </div>
                     </div>

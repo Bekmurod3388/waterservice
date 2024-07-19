@@ -5,7 +5,7 @@
     data-bs-target="#basicModal">
     <span>
         <i class="bx bx-plus me-sm-1"></i>
-        <span class="d-none d-sm-inline-block">Add New User</span>
+        <span class="d-none d-sm-inline-block">Yangi foydalanuvchi qo'shish</span>
     </span>
 </button>
 
@@ -13,7 +13,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Client Create</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Yangi foydalanuvchi qo'shish</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -26,20 +26,20 @@
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Full Name</label>
+                            <label for="nameBasic" class="form-label">To'liq ismi</label>
                             <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name" required/>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="phone" class="form-label">Phone Number</label>
+                            <label for="phone" class="form-label">Telefon raqami</label>
                             <input type="tel" id="phone" class="form-control" name="phone" placeholder="940810048"
                                    pattern="[0-9]{9}" maxlength="9" value="{{ old('phone') }}" required/>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="roles" class="form-label">Roles</label>
+                            <label for="roles" class="form-label">Rollar</label>
                             @foreach($roles as $role)
                                 <div class="form-check mt-3">
                                     <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $role->name }}" id="role{{ $role->id }}" />
@@ -49,8 +49,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Yopish</button>
+                        <button type="submit" class="btn btn-primary">Saqlash</button>
                     </div>
                 </form>
             </div>
