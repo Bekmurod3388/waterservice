@@ -2,8 +2,6 @@
 @section('content')
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Table /</span> Services </h4>
-
         @include('alerts.success-alert')
         @include('alerts.error-alert')
 
@@ -34,7 +32,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($services as $service)
+                    @forelse($services as $service)
                         <tr>
                             <td>{{ $loop->index+1 }}</td>
                             <td>{{ $service->name }}</td>
@@ -58,8 +56,10 @@
 
                                 </div>
                             </td>
+                            @empty
+                                <td colspan="3" class="text-center">Ma'lumot yo'q</td>
                         </tr>
-                    @endforeach
+                    @endforelse
                     </tbody>
                 </table>
             </div>

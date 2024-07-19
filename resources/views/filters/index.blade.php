@@ -2,7 +2,6 @@
 @section('content')
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Table /</span> Filters </h4>
 
         @include('alerts.success-alert')
         @include('alerts.error-alert')
@@ -34,7 +33,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($filters as $filter)
+                    @forelse($filters as $filter)
                         <tr>
                             <td>{{ $loop->index+1 }}</td>
                             <td>{{ $filter->name }}</td>
@@ -59,8 +58,11 @@
                                     </form>
                                 </div>
                             </td>
+                            @empty
+                                <td colspan="3" class="text-center">Ma'lumot yo'q</td>
                         </tr>
-                    @endforeach
+                    @endforelse
+
                     </tbody>
                 </table>
             </div>
