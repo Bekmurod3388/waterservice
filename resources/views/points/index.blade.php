@@ -44,7 +44,7 @@
                             <td>{{ $point->address }}</td>
                             <td>
                                 <div class="d-flex">
-                                    @include('point.edit')
+                                    @include('points.edit')
 
                                 </div>
                             </td>
