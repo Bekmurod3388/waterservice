@@ -19,7 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::resource('/client', ClientController::class);
-    Route::resource('client/{client}/filters',PointController::class)->names('client.filter');
+    Route::resource('client/{client}/points',PointController::class)->names('client.points');
     Route::resource('/user', UserController::class);
     Route::resource('/service', ServiceController::class);
     Route::resource('/filters', FilterController::class);

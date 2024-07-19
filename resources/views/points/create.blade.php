@@ -22,7 +22,7 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('client.filter.store', request()->route('client')) }}">
+                <form method="POST" action="{{ route('client.points.store', request()->route('client')) }}">
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
@@ -54,8 +54,8 @@
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="expire" class="form-label">Manzil</label>
-                            <input type="number" id="expire" class="form-control" name="expire" value="{{ old('expire') ?? 6 }}"
+                            <label for="filter_expire" class="form-label">Almashtirish sanasi</label>
+                            <input type="number" id="filter_expire" class="form-control" name="filter_expire" value="{{ old('expire') ?? 6 }}"
                                    required min="1" max="12"/>
                         </div>
                     </div>
