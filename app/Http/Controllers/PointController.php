@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Filter;
 use App\Models\Point;
+use App\Models\Region;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
@@ -12,8 +14,11 @@ class PointController extends Controller
      */
     public function index()
     {
-        $points = Point::all();
-        return view('points.index',['points'=>$points]);
+        return view('points.index', [
+            'points' => Point::all(),
+            'regions' => Region::all(),
+            'filters' => Filter::all()
+        ]);
     }
 
     /**
