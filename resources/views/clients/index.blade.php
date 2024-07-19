@@ -26,6 +26,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th>ID</th>
                         <th>To'liq ism</th>
                         <th>Telefon raqami</th>
                         <th>Harakatlar</th>
@@ -34,6 +35,7 @@
                     <tbody>
                     @forelse($clients as $client)
                         <tr>
+                            <td>{{ $client->id }}</td>
                             <td>{{ $client->name }}</td>
                             <td>{{ $client->phone }}</td>
                             <td>
