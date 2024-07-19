@@ -30,6 +30,7 @@
                         <th>Telefon raqami</th>
                         <th>Tuman</th>
                         <th>Manzil</th>
+                        <th>Filtr almashtirish sanasi</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
@@ -41,6 +42,7 @@
                             <td>{{ $point->client->phone }}</td>
                             <td>{{ $point->region->name }}</td>
                             <td>{{ $point->address }}</td>
+                            <td><span class="btn btn-outline-danger">{{$point->filter_expire_month}}</span></td>
                             <td>
                                 <div class="d-flex">
                                     @include('points.agent')

@@ -69,7 +69,7 @@ class PointController extends Controller
         $services = Service::all();
         $agents = User::role('agent')->get();
         $points = Point::query()->
-        where('filter_expire_month' ,'<', now())->get();
+        where('filter_expire_month' ,'<=', now())->get();
         return view('points.work_list',['points'=>$points, 'agents'=>$agents,'services'=>$services]);
     }
 }
