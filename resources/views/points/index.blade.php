@@ -27,28 +27,30 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>To'liq ism</th>
+                        <th>Mijoz</th>
                         <th>Telefon raqami</th>
-                        <th>Harakatlar</th>
+                        <th>Tuman</th>
+                        <th>Manzil</th>
+                        <th>Amallar</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($clients as $client)
-                        <tr>
-                            <td>{{ $client->id }}</td>
-                            <td>{{ $client->name }}</td>
-                            <td>{{ $client->phone }}</td>
-                            <td>
-                                <div class="d-flex">
-                                    @include('clients.edit')
-                                    <a href="{{route('client.filter.index',$client->id)}}" class="btn btn-success me-2"><i class="bx bx-map"></i></a><!--Lokatsiyalar Client Filter-->
-                                    <a href="#" class="btn btn-primary me-2"><i class="bx bx-list-check"></i></a><!--Tasks-->
-                                </div>
-                            </td>
-                            @empty
-                                <td colspan="3" class="text-center">Ma'lumot yo'q</td>
-                        </tr>
-                    @endforelse
+{{--                    @forelse($clients as $client)--}}
+{{--                        <tr>--}}
+{{--                            <td>{{ $client->id }}</td>--}}
+{{--                            <td>{{ $client->name }}</td>--}}
+{{--                            <td>{{ $client->phone }}</td>--}}
+{{--                            <td>--}}
+{{--                                <div class="d-flex">--}}
+{{--                                    @include('clients.edit')--}}
+{{--                                    <a href="#" class="btn btn-success me-2"><i class="bx bx-map"></i></a><!--Lokatsiyalar Client Filter-->--}}
+{{--                                    <a href="#" class="btn btn-primary me-2"><i class="bx bx-list-check"></i></a><!--Tasks-->--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                            @empty--}}
+{{--                                <td colspan="3" class="text-center">Ma'lumot yo'q</td>--}}
+{{--                        </tr>--}}
+{{--                    @endforelse--}}
                     </tbody>
                 </table>
             </div>

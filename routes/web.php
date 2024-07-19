@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientFilterController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PointController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::resource('/client', ClientController::class);
-    Route::resource('client/{client}/filters',ClientFilterController::class);
+    Route::resource('client/{client}/filters',PointController::class)->names('client.filter');
     Route::resource('/user', UserController::class);
     Route::resource('/service', ServiceController::class);
     Route::resource('/filters', FilterController::class);

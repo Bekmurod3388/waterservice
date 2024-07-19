@@ -75,13 +75,27 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
-        @role('admin')
+        @role('admin|operator')
         <li class="menu-item @if(request()->routeIs('client.index')) active @endif">
             <a href="{{ route('client.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Mijozlar</div>
             </a>
         </li>
+        <li class="menu-item ">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-task"></i>
+                <div data-i18n="Analytics">Ishlar ro'yxati</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Analytics">Agent ishlari</div>
+            </a>
+        </li>
+        @endrole
+        @role('admin')
         <li class="menu-item @if(request()->routeIs('user.index')) active @endif">
             <a href="{{ route('user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
