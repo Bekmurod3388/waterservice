@@ -22,19 +22,35 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('client.store') }}">
+                <form method="POST" action="{{ route('client.filter.store', request()->route('client')) }}">
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">To'liq ismi</label>
-                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name" required/>
+                            <select class="form-control">
+                                @foreach($regions as $region)
+                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="phone" class="form-label">Telefon raqami</label>
-                            <input type="tel" id="phone" class="form-control" name="phone" placeholder="940810048"
-                                   pattern="[0-9]{9}" maxlength="9" value="{{ old('phone') }}" required/>
+                            <label for="nameBasic" class="form-label">Manzil</label>
+                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}"
+                                   placeholder="Full Name" required/>
+                        </div>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="phone" class="form-label">Filterlar</label>
+                            <select class="form-control">
+                                <option disabled>Mavjud emas</option>
+                                @foreach($filters as $filter)
+                                    <option value="{{ $filter->id }}">{{ $filter->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

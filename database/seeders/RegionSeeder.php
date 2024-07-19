@@ -14,18 +14,18 @@ class RegionSeeder extends Seeder
     public function run(): void
     {
 
-            Region::create(['name'=>'Urganch']);
-            Region::create(['name'=>'Urganch tuman']);
-            Region::create(['name'=>'Xonqa']);
-            Region::create(['name'=>'Bog\'ot']);
-            Region::create(['name'=>'Xazorasp']);
-            Region::create(['name'=>'Qo\'shko\'pir']);
-            Region::create(['name'=>'Xiva']);
-            Region::create(['name'=>'Xiva tuman']);
-            Region::create(['name'=>'Yangiariq']);
-            Region::create(['name'=>'Yangibozor']);
-            Region::create(['name'=>'Gurlan']);
-            Region::create(['name'=>'Shovot']);
-            Region::create(['name'=>'Tuproqqal\'a']);
+            Region::query()->firstOrCreate(['name'=>'Urganch']);
+            Region::query()->firstOrCreate(['name'=>'Urganch tuman']);
+            Region::query()->firstOrCreate(['name'=>'Xonqa']);
+            Region::query()->firstOrCreate(['name'=>'Bog\'ot']);
+            Region::query()->firstOrCreate(['name'=>'Xazorasp']);
+            Region::query()->firstOrCreate(['name'=>'Qo\'shko\'pir']);
+            Region::query()->firstOrCreate(['name'=>'Xiva']);
+            Region::query()->firstOrCreate(['name'=>'Xiva tuman']);
+            Region::query()->firstOrCreate(['name'=>'Yangiariq']);
+            Region::query()->firstOrCreate(['name'=>'Yangibozor']);
+            Region::query()->firstOrCreate(['name'=>'Gurlan']);
+            Region::query()->firstOrCreate(['name'=>'Shovot']);
+            Region::query()->firstOrCreate(['name'=>'Tuproqqal\'a']);
     }
 }
