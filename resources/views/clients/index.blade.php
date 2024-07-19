@@ -33,7 +33,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($clients as $client)
+                    @forelse($clients as $client)
                         <tr>
                             <td>{{ $client->name }}</td>
                             <td>{{ $client->phone }}</td>
@@ -42,8 +42,10 @@
                                     @include('clients.edit')
                                 </div>
                             </td>
+                            @empty
+                                <td colspan="3" class="text-center">Ma'lumot yo'q</td>
                         </tr>
-                    @endforeach
+                    @endforelse
                     </tbody>
                 </table>
             </div>
