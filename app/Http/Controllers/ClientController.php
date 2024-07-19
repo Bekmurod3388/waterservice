@@ -29,7 +29,7 @@ class ClientController extends Controller
 
         Client::create($request->all());
 
-        return back()->with('success', 'Client created successfully!');
+        return back()->with('success', 'Mijoz muvaffaqiyatli yaratildi!');
     }
 
     /**
@@ -52,7 +52,7 @@ class ClientController extends Controller
 
         $client->update($request->all());
 
-        return back()->with('success', 'Client updated successfully!');
+        return back()->with('success', 'Mijoz muvaffaqiyatli yangilandi!');
     }
 
     /**

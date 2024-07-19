@@ -41,7 +41,7 @@ class UserController extends Controller
 
         $user->assignRole($validatedData['roles']);
 
-        return back()->with('success', 'User created successfully.');
+        return back()->with('success', 'Foydalanuvchi muvaffaqiyatli yaratildi!');
     }
 
     /**
@@ -64,7 +64,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->syncRoles($validatedData['roles']);
 
-        return back()->with('success', 'User roles updated successfully.');
+        return back()->with('success', 'Foydalanuvchi rollari muvaffaqiyatli yangilandi!');
     }
 
 
@@ -76,6 +76,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return back()->with('success', 'User deleted successfully!');
+        return back()->with('success', 'Foydalanuvchi muvaffaqiyatli oʻchirildi!');
     }
 }
