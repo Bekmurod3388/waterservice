@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-semibold d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
+                                    <small class="text-muted">{{auth()->user()->getRoleNames()}}</small>
                                 </div>
                             </div>
                         </a>
