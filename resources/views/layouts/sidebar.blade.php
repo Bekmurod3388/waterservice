@@ -76,9 +76,9 @@
             </a>
         </li>
         @role('admin')
-        <li class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <li class="menu-item @if(request()->routeIs('client.index')) active @endif">
+            <a href="{{ route('client.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Clients</div>
             </a>
         </li>

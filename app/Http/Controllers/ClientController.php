@@ -13,15 +13,8 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
-        return view('clients.index', compact('clients'));
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('clients.create');
+        return view('clients.index', compact('clients'));
     }
 
     /**
@@ -35,7 +28,8 @@ class ClientController extends Controller
         ]);
 
         Client::create($request->all());
-        return redirect()->route('clients.index');
+
+        return back()->with('success', 'Client created successfully!');
     }
 
     /**
@@ -44,14 +38,6 @@ class ClientController extends Controller
     public function show(Client $client)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Client $client)
-    {
-        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -66,8 +52,7 @@ class ClientController extends Controller
 
         $client->update($request->all());
 
-        return redirect()->route('clients.index');
-
+        return back()->with('success', 'Client updated successfully!');
     }
 
     /**
@@ -76,6 +61,7 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         $client->delete();
+
         return redirect()->route('clients.index');
     }
 }
