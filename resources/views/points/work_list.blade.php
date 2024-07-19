@@ -18,7 +18,6 @@
                 </form>
 
 
-                @include('clients.create')
 
 
             </div>
@@ -27,35 +26,33 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>To'liq ism</th>
+                        <th>Mijoz</th>
                         <th>Telefon raqami</th>
-                        <th>Harakatlar</th>
+                        <th>Tuman</th>
+                        <th>Manzil</th>
+                        <th>Amallar</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($clients as $client)
+                    @forelse($points as $point)
                         <tr>
-                            <td>{{ $client->id }}</td>
-                            <td>{{ $client->name }}</td>
-                            <td>{{ $client->phone }}</td>
+                            <td>{{ $point->id }}</td>
+                            <td>{{ $point->client->name }}</td>
+                            <td>{{ $point->client->phone }}</td>
+                            <td>{{ $point->region->name }}</td>
+                            <td>{{ $point->address }}</td>
                             <td>
                                 <div class="d-flex">
-                                    @include('clients.edit')
-                                    <a href="{{route('client.points.index',$client->id)}}" class="btn btn-success me-2"><i class="bx bx-map"></i></a><!--Lokatsiyalar Client Filter-->
-                                    <a href="#" class="btn btn-primary me-2"><i class="bx bx-list-check"></i></a><!--Tasks-->
+                                    @include('points.agent')
+
                                 </div>
                             </td>
                             @empty
-                                <td colspan="3" class="text-center">Ma'lumot yo'q</td>
+                                <td colspan="6" class="text-center">Ma'lumot yo'q</td>
                         </tr>
                     @endforelse
                     </tbody>
                 </table>
-                <!-- Basic Pagination -->
-                <div class="card-body">
-                    {{ $clients->links('pagination::bootstrap-5') }}
-                </div>
-                <!--/ Basic Pagination -->
             </div>
         </div>
     </div>

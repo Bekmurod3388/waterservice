@@ -82,8 +82,8 @@
                 <div data-i18n="Analytics">Mijozlar</div>
             </a>
         </li>
-        <li class="menu-item ">
-            <a href="#" class="menu-link">
+        <li class="menu-item @if(request()->routeIs('work.list')) active @endif">
+            <a href="{{route('work.list')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-task"></i>
                 <div data-i18n="Analytics">Ishlar ro'yxati</div>
             </a>

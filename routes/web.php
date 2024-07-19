@@ -17,10 +17,10 @@ Route::group(['middleware' => 'auth'], function () {
        return view('dashboard');
     });
 
-    Route::resource('/clients', ClientController::class);
+    Route::resource('/client', ClientController::class);
     Route::resource('client/{client}/filters',PointController::class)->names('client.filter');
-    Route::resource('/users', UserController::class);
-    Route::resource('/services', ServiceController::class);
+    Route::resource('/user', UserController::class);
+    Route::resource('/service', ServiceController::class);
     Route::resource('/filters', FilterController::class);
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

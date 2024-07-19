@@ -14,26 +14,49 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'admin',
-            'phone' => '123456789',
-            'password' => Hash::make('admin'),
-        ])->assignRole('admin');
+        $admin = User::query()->firstOrCreate(
+            [
+                'phone' => '123456789',
+            ],
+            [
+                'name' => 'admin',
+                'password' => Hash::make('admin'),
+            ]
+        );
+        $admin->assignRole('admin');
 
-        User::create([
-            'name' => 'manager',
-            'phone' => '987654321',
-            'password' => Hash::make('admin'),
-        ])->assignRole('manager');
-        User::create([
-            'name' => 'operator',
-            'phone' => '123123123',
-            'password' => Hash::make('admin'),
-        ])->assignRole('operator');
-        User::create([
-            'name' => 'agent',
-            'phone' => '123123124',
-            'password' => Hash::make('admin'),
-        ])->assignRole('agent');
+        $manager = User::query()->firstOrCreate(
+            [
+                'phone' => '987654321',
+            ],
+            [
+                'name' => 'manager',
+                'password' => Hash::make('admin'),
+            ]
+        );
+        $manager->assignRole('manager');
+
+        $operator = User::query()->firstOrCreate(
+            [
+                'phone' => '123123123',
+            ],
+            [
+                'name' => 'operator',
+                'password' => Hash::make('admin'),
+            ]
+        );
+        $operator->assignRole('operator');
+
+        $agent = User::query()->firstOrCreate(
+            [
+                'phone' => '123123124',
+            ],
+            [
+                'name' => 'agent',
+                'password' => Hash::make('admin'),
+            ]
+        );
+        $agent->assignRole('agent');
+
     }
 }

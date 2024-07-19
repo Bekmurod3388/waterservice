@@ -19,7 +19,8 @@ return new class extends Migration
             $table->bigInteger('region_id');
             $table->string('address')->nullable();
             $table->bigInteger('filter_id');
-            $table->date('filter_expire_month');
+            $table->tinyInteger('filter_expire');
+            $table->date('filter_expire_date');
             $table->timestamps();
         });
     }

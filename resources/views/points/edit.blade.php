@@ -2,12 +2,12 @@
     type="button"
     class="btn btn-warning me-2"
     data-bs-toggle="modal"
-    data-bs-target="#editModal{{ $client->id }}"
+    data-bs-target="#editModal{{ $point->id }}"
 >
     <i class="bx bx-edit-alt"></i>
 </button>
 
-<div class="modal fade" id="editModal{{ $client->id }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editModal{{ $point->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,19 +20,40 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('client.update', $client->id) }}">
+                <form method="POST" action="{{ route('client.points.update', [request()->route('client'), $point->id]) }}">
                     @csrf
                     @method('PUT')
+                    <div class="col mb-3">
+                        <label for="region_id" class="form-label">Tuman</label>
+                        <select id="region_id" class="form-control" name="region_id">
+                            @foreach($regions as $region)
+                                <option @selected($region->id == $point->region_id) value="{{ $region->id }}">{{ $region->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">To'liq ismi</label>
-                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ $client->name }}"/>
+                            <label for="address" class="form-label">Manzil</label>
+                            <input type="text" id="address" class="form-control" name="address" value="{{ $point->address }}"
+                                   placeholder="Full Name" required/>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="phone" class="form-label">Telefon raqami</label>
-                            <input type="tel" id="phone" class="form-control" name="phone" value="{{ $client->phone }}" pattern="[0-9]{9}" maxlength="9" />
+                            <label for="filter_id" class="form-label">Filterlar</label>
+                            <select id="filter_id" class="form-control" name="filter_id">
+                                <option disabled>Mavjud emas</option>
+                                @foreach($filters as $filter)
+                                    <option @selected($filter->id == $point->filter_id) value="{{ $filter->id }}">{{ $filter->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="filter_expire" class="form-label">Almashtirish sanasi</label>
+                            <input type="number" id="filter_expire" class="form-control" name="filter_expire" value="{{ $point->filter_expire }}"
+                                   required min="1" max="12"/>
                         </div>
                     </div>
                     <div class="modal-footer">
