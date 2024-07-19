@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Filter;
 use App\Models\Point;
 use App\Models\Region;
+use App\Models\Service;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -85,5 +87,14 @@ class PointController extends Controller
     public function destroy(Point $point)
     {
         //
+    }
+
+    public function work_list()
+    {
+        $services = Service::all();
+        $agents = User::role('agent')->get();
+        $points = Point::query()->
+        where('filter_expire_month' ,'<', now())->get();
+        return view('points.work_list',['points'=>$points, 'agents'=>$agents,'services'=>$services]);
     }
 }
