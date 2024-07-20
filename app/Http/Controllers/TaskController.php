@@ -39,7 +39,7 @@ class TaskController extends Controller
         ]);
 
         DB::transaction(function() use ($request) {
-            $services = Service::query()->whereIn('id', $request->get('services'))->pluck('cost', 'id')->toArray();
+            $services = Service::query()->whereIn('id', $request->get('service_ids'))->pluck('cost', 'id')->toArray();
 
             $task = Task::query()->create([
                 'client_id' => $request->get('client_id'),
