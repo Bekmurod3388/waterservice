@@ -76,8 +76,8 @@
             </a>
         </li>
         @role('admin|operator')
-        <li class="menu-item @if(request()->routeIs('client.index')) active @endif">
-            <a href="{{ route('client.index') }}" class="menu-link">
+        <li class="menu-item @if(request()->routeIs('clients.index')) active @endif">
+            <a href="{{ route('clients.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Mijozlar</div>
             </a>
@@ -96,14 +96,14 @@
         </li>
         @endrole
         @role('admin')
-        <li class="menu-item @if(request()->routeIs('user.index')) active @endif">
-            <a href="{{ route('user.index') }}" class="menu-link">
+        <li class="menu-item @if(request()->routeIs('users.index')) active @endif">
+            <a href="{{ route('users.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div data-i18n="Analytics">Foydalanuvchilar</div>
             </a>
         </li>
-        <li class="menu-item @if(request()->routeIs('service.index')) active @endif">
-            <a href="{{ route('service.index') }}" class="menu-link">
+        <li class="menu-item @if(request()->routeIs('services.index')) active @endif">
+            <a href="{{ route('services.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Servislar</div>
             </a>

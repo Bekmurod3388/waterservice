@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Filters\StoreRequest;
+use App\Http\Requests\Filters\UpdateRequest;
 use App\Models\Filter;
 use Illuminate\Http\Request;
 
@@ -12,8 +14,9 @@ class FilterController extends Controller
      */
     public function index()
     {
-        $filters = Filter::all();
-        return view('filters.index', compact('filters'));
+        return view('filters.index', [
+            'filters' => Filter::paginate(10),
+        ]);
     }
 
     /**
@@ -27,16 +30,11 @@ class FilterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        request()->validate([
-            'name' => 'required',
-            'cost' => 'required',
-        ]);
+        Filter::create($request->validated());
 
-        Filter::create($request->all());
-
-        return redirect()->route('filters.index');
+        return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
     }
 
     /**
@@ -48,26 +46,13 @@ class FilterController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Filter $filter)
-    {
-        return view('filters.edit', compact('filter'));
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Filter $filter)
+    public function update(UpdateRequest $request, Filter $filter)
     {
-        request()->validate([
-            'name' => 'required',
-            'cost' => 'required',
-        ]);
+        $filter->update($request->validated());
 
-        $filter->update($request->all());
-
-        return redirect()->route('filters.index');
+        return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');
     }
 
     /**
@@ -75,10 +60,9 @@ class FilterController extends Controller
      */
     public function destroy(Filter $filter)
     {
-
         $filter->delete();
 
-        return redirect()->route('filters.index');
+        return back()->with('success', 'Servis muvaffaqiyatli oʻchirildi!');
 
     }
 }

@@ -35,36 +35,28 @@
                     <tbody>
                     @forelse($filters as $filter)
                         <tr>
-                            <td>{{ $loop->index+1 }}</td>
+                            <td>{{ $filter->id }}</td>
                             <td>{{ $filter->name }}</td>
                             <td>{{ $filter->cost }}</td>
                             <td>
                                 <div class="d-flex">
 
                                     @include('filters.edit')
+                                    @include('filters.edit')
 
-                                    <form method="POST" action="{{route('filters.destroy',$filter->id)}}">
-
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button
-                                            type="submit"
-                                            class="btn btn-danger me-2"
-                                        >
-                                            <i class="bx bx-trash-alt"></i>
-                                        </button>
-
-                                    </form>
                                 </div>
                             </td>
                             @empty
                                 <td colspan="4" class="text-center">Ma'lumot yo'q</td>
                         </tr>
                     @endforelse
-
                     </tbody>
                 </table>
+                <!-- Basic Pagination -->
+                <div class="card-body">
+                    {{ $filters->links('pagination::bootstrap-5') }}
+                </div>
+                <!--/ Basic Pagination -->
             </div>
         </div>
     </div>

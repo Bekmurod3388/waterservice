@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Clients\StoreRequest;
+use App\Http\Requests\Clients\UpdateRequest;
 use App\Models\Client;
-use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
@@ -12,23 +13,17 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-
-        return view('clients.index', compact('clients'));
+        return view('clients.index', [
+            'clients' => Client::query()->paginate(10),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-        ]);
-
-        Client::create($request->all());
+        Client::query()->create($request->validated());
 
         return back()->with('success', 'Mijoz muvaffaqiyatli yaratildi!');
     }
@@ -44,14 +39,9 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(UpdateRequest $request, Client $client)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-        ]);
-
-        $client->update($request->all());
+        $client->update($request->validated());
 
         return back()->with('success', 'Mijoz muvaffaqiyatli yangilandi!');
     }
