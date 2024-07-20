@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/users', UserController::class);
     Route::resource('/services', ServiceController::class);
     Route::resource('/filters', FilterController::class);
+    Route::get('/work_list',[PointController::class,'work_list'])->name('work.list');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
