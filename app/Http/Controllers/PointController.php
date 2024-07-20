@@ -78,18 +78,13 @@ class PointController extends Controller
 
     public function work_list()
     {
-        $data=[];
-        $m=0;
-        $tasks = Task::query()->where('is_completed',0)->get();
-        $points =  Point::query()->where('filter_expire_date', '<=', now())->get();
-        for($i = 0; $i<count($tasks);$i++){
-            for($j=0; $j<count($points);$j++){
-                if($tasks[$i]->point_id!==$points[$j]->id){
-                    $data[$m] = $points[$j];
-                    $m++;
-                }
-            }
-        }
+
+        $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
+        $points = Point::query()->where('filter_expire_date', '<=', now())->get();
+        $data = $points->filter(function ($point) use ($tasks) {
+            return !in_array($point->id, $tasks);
+        })->values()->all();
+
         return view('points.work_list', [
             'agents' => User::role('agent')->get(),
             'services' => Service::all(),
