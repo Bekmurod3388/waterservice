@@ -20,7 +20,7 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('client.update', $client->id) }}">
+                <form method="POST" action="{{ route('clients.update', $client->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="row g-2">

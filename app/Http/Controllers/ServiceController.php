@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Services\StoreRequest;
+use App\Http\Requests\Services\UpdateRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -12,31 +14,19 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
-        return view('services.index', compact('services'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('service.create');
+        return view('services.index', [
+            'services' => Service::query()->paginate(10),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            "cost" => 'required',
-        ]);
-
         Service::create($request->all());
 
-        return redirect()->route('service.index');
+        return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
     }
 
     /**
@@ -48,26 +38,13 @@ class ServiceController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Service $service)
-    {
-        return view('services.edit', compact('service'));
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Service $service)
+    public function update(UpdateRequest $request, Service $service)
     {
-        $request->validate([
-            'name' => 'required',
-            "cost" => 'required',
-        ]);
-
         $service->update($request->all());
 
-        return redirect()->route('service.index');
+        return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');
     }
 
     /**
@@ -76,6 +53,6 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $service->delete();
-        return redirect()->route('service.index');
+        return back()->with('success', 'Servis muvaffaqiyatli oʻchirildi!');
     }
 }

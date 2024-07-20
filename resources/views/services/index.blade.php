@@ -34,25 +34,14 @@
                     <tbody>
                     @forelse($services as $service)
                         <tr>
-                            <td>{{ $loop->index+1 }}</td>
+                            <td>{{ $service->id }}</td>
                             <td>{{ $service->name }}</td>
                             <td>{{ $service->cost }}</td>
                             <td>
                                 <div class="d-flex">
+
                                     @include('services.edit')
-
-                                    <form method="POST" action="{{route('service.destroy',$service->id)}}">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button
-                                            type="submit"
-                                            class="btn btn-danger me-2"
-                                        >
-                                            <i class="bx bx-trash-alt"></i>
-                                        </button>
-
-                                    </form>
+                                    @include('services.delete')
 
                                 </div>
                             </td>
@@ -62,6 +51,11 @@
                     @endforelse
                     </tbody>
                 </table>
+                <!-- Basic Pagination -->
+                <div class="card-body">
+                    {{ $services->links('pagination::bootstrap-5') }}
+                </div>
+                <!--/ Basic Pagination -->
             </div>
         </div>
     </div>
