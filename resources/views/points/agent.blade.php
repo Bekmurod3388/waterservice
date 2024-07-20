@@ -38,9 +38,14 @@
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="phone" class="form-label">Servislar</label><br>
-                                @foreach($services as $service)
-                                <input type="checkbox"  class="form-check-input" value="{{$service->id}}"><span class="form-label p-1">{{$service->name}}{{$service->count}}</span>
-                                @endforeach
+                            @foreach($services as $service)
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" value="{{ $service->id }}">
+                                        <span class="p-1">{{ $service->name }} {{ $service->count }}</span>
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="modal-footer">
