@@ -17,10 +17,17 @@ class ProfileController extends Controller
     public function update(UpdateRequest $request)
     {
         $user = Auth::user();
+
         $user->update([
             'name' => $request->name,
             'phone' => $request->phone,
         ]);
+
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => bcrypt($request->password),
+            ]);
+        }
 
         return back()->with('success', 'Foydalanuvchi muvaffaqiyatli yangilandi!');
     }

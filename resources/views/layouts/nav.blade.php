@@ -49,7 +49,7 @@
                     <li>
                         <a class="dropdown-item" href="{{ route('profile.index') }}">
                             <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">My Profile</span>
+                            <span class="align-middle">Mening profilim</span>
                         </a>
                     </li>
 
@@ -62,7 +62,7 @@
                             <input type="hidden" name="logout" value="1">
                             <button type="submit" class="dropdown-item">
                                 <i class="bx bx-power-off me-2"></i>
-                                <span class="align-middle">Log Out</span>
+                                <span class="align-middle">Chiqish</span>
                             </button>
                         </form>
                     </li>

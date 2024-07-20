@@ -37,6 +37,36 @@
                                         />
                                     </div>
                                 </div>
+                                <div class="mb-3 col-md-6 form-password-toggle">
+                                    <label class="form-label" for="password">Yangi Parol</label>
+                                    <div class="input-group input-group-merge">
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            id="password"
+                                            name="password"
+                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        />
+                                        <span id="password-toggle" class="input-group-text cursor-pointer">
+                                            <i class="bx bx-hide"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-6 form-password-toggle">
+                                    <label class="form-label" for="password_confirmation">Parolni tasdiqlang</label>
+                                    <div class="input-group input-group-merge">
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            id="password_confirmation"
+                                            name="password_confirmation"
+                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        />
+                                        <span id="password-confirmation-toggle" class="input-group-text cursor-pointer">
+                                            <i class="bx bx-hide"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mt-2">
                                 <button type="submit" class="btn btn-primary me-2">O'zgarishlarni saqlang</button>
@@ -48,4 +78,29 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const passwordToggleIcons = document.querySelectorAll('.form-password-toggle .input-group-text');
+
+            passwordToggleIcons.forEach(function (icon) {
+                icon.addEventListener('click', function () {
+                    const input = icon.parentElement.querySelector('input');
+                    const iconElement = icon.querySelector('i');
+
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        iconElement.classList.remove('bx-hide');
+                        iconElement.classList.add('bx-show');
+                    } else {
+                        input.type = 'password';
+                        iconElement.classList.remove('bx-show');
+                        iconElement.classList.add('bx-hide');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
