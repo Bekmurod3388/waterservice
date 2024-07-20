@@ -1,7 +1,7 @@
 <!-- Menu -->
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
+        <a href="{{ route('dashboard') }}" class="app-brand-link">
             <img style="width: 90px" src="{{asset('assets/Images/logo.jpg')}}" alt="">
             <span style="text-transform: uppercase" class="app-brand-text demo menu-text fw-bolder ms-2">RGD</span>
         </a>
