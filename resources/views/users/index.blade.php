@@ -58,3 +58,28 @@
     </div>
 
 @endsection
+
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const passwordToggleIcons = document.querySelectorAll('.form-password-toggle .input-group-text');
+
+            passwordToggleIcons.forEach(function (icon) {
+                icon.addEventListener('click', function () {
+                    const input = icon.parentElement.querySelector('input');
+                    const iconElement = icon.querySelector('i');
+
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        iconElement.classList.remove('bx-hide');
+                        iconElement.classList.add('bx-show');
+                    } else {
+                        input.type = 'password';
+                        iconElement.classList.remove('bx-show');
+                        iconElement.classList.add('bx-hide');
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
