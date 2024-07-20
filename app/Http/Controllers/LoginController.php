@@ -24,7 +24,7 @@ class LoginController extends Controller
         $loginSuccess = $this->loginService->login($data);
 
         if ($loginSuccess) {
-            return view('dashboard');
+            return redirect('/');
         } else {
             return back()->withErrors(['phone' => 'Hisob maʼlumotlari yaroqsiz'])->withInput();
         }
