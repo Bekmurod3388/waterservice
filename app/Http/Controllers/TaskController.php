@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use App\Models\Task;
+use App\Models\TaskService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -28,7 +31,33 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'client_id' => 'required|int',
+            'point_id' => 'required|int',
+            'user_id' => 'required|int',
+            'service_ids' => '',
+        ]);
+
+        DB::transaction(function() use ($request) {
+            $services = Service::query()->whereIn('id', $request->get('service_ids'))->pluck('cost', 'id')->toArray();
+
+            $task = Task::query()->create([
+                'client_id' => $request->get('client_id'),
+                'point_id' => $request->get('point_id'),
+                'user_id' => $request->get('user_id')
+            ]);
+
+            foreach ($request->get('service_ids') as $service_id) {
+                TaskService::query()->create([
+                    'task_id' => $task->id,
+                    'user_id' => $request->get('user_id'),
+                    'service_id' => $service_id,
+                    'service_cost' => $services[$service_id]
+                ]);
+            }
+        });
+
+        return redirect()->back();
     }
 
     /**

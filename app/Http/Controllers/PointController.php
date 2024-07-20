@@ -8,6 +8,7 @@ use App\Models\Filter;
 use App\Models\Point;
 use App\Models\Region;
 use App\Models\Service;
+use App\Models\Task;
 use App\Models\User;
 
 class PointController extends Controller
@@ -15,10 +16,10 @@ class PointController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($client)
     {
         return view('points.index', [
-            'points' => Point::with('client')->paginate(10),
+            'points' => Point::with('client')->where('client_id', $client)->paginate(10),
             'regions' => Region::all(),
             'filters' => Filter::all()
         ]);
@@ -77,10 +78,17 @@ class PointController extends Controller
 
     public function work_list()
     {
+
+        $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
+        $points = Point::query()->where('filter_expire_date', '<=', now())->get();
+        $data = $points->filter(function ($point) use ($tasks) {
+            return !in_array($point->id, $tasks);
+        })->values()->all();
+
         return view('points.work_list', [
             'agents' => User::role('agent')->get(),
             'services' => Service::all(),
-            'points' => Point::query()->where('filter_expire_date', '<=', now())->paginate(10),
+            'points'=>$data
         ]);
     }
 }
