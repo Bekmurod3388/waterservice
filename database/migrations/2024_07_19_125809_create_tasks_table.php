@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('client_id');
             $table->bigInteger('point_id');
             $table->bigInteger('user_id');
             $table->boolean('is_completed')->default(0);
