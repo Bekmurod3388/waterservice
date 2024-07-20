@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientFilterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PointController;
@@ -14,9 +15,7 @@ Route::get('login', [LoginController::class,'loginPage'])->name('loginPage');
 Route::post('login', [LoginController::class, 'login'])->name('login');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', function () {
-       return view('dashboard');
-    });
+    Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('clients', ClientController::class);
     Route::resource('client/{client}/filters',PointController::class)->names('client.points');
