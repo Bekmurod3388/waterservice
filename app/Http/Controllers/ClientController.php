@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Clients\StoreRequest;
 use App\Http\Requests\Clients\UpdateRequest;
 use App\Models\Client;
-use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
@@ -14,9 +13,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::paginate(10);
-
-        return view('clients.index', compact('clients'));
+        return view('clients.index', [
+            'clients' => Client::query()->paginate(10),
+        ]);
     }
 
     /**
@@ -24,7 +23,7 @@ class ClientController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Client::create($request->all());
+        Client::query()->create($request->validated());
 
         return back()->with('success', 'Mijoz muvaffaqiyatli yaratildi!');
     }
@@ -42,12 +41,7 @@ class ClientController extends Controller
      */
     public function update(UpdateRequest $request, Client $client)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-        ]);
-
-        $client->update($request->all());
+        $client->update($request->validated());
 
         return back()->with('success', 'Mijoz muvaffaqiyatli yangilandi!');
     }

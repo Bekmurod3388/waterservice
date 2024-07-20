@@ -14,8 +14,9 @@ class FilterController extends Controller
      */
     public function index()
     {
-        $filters = Filter::paginate(10);
-        return view('filters.index', compact('filters'));
+        return view('filters.index', [
+            'filters' => Filter::paginate(10),
+        ]);
     }
 
     /**
@@ -31,7 +32,7 @@ class FilterController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Filter::create($request->all());
+        Filter::create($request->validated());
 
         return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
     }
@@ -49,7 +50,7 @@ class FilterController extends Controller
      */
     public function update(UpdateRequest $request, Filter $filter)
     {
-        $filter->update($request->all());
+        $filter->update($request->validated());
 
         return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');
     }
@@ -59,7 +60,6 @@ class FilterController extends Controller
      */
     public function destroy(Filter $filter)
     {
-
         $filter->delete();
 
         return back()->with('success', 'Servis muvaffaqiyatli oʻchirildi!');
