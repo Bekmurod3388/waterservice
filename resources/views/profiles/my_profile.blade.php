@@ -9,7 +9,6 @@
             <div class="col-md-12">
                 <div class="card mb-4">
                     <h5 class="card-header">Profil tafsilotlari</h5>
-                    <!-- Account -->
                     <div class="card-body">
                         <form id="formAccountSettings" method="POST" action="{{ route('profile.update') }}">
                             @csrf
@@ -45,7 +44,6 @@
                             </div>
                         </form>
                     </div>
-                    <!-- /Account -->
                 </div>
             </div>
         </div>
