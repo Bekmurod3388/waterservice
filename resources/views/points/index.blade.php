@@ -57,7 +57,7 @@
                 </table>
                 <!-- Basic Pagination -->
                 <div class="card-body">
-{{--                    {{ $clients->links('pagination::bootstrap-5') }}--}}
+                    {{ $points->links('pagination::bootstrap-5') }}
                 </div>
                 <!--/ Basic Pagination -->
             </div>

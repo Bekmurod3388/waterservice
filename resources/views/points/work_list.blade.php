@@ -55,6 +55,11 @@
                     @endforelse
                     </tbody>
                 </table>
+                <!-- Basic Pagination -->
+                <div class="card-body">
+                    {{ $points->links('pagination::bootstrap-5') }}
+                </div>
+                <!--/ Basic Pagination -->
             </div>
         </div>
     </div>

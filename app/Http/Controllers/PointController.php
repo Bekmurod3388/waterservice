@@ -18,7 +18,7 @@ class PointController extends Controller
     public function index()
     {
         return view('points.index', [
-            'points' => Point::with('client')->get(),
+            'points' => Point::with('client')->paginate(10),
             'regions' => Region::all(),
             'filters' => Filter::all()
         ]);
@@ -80,7 +80,7 @@ class PointController extends Controller
         return view('points.work_list', [
             'agents' => User::role('agent')->get(),
             'services' => Service::all(),
-            'points' => Point::query()->where('filter_expire_date', '<=', now())->get(),
+            'points' => Point::query()->where('filter_expire_date', '<=', now())->paginate(10),
         ]);
     }
 }
