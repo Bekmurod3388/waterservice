@@ -26,25 +26,20 @@
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Agentlarni tanlang</label>
+                            <label for="agent_id" class="form-label">Agentlarni tanlang</label><br>
+                            <select id="agent_id" class="form-control" name="agent_id">
                                 @foreach($agents as $agent)
-                                    <input type="checkbox" value="{{$agent->id}}">{{$agent->name}}
+                                    <option value="{{ $agent->id }}">{{ $agent->name }}</option>
                                 @endforeach
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Manzil</label>
-                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}"
-                                   placeholder="Full Name" required/>
+                            </select>
                         </div>
                     </div>
 
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="phone" class="form-label">Servislar</label>
+                            <label for="phone" class="form-label">Servislar</label><br>
                                 @foreach($services as $service)
-                                <input type="checkbox" value="{{$service->id}}">{{$service->name}}{{$service->count}}
+                                <input type="checkbox"  class="form-check-input" value="{{$service->id}}"><span class="form-label p-1">{{$service->name}}{{$service->count}}</span>
                                 @endforeach
                         </div>
                     </div>
