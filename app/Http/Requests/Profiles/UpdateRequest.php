@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Requests\Users;
+namespace App\Http\Requests\Profiles;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        // Разрешить выполнение запроса
         return true;
     }
 
@@ -25,7 +24,6 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'phone' => 'required|string|unique:users,phone',
-            'roles' => 'required',
         ];
     }
 
@@ -43,7 +41,6 @@ class StoreRequest extends FormRequest
             'phone.required' => 'Telefon raqami maydoni to\'ldirilishi shart.',
             'phone.string' => 'Telefon raqami maydoni matn bo\'lishi kerak.',
             'phone.unique' => 'Bu telefon raqami allaqachon mavjud.',
-            'roles.required' => 'Rol maydoni to\'ldirilishi shart.',
         ];
     }
 }
