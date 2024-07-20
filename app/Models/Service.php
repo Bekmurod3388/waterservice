@@ -10,4 +10,8 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'cost'];
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'task_services')->using(TaskService::class);
+    }
 }

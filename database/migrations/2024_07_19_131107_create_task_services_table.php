@@ -16,6 +16,8 @@ return new class extends Migration
             $table->bigInteger('service_id');
             $table->bigInteger('task_id');
             $table->boolean('status')->default(0);
+            $table->bigInteger('cost');
+            $table->bigInteger('user_id');
         });
     }
 
