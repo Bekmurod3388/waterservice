@@ -15,10 +15,10 @@ class PointController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($client)
     {
         return view('points.index', [
-            'points' => Point::with('client')->paginate(10),
+            'points' => Point::with('client')->where('client_id', $client)->paginate(10),
             'regions' => Region::all(),
             'filters' => Filter::all()
         ]);
