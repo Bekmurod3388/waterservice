@@ -35,7 +35,7 @@
                         <div class="col mb-3">
                             <label for="address" class="form-label">Manzil</label>
                             <input type="text" id="address" class="form-control" name="address" value="{{ $point->address }}"
-                                   placeholder="Full Name" required/>
+                                   placeholder="Manzil" required/>
                         </div>
                     </div>
                     <div class="row g-2">
