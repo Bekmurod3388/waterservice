@@ -16,6 +16,8 @@ return new class extends Migration
             $table->bigInteger('client_id');
             $table->bigInteger('point_id');
             $table->bigInteger('user_id');
+            $table->dateTime('schedule');
+            $table->text('comment');
             $table->boolean('is_completed')->default(0);
             $table->timestamps();
         });

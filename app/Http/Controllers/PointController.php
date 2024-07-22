@@ -78,9 +78,8 @@ class PointController extends Controller
 
     public function work_list()
     {
-
         $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
-        $points = Point::query()->where('filter_expire_date', '<=', now())->get();
+        $points = Point::query()->whereDate('filter_expire_date', '<=', now())->get();
         $data = $points->filter(function ($point) use ($tasks) {
             return !in_array($point->id, $tasks);
         })->values()->all();
@@ -88,7 +87,7 @@ class PointController extends Controller
         return view('points.work_list', [
             'agents' => User::role('agent')->get(),
             'services' => Service::all(),
-            'points'=>$data
+            'points'=> $data
         ]);
     }
 }
