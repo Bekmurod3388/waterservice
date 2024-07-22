@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Service;
 use App\Models\Task;
 use App\Models\TaskService;
@@ -89,6 +90,30 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+
+        dd('test');
+        $task->delete();
+        return redirect()->back();
+
+    }
+
+    public function clientTasks(Client $client)
+    {
+        return view('tasks.client_tasks', [
+            'client' => $client,
+            'tasks' => Task::with('client', 'point', 'user')->where('client_id', '=', $client->id)->get(),
+            'action' => 'clients.tasks.create'
+        ]);
+    }
+
+    public function clientTasksCreate(Request $request)
+    {
+        Task::query()->create([
+            'client_id' => $request->get('client_id'),
+            'user_id' => auth()->id(),
+            'point_id' => 1,
+        ]);
+
+        return redirect()->back();
     }
 }
