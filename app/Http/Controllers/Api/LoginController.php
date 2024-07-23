@@ -43,8 +43,8 @@ class LoginController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'current_password' => 'nullable|string',
-            'new_password' => 'nullable|min:5|confirmed',
-            'new_password_confirmation' => 'nullable|min:5|confirmed'
+            'new_password' => 'nullable|min:5|string',
+            'new_password_confirmation' => 'nullable|min:5|string'
         ]);
 
         /** @var User $user */
