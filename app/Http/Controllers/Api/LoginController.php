@@ -43,7 +43,8 @@ class LoginController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'current_password' => 'nullable|string',
-            'new_password' => 'nullable|min:5|confirmed'
+            'new_password' => 'nullable|min:5|confirmed',
+            'new_password_confirmation' => 'nullable|min:5|confirmed'
         ]);
 
         /** @var User $user */
@@ -52,7 +53,12 @@ class LoginController extends Controller
             'name' => $request->get('name'),
             'phone' => $request->get('phone')
         ]);
-        if (Hash::check($request->get('current_password'), $user->pasword)) {
+        if ($request->get('new_password') != $request->get("new_password_confirmation")){
+            return response()->json([
+                'message' => 'Update failed',
+                'errors' => ['password' => 'Parollar mos kelmadi']
+            ]);
+        } elseif (Hash::check($request->get('current_password'), $user->pasword)) {
             $user->update([
                 'password' => Hash::make($request->get('new_password'))
             ]);
