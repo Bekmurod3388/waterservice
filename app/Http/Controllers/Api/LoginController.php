@@ -53,24 +53,22 @@ class LoginController extends Controller
             'name' => $request->get('name'),
             'phone' => $request->get('phone')
         ]);
-        if ($request->get('new_password') != $request->get("new_password_confirmation")){
+
+        if ($request->get('new_password') && !Hash::check($request->get('current_password'), $user->password)) {
             return response()->json([
                 'message' => 'Update failed',
-                'errors' => ['password' => 'Parollar mos kelmadi']
-            ]);
-        } elseif (Hash::check($request->get('current_password'), $user->pasword)) {
+                'errors' => ['password' => 'Current password is incorrect']
+            ], 422);
+        }
+
+        if ($request->get('new_password') && $request->get('new_password') == $request->get('new_password_confirmation')) {
             $user->update([
                 'password' => Hash::make($request->get('new_password'))
-            ]);
-        } else {
-            return response()->json([
-                'message' => 'Update failed',
-                'errors' => ['password' => 'Parol mos kelmadi']
             ]);
         }
 
         return response()->json([
-            'message' => 'Login successful',
+            'message' => 'Profile updated successfully',
             'data' => [
                 'user' => $user
             ],
