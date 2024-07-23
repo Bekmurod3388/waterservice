@@ -11,7 +11,7 @@ Route::post('/login',[LoginController::class,'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout',[LoginController::class,'logout'])->middleware('auth:sanctum');
-    Route::post('/updateProfile',[LoginController::class,'updateProfile'])->middleware('auth:sanctum');
+    Route::put('/updateProfile',[LoginController::class,'updateProfile'])->middleware('auth:sanctum');
 
     Route::get('/tasks', [AgentController::class, 'getTasks']);
     Route::get('/services',[ServiceController::class,'getServices']);
