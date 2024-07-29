@@ -15,7 +15,11 @@ class RoleSeeder extends Seeder
     {
         Role::findOrCreate('admin');
         Role::findOrCreate('manager');
-        Role::findOrCreate('operator');
-        Role::findOrCreate('agent');
+        Role::findOrCreate('operator-dealer');//sotuv operatori
+        Role::findOrCreate('operator-agent');//servis operatori
+        Role::findOrCreate('operator-cashier');//to'lov operatori
+        Role::findOrCreate('dealer');//diller
+        Role::findOrCreate('agent');//servischik
+        Role::findOrCreate('cashier');//kassir
     }
 }
