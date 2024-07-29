@@ -1,7 +1,7 @@
 <!-- Menu -->
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
+        <a href="{{ route('dashboard') }}" class="app-brand-link">
             <img style="width: 90px" src="{{asset('assets/Images/logo.jpg')}}" alt="">
             <span style="text-transform: uppercase" class="app-brand-text demo menu-text fw-bolder ms-2">RGD</span>
         </a>
@@ -22,7 +22,7 @@
             </a>
         </li>
         @role('admin|operator')
-        <li class="menu-item @if(request()->routeIs('clients.index')) active @endif">
+        <li class="menu-item @if(request()->routeIs('clients.index','clients.tasks.index')) active @endif">
             <a href="{{ route('clients.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Mijozlar</div>
@@ -50,14 +50,14 @@
         </li>
         <li class="menu-item @if(request()->routeIs('services.index')) active @endif">
             <a href="{{ route('services.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
+                <i class="menu-icon tf-icons bx bx-test-tube"></i>
                 <div data-i18n="Analytics">Servislar</div>
             </a>
         </li>
 
         <li class="menu-item @if(request()->routeIs('filters.index')) active @endif">
             <a href="{{ route('filters.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
+                <i class="menu-icon tf-icons bx bx-filter-alt"></i>
                 <div data-i18n="Analytics"> Filterlar </div>
             </a>
         </li>

@@ -45,7 +45,7 @@
                             <td><span class="btn btn-outline-danger">{{$point->filter_expire_date->format('Y-m-d')}}</span></td>
                             <td>
                                 <div class="d-flex">
-                                    @include('points.agent')
+                                    @include('points.agent', ['client_id' => $point->client_id, 'point_id' => $point->id])
 
                                 </div>
                             </td>
@@ -56,10 +56,10 @@
                     </tbody>
                 </table>
                 <!-- Basic Pagination -->
-                <div class="card-body">
-                    {{ $points->links('pagination::bootstrap-5') }}
-                </div>
-                <!--/ Basic Pagination -->
+{{--                <div class="card-body">--}}
+{{--                    {{ $points->links('pagination::bootstrap-5') }}--}}
+{{--                </div>--}}
+{{--                <!--/ Basic Pagination -->--}}
             </div>
         </div>
     </div>

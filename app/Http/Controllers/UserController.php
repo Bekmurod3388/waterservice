@@ -53,6 +53,18 @@ class UserController extends Controller
     public function update(UpdateRequest $request, string $id)
     {
         $user = User::findOrFail($id);
+
+        $user->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+        ]);
+
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => bcrypt($request->password),
+            ]);
+        }
+
         $user->syncRoles($request->roles);
 
         return back()->with('success', 'Foydalanuvchi muvaffaqiyatli yangilandi!');

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Profiles;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -23,7 +24,12 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|unique:users,phone',
+            'phone' => [
+                'required',
+                'string',
+                Rule::unique('users', 'phone')->ignore($this->user()->id),
+            ],
+            'password' => 'nullable|string|min:8|confirmed',
         ];
     }
 
@@ -41,6 +47,8 @@ class UpdateRequest extends FormRequest
             'phone.required' => 'Telefon raqami maydoni to\'ldirilishi shart.',
             'phone.string' => 'Telefon raqami maydoni matn bo\'lishi kerak.',
             'phone.unique' => 'Bu telefon raqami allaqachon mavjud.',
+            'password.min' => 'Parol kamida 8 ta belgidan iborat bo\'lishi kerak.',
+            'password.confirmed' => 'Parollar mos kelmayapti.',
         ];
     }
 }

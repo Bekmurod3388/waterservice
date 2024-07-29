@@ -9,7 +9,9 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['point_id', 'user_id', 'status'];
+    public $timestamps = false;
+
+    protected $fillable = ['client_id', 'point_id', 'user_id', 'is_completed'];
 
     public function point()
     {
@@ -20,8 +22,17 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function services()
     {
         return $this->belongsToMany(Service::class, 'task_services')->using(TaskService::class);
     }
+
+    public function client(){
+
+        return $this->belongsTo(Client::class);
+
+    }
+
+
 }

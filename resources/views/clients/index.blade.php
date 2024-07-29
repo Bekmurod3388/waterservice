@@ -42,7 +42,7 @@
                                 <div class="d-flex">
                                     @include('clients.edit')
                                     <a href="{{route('client.points.index',$client->id)}}" class="btn btn-success me-2"><i class="bx bx-map"></i></a><!--Lokatsiyalar Client Filter-->
-                                    <a href="#" class="btn btn-primary me-2"><i class="bx bx-list-check"></i></a><!--Tasks-->
+                                    <a href="{{route('clients.tasks.index',$client->id)}}" class="btn btn-primary me-2"><i class="bx bx-list-check"></i></a><!--Tasks-->
                                 </div>
                             </td>
                             @empty

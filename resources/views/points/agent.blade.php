@@ -22,12 +22,12 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('tasks.store') }}">
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="agent_id" class="form-label">Agentlarni tanlang</label><br>
-                            <select id="agent_id" class="form-control" name="agent_id">
+                            <label for="user_id" class="form-label">Agentlarni tanlang</label><br>
+                            <select id="user_id" class="form-control" name="user_id">
                                 @foreach($agents as $agent)
                                     <option value="{{ $agent->id }}">{{ $agent->name }}</option>
                                 @endforeach
@@ -41,7 +41,7 @@
                             @foreach($services as $service)
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" value="{{ $service->id }}">
+                                        <input type="checkbox" class="form-check-input" value="{{ $service->id }}" name="service_ids[]">
                                         <span class="p-1">{{ $service->name }} {{ $service->count }}</span>
                                     </label>
                                 </div>
@@ -49,6 +49,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <input type="hidden" name="client_id" value="{{ $client_id }}">
+                        <input type="hidden" name="point_id" value="{{ $point_id }}">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Yopish</button>
                         <button type="submit" class="btn btn-primary">Saqlash</button>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -22,7 +23,13 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'roles' => 'required',
+            'name' => 'required|string|max:255',
+            'phone' => [
+                'required',
+                'string',
+                Rule::unique('users', 'phone')->ignore($this->route('user')),
+            ],
+            'password' => 'nullable|string|min:8|confirmed',
         ];
     }
 
@@ -34,7 +41,14 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'roles.required' => 'Rol maydoni to\'ldirilishi shart.',
+            'name.required' => 'Ism maydoni to\'ldirilishi shart.',
+            'name.string' => 'Ism maydoni matn bo\'lishi kerak.',
+            'name.max' => 'Ism maydoni 255 ta belgidan oshmasligi kerak.',
+            'phone.required' => 'Telefon raqami maydoni to\'ldirilishi shart.',
+            'phone.string' => 'Telefon raqami maydoni matn bo\'lishi kerak.',
+            'phone.unique' => 'Bu telefon raqami allaqachon mavjud.',
+            'password.min' => 'Parol kamida 8 ta belgidan iborat bo\'lishi kerak.',
+            'password.confirmed' => 'Parollar mos kelmayapti.',
         ];
     }
 }

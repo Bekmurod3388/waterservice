@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('task_services', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('service_id');
             $table->bigInteger('task_id');
-            $table->boolean('status')->default(0);
-            $table->bigInteger('cost');
             $table->bigInteger('user_id');
+            $table->bigInteger('service_id');
+            $table->bigInteger('service_cost');
+            $table->boolean('status')->default(0);
+            $table->timestamps();
         });
     }
 
