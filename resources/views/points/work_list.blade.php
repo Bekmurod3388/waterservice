@@ -40,7 +40,7 @@
                             <td>{{ $point->region->name }}</td>
                             <td>{{ $point->address }}</td>
                             <td>
-                                @include('points.change_filter')
+{{--                                @include('points.change_filter')--}}
                             </td>
                             <td>
                                 <div class="d-flex">
