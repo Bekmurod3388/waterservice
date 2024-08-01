@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 
 class MobileAgentController extends Controller
 {
-    public function index()
+    public function index($token)
     {
-        $tasks = Task::with('point')->where('user_id', auth()->id())->get();
-        return view('mobile.agent.pages.home', compact('tasks'));
+        return view('mobile.agent.pages.home', [
+            'tasks' => Task::with('point')->where('user_id', auth()->id())->get(),
+            'token' => $token
+        ]);
     }
 }
