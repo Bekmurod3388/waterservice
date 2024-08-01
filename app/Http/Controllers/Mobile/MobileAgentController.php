@@ -14,10 +14,4 @@ class MobileAgentController extends Controller
         $tasks = Task::with('point')->where('user_id', auth()->id())->get();
         return view('mobile.agent.pages.home', compact('tasks'));
     }
-
-    public function testLogin()
-    {
-        $tasks = Task::with('point')->where('user_id', auth()->id())->get();
-        return view('mobile.agent.pages.home', compact('tasks'));
-    }
 }

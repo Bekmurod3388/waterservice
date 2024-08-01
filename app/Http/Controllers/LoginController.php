@@ -30,18 +30,19 @@ class LoginController extends Controller
         }
     }
 
-    public function loginByUrl(Request $request, $token)
+    public function mobileLogin(Request $request)
     {
         // Get token from URL query parameter
+        $token = $request->header('token');
 
         if ($token) {
             $accessToken = PersonalAccessToken::findToken($token);
 
             if ($accessToken) {
                 // Check if the token has expired
-                if ($accessToken->expires_at && $accessToken->expires_at->isPast()) {
-                    return response()->json(['message' => 'Token has expired'], 401);
-                }
+//                if ($accessToken->expires_at && $accessToken->expires_at->isPast()) {
+//                    return response()->json(['message' => 'Token has expired'], 401);
+//                }
 
                 // Set the authenticated user
                 $request->setUserResolver(function () use ($accessToken) {
@@ -53,8 +54,6 @@ class LoginController extends Controller
         } else {
             return response()->json(['message' => 'Token not provided'], 401);
         }
-
-        $accessToken = PersonalAccessToken::findToken($token);
 
 //        dd($accessToken);
 //        if ($accessToken && !$accessToken->isExpired()) {

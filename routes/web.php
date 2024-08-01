@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('login', [LoginController::class, 'loginPage'])->name('loginPage');
 Route::post('login', [LoginController::class, 'login'])->name('login');
 
-Route::get('login-url/{token}', [LoginController::class, 'loginByUrl']);
-Route::get('testlogin', [MobileAgentController::class, 'testLogin']);
+Route::get('mobile-login', [LoginController::class, 'mobileLogin']);
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
@@ -43,10 +43,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('my_profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('my_profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+});
 
-    Route::prefix('mobile')->group(function () {
-        Route::prefix('agent')->group(function () {
-            Route::get('index', [MobileAgentController::class, 'index']);
-        });
+Route::prefix('mobile/{token}')->group(function () {
+    Route::prefix('agent')->group(function () {
+        Route::get('index', [MobileAgentController::class, 'index'])->name('mobile.agent.index');
+        Route::get('task-items', [MobileAgentController::class, 'taskItems'])->name('mobile.agent.task_items');
     });
 });
