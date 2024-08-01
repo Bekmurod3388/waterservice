@@ -27,23 +27,41 @@
                         <th>ID</th>
                         <th>To'liq ism</th>
                         <th>Telefon raqami</th>
+                        <th>Bugungi ishlar</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($agents as $user)
+                    @forelse($agents as $agent)
                         <tr>
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->phone }}</td>
+                            <td>{{ $agent->id }}</td>
+                            <td>{{ $agent->name }}</td>
+                            <td>{{ $agent->phone }}</td>
+                            <td>
+                                @if($agent->created_at->isSameDay(\Carbon\Carbon::today()))
+                                    <span style="color: blue">
+                                    {{ $agent->tasks->first()->total_tasks ?? 0 }}
+                                </span>/
+                                    <span style="color: green">
+                                    {{ $agent->tasks->first()->complete_tasks ?? 0 }}
+                                </span>/
+                                    <span style="color: red">
+                                    {{ $agent->tasks->first()->incomplete_tasks ?? 0 }}
+                                </span>
+                                @else
+                                    <span>Topshiriq yo'q</span>
+                                @endif
+                            </td>
                             <td>
                                 <div class="d-flex">
-{{--                                    @include('users.edit')--}}
-{{--                                    @include('users.delete')--}}
+                                    {{-- @include('agents.create_task') --}}
+                                    {{-- @include('users.delete') --}}
                                 </div>
                             </td>
-                            @empty
-                                <td colspan="3" class="text-center">Ma'lumot yo'q</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center">Ma'lumot yo'q</td>
                         </tr>
                     @endforelse
                     </tbody>

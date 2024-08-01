@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
 
         $operator = User::query()->firstOrCreate(
             [
-                'phone' => '123123123',
+                    'phone' => '123123123',
             ],
             [
                 'name' => 'operator',
