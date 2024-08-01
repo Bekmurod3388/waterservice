@@ -9,5 +9,5 @@ class TaskReason extends Model
 {
     use HasFactory;
 
-    protected $fillable=['point_id','reason','filter_expire_date'];
+    protected $fillable = ['point_id', 'reason', 'filter_expire_date'];
 }

@@ -78,7 +78,7 @@ class PointController extends Controller
         //
     }
 
-    public function work_list()
+    public function workList()
     {
         $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
         $points = Point::query()->whereDate('filter_expire_date', '<=', now())->get();
@@ -94,21 +94,17 @@ class PointController extends Controller
         ]);
     }
 
-    public function work_list_create($data, Request $request)
+    public function changeExpireDate(Request $request, Point $point)
     {
-
-        $point = Point::findOrfail($data);
-//        dd($point->filter_expire_date,$point);
         $point->filter_expire_date = $request->filter_expire_date;
         $point->save();
-        TaskReason::create([
+
+        TaskReason::query()->create([
             'point_id' => $point->id,
             'filter_expire_date'=>$request->filter_expire_date,
             'reason'=>$request->reason
         ]);
 
         return redirect()->route('work.list')->with('success', 'Manzil muvaffaqiyatli yaratildi!');
-
     }
-
 }

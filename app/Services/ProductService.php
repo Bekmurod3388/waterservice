@@ -2,19 +2,22 @@
 
 namespace App\Services;
 
+use App\Models\Product;
 use App\Models\ProductHistory;
 
-class ProductHistoryCreateService
+class ProductService
 {
 
     public function create($data)
     {
-        ProductHistory::create([
-            'product_id' => $data->id,
+        $product = Product::query()->create($data);
+
+        ProductHistory::query()->create([
+            'product_id' => $product->id,
             'user_id' => auth()->id(),
             'cost_price' => 0,
             'purchase_price' => $data->purchase_price,
-            'differance' => 0,
+            'difference' => 0,
             'before' => $data->quantity,
             'after' => $data->quantity,
         ]);
@@ -24,24 +27,22 @@ class ProductHistoryCreateService
     {
         $after = $product->quantity + $request->quantity;
 
-        ProductHistory::create([
+        ProductHistory::query()->create([
             'product_id' => $product->id,
             'user_id' => auth()->id(),
             'cost_price' => 0,
             'purchase_price' => $request->purchase_price,
-            'differance' => $request->quantity,
+            'difference' => $request->quantity,
             'before' => $product->quantity,
             'after' => $after,
         ]);
 
         $product->update([
-            'name'=>$request->name,
-            'quantity'=>$after,
-            'cost_price'=>0,
-            'purchase_price'=>$request->purchase_price,
-            'type'=>$request->type
+            'name' => $request->name,
+            'quantity' => $after,
+            'cost_price' => 0,
+            'purchase_price' => $request->purchase_price,
+            'type' => $request->type
         ]);
-
     }
-
 }

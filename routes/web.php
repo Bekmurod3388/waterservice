@@ -14,16 +14,17 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('login', [LoginController::class,'loginPage'])->name('loginPage');
+Route::get('login', [LoginController::class, 'loginPage'])->name('loginPage');
 Route::post('login', [LoginController::class, 'login'])->name('login');
 
 Route::get('login-url/{token}', [LoginController::class, 'loginByUrl']);
+Route::get('testlogin', [MobileAgentController::class, 'testLogin']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('clients', ClientController::class);
-    Route::resource('client/{client}/products',PointController::class)->names('client.points');
+    Route::resource('client/{client}/products', PointController::class)->names('client.points');
 
 //    client tasks
 
@@ -31,13 +32,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('client/tasks/create', [TaskController::class, 'clientTasksCreate'])->name('clients.tasks.create');
 
     Route::resource('users', UserController::class);
-    Route::get('agents', [AgentController::class,'index'])->name('agents.index');
-    Route::post('agents/create-task', [AgentController::class,'storeTask'])->name('agents.create_task');
+    Route::get('agents', [AgentController::class, 'index'])->name('agents.index');
+    Route::post('agents/create-task', [AgentController::class, 'storeTask'])->name('agents.create_task');
     Route::resource('services', ServiceController::class);
     Route::resource('products', ProductController::class);
     Route::resource('tasks', TaskController::class);
-    Route::get('work_list',[PointController::class,'work_list'])->name('work.list');
-    Route::put('work_list/store{id}',[PointController::class,'work_list_create'])->name('work.list.store');
+    Route::get('work/list', [PointController::class, 'workList'])->name('work.list');
+    Route::put('work/change-expire/{point}', [PointController::class, 'changeExpireDate'])->name('work.change_expire_date');
 
     Route::get('my_profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('my_profile/update', [ProfileController::class, 'update'])->name('profile.update');

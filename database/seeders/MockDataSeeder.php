@@ -3,12 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Client;
-use App\Models\Filter;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\Region;
 use App\Models\Service;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MockDataSeeder extends Seeder
@@ -22,8 +20,7 @@ class MockDataSeeder extends Seeder
             'name' => 'test filter',
             'purchase_price' => 123000,
             'quantity'=>10,
-            'type'=>'filter'
-
+            'type'=>1
         ]);
 
         Service::query()->firstOrCreate([

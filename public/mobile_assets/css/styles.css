@@ -1,0 +1,370 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+    /*========== Colors ==========*/
+    /*Color mode HSL(hue, saturation, lightness)*/
+    --first-color: #35508a;
+    --black-color: hsl(225, 12%, 12%);
+    --white-color: hsl(0, 0%, 100%);
+    --text-color: #f7f1f9;
+    --body-color: #fef7ff;
+
+    /*========== Font and typography ==========*/
+    /*.5rem = 8px | 1rem = 16px ...*/
+    --body-font: "Montserrat Alternates", sans-serif;
+    --biggest-font-size: 2.5rem;
+    --tiny-font-size: .625rem;
+
+    /*========== Font weight ==========*/
+    --font-regular: 400;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1150px) {
+    :root {
+        --biggest-font-size: 3.5rem;
+    }
+}
+
+/*=============== BASE ===============*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--body-font);
+    background: var(--body-color);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+    max-width: 1120px;
+    margin-inline: 1.5rem;
+    height: 100%;
+}
+
+.orders_start {
+    height: 100%;
+}
+
+/* Remove the property of 100vh, when inserting its content */
+.section {
+    height: 100vh;
+    padding-block: 2.5rem;
+}
+
+.section h1 {
+    font-size: var(--biggest-font-size);
+    color: var(--black-color);
+    text-align: center;
+}
+
+/*=============== NAVBAR ===============*/
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--text-color);
+    width: 100%;
+    margin-inline: auto;
+    box-shadow: 0 2px 16px hsla(228, 95%, 4%, .4);
+    padding: 1rem 1.75rem;
+    border-top-right-radius: 4rem;
+
+    border-top-left-radius: 4rem;
+    z-index: var(--z-fixed);
+    color: var(--text-color);
+
+}
+
+.nav__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__link {
+    color: var(--first-color);
+    font-size: 1.5rem;
+    transition: color .4s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*=============== EXPAND LIST ===============*/
+.nav__expand {
+    border: none;
+    outline: none;
+    width: 40px;
+    height: 40px;
+    background-color: var(--first-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav__expand-icon {
+    display: inline-block;
+    color: var(--white-color);
+    font-size: 1.5rem;
+    transition: transform .4s;
+}
+
+.nav__expand-list {
+    position: absolute;
+    top: -4.5rem;
+    left: 0;
+    right: 0;
+    background-color: var(--body-color);
+    box-shadow: 0 2px 16px hsla(228, 95%, 4%, .1);
+    width: max-content;
+    margin-inline: auto;
+    padding: .5rem 1.5rem;
+    border-radius: 4rem;
+    display: flex;
+    column-gap: 2rem;
+    z-index: -1;
+    overflow: hidden;
+    transform: translateY(5rem) scale(.1);
+    transition: transform .5s cubic-bezier(.5, 1.8, .4, .8);
+}
+
+.nav__expand-list li {
+    transform: translateY(-3rem);
+    transition: transform .4s;
+}
+
+.nav__expand-list li:nth-child(1) {
+    transition-delay: .2s;
+}
+
+.nav__expand-list li:nth-child(2) {
+    transition-delay: .3s;
+}
+
+.nav__expand-list li:nth-child(3) {
+    transition-delay: .4s;
+}
+
+.nav__expand-link {
+    color: var(--first-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: color .4s;
+}
+
+.nav__expand-link i {
+    font-size: 1.5rem;
+}
+
+.nav__expand-link span {
+    font-size: var(--tiny-font-size);
+    font-weight: var(--font-semi-bold);
+}
+
+
+/* Show list */
+.show-list,
+.show-list li {
+    transform: translateY(0);
+}
+
+/* Rotate icon */
+.rotate-icon {
+    transform: rotate(135deg);
+}
+
+/* Active link */
+.active-link {
+    color: #000;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (min-width: 450px) {
+    .nav {
+        width: 350px;
+    }
+}
+
+/* For large devices */
+@media screen and (min-width: 1150px) {
+    .container {
+        margin-inline: auto;
+    }
+}
+
+.nav__link p {
+    font-size: 10px;
+}
+
+.orders {
+    height: 83vh;
+    overflow: auto;
+}
+
+.order {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #f2f2f2;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px hsla(228, 95%, 4%, .1);
+}
+
+.order_navigation button {
+    background: green;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 13px;
+    border: none;
+}
+
+.order {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+
+    margin: 20px 0;
+}
+
+.order_content p {
+    font-size: 14px;
+}
+
+.order_content span {
+    font-size: 10px;
+}
+
+
+.popup__bg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 33%;
+    background: #f7f1f9;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s all;
+    z-index: 101;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+
+}
+
+.popup__bg.active {
+    opacity: 1;
+    pointer-events: all;
+    transition: 0.5s all;
+}
+
+
+.popup.active {
+    transition: 0.5s all;
+    padding: 0 20px;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #000;
+    font-size: 36px;
+}
+
+.wrapper {
+    margin-top: 5vh;
+    height: 95vh;
+}
+
+.info {
+    margin: 20px 0;
+}
+
+.info div {
+    margin-bottom: 10px;
+}
+
+.info span {
+    display: block;
+    font-size: 14px;
+    color: #b0b0b0;
+}
+
+.info p {
+    margin: 0;
+    font-size: 16px;
+    color: #000;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.buttons a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}
+
+.green {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.orange {
+    background-color: #FF5722;
+    color: #fff;
+
+}
+
+.blue {
+    background-color: #2196F3;
+    color: #fff;
+
+}
+
+.nav_top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 6vh;
+    padding: 10px 20px;
+    background-color: var(--first-color);
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}

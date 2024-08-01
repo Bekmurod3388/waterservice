@@ -20,7 +20,7 @@
             </div>
 
             <div class="modal-body">
-                <form method="POST" action="{{ route('work.list.store',$point->id) }}">
+                <form method="POST" action="{{ route('work.change_expire_date',$point->id) }}">
 
                     @csrf
                     @method('PUT')

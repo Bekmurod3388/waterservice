@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->Biginteger('cost_price');
             $table->Biginteger('purchase_price');
-            $table->integer('differance');
+            $table->integer('difference');
             $table->integer('before');
             $table->integer('after');
             $table->timestamps();
