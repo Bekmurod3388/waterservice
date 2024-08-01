@@ -28,7 +28,7 @@
                         <th>ID</th>
                         <th>Servis nomi</th>
                         <th>Narxi</th>
-                        <th>Ko'proq</th>
+                        <th>Amallar</th>
                     </tr>
                     </thead>
                     <tbody>

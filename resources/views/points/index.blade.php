@@ -50,7 +50,7 @@
                                 </div>
                             </td>
                             @empty
-                                <td colspan="6" class="text-center">Ma'lumot yo'q</td>
+                                <td colspan="7" class="text-center">Ma'lumot yo'q</td>
                         </tr>
                     @endforelse
                     </tbody>

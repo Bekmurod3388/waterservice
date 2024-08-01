@@ -29,7 +29,7 @@
                         <th>ID</th>
                         <th>To'liq ism</th>
                         <th>Telefon raqami</th>
-                        <th>Harakatlar</th>
+                        <th>Amallar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -46,7 +46,7 @@
                                 </div>
                             </td>
                             @empty
-                                <td colspan="3" class="text-center">Ma'lumot yo'q</td>
+                                <td colspan="4" class="text-center">Ma'lumot yo'q</td>
                         </tr>
                     @endforelse
                     </tbody>
