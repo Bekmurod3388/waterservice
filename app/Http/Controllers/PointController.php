@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Points\StoreRequest;
 use App\Http\Requests\Points\UpdateRequest;
-use App\Models\Filter;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\Region;
 use App\Models\Service;
 use App\Models\Task;
+use App\Models\TaskReason;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class PointController extends Controller
 {
@@ -85,10 +86,29 @@ class PointController extends Controller
             return !in_array($point->id, $tasks);
         })->values()->all();
 
+
         return view('points.work_list', [
             'agents' => User::role('agent')->get(),
             'services' => Service::all(),
-            'points'=> $data
+            'points' => $data
         ]);
     }
+
+    public function work_list_create($data, Request $request)
+    {
+
+        $point = Point::findOrfail($data);
+//        dd($point->filter_expire_date,$point);
+        $point->filter_expire_date = $request->filter_expire_date;
+        $point->save();
+        TaskReason::create([
+            'point_id' => $point->id,
+            'filter_expire_date'=>$request->filter_expire_date,
+            'reason'=>$request->reason
+        ]);
+
+        return redirect()->route('work.list')->with('success', 'Manzil muvaffaqiyatli yaratildi!');
+
+    }
+
 }
