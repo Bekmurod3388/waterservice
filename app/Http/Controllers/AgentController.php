@@ -13,7 +13,6 @@ class AgentController extends Controller
             'agents' => User::query()->whereHas('roles', function ($query) {
                 $query->where('name', 'agent');
             })->paginate(10),
-
         ]);
     }
 }

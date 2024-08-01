@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientFilterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Mobile\MobileAgentController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class,'loginPage'])->name('loginPage');
 Route::post('login', [LoginController::class, 'login'])->name('login');
+
+Route::get('login-url/{token}', [LoginController::class, 'loginByUrl']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
@@ -37,4 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('my_profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('my_profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+    Route::prefix('mobile')->group(function () {
+        Route::prefix('agent')->group(function () {
+            Route::get('index', [MobileAgentController::class, 'index']);
+        });
+    });
 });

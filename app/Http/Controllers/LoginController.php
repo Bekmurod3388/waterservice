@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
 use App\Services\LoginService;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class LoginController extends Controller
 {
@@ -30,7 +30,43 @@ class LoginController extends Controller
         }
     }
 
-    public function register(RegisterRequest $request)
+    public function loginByUrl(Request $request, $token)
+    {
+        // Get token from URL query parameter
+
+        if ($token) {
+            $accessToken = PersonalAccessToken::findToken($token);
+
+            if ($accessToken) {
+                // Check if the token has expired
+                if ($accessToken->expires_at && $accessToken->expires_at->isPast()) {
+                    return response()->json(['message' => 'Token has expired'], 401);
+                }
+
+                // Set the authenticated user
+                $request->setUserResolver(function () use ($accessToken) {
+                    return $accessToken->tokenable;
+                });
+            } else {
+                return response()->json(['message' => 'Invalid token'], 401);
+            }
+        } else {
+            return response()->json(['message' => 'Token not provided'], 401);
+        }
+
+        $accessToken = PersonalAccessToken::findToken($token);
+
+//        dd($accessToken);
+//        if ($accessToken && !$accessToken->isExpired()) {
+//            $request->setUserResolver(function () use ($accessToken) {
+//                return $accessToken->tokenable;
+//            });
+//        }
+
+        return redirect('mobile/agent');
+    }
+
+    public function register(Request $request)
     {
         $data = $request->only(['username', 'password']);
         $this->loginService->register($data);
