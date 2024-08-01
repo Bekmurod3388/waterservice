@@ -46,8 +46,8 @@
                             <label for="filter_id" class="form-label">Filterlar</label>
                             <select id="filter_id" class="form-control" name="filter_id">
                                 <option disabled>Mavjud emas</option>
-                                @foreach($filters as $filter)
-                                    <option value="{{ $filter->id }}">{{ $filter->name }}</option>
+                                @foreach($products as $product)
+                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
                                 @endforeach
                             </select>
                         </div>
