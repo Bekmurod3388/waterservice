@@ -30,7 +30,9 @@
                         <th>ID</th>
                         <th>Mahsulot nomi</th>
                         <th>Narxi</th>
-                        <th>Ko'proq</th>
+                        <th>Soni</th>
+                        <th>turi</th>
+                        <th>Amallar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,7 +40,9 @@
                         <tr>
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->name }}</td>
-                            <td>{{ $product->cost }}</td>
+                            <td>{{ $product->purchase_price}}</td>
+                            <td>{{ $product->quantity}}</td>
+                            <td>{{ $product->type}}</td>
                             <td>
                                 <div class="d-flex">
 

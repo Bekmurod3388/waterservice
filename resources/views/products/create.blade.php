@@ -13,7 +13,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1"> Mahsulot yaratish </h5>
+                <h5 class="modal-title" id="exampleModalLabel1">  Mahsulot yaratish </h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -26,15 +26,29 @@
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Mahsulot nomi</label>
+                            <label for="nameBasic" class="form-label"> nomi</label>
                             <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}" required/>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="cost" class="form-label">Mahsulot narxi </label>
-                            <input type="number" id="cost" class="form-control" name="cost"
-                                   value="{{ old('cost') }}" required/>
+                            <label for="purchase_price" class="form-label">  narxi </label>
+                            <input type="number" id="purchase_price" class="form-control" name="purchase_price"
+                                   value="{{ old('purchase_price') }}" required/>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="quantity" class="form-label"> Soni </label>
+                            <input type="number" id="quantity" class="form-control" name="quantity"
+                                   value="{{ old('quantity') }}" required/>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="type" class="form-label"> turi </label>
+                            <input type="text" id="type" class="form-control" name="type"
+                                   value="{{ old('type') }}" required/>
                         </div>
                     </div>
                     <div class="modal-footer">

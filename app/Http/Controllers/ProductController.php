@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Products\StoreRequest;
 use App\Http\Requests\Products\UpdateRequest;
 use App\Models\Product;
+use App\Models\ProductHistory;
+use App\Services\ProductHistoryCreateService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,6 +14,13 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    protected $productHistoryCreateService;
+
+    public function __construct(ProductHistoryCreateService $productHistoryCreateService){
+        $this->productHistoryCreateService = $productHistoryCreateService;
+    }
+
     public function index()
     {
         return view('products.index', [
@@ -32,7 +41,9 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Product::create($request->validated());
+        $product = Product::create($request->validated());
+
+        $this->productHistoryCreateService->create($product);
 
         return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
     }
@@ -48,10 +59,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Product $Product)
+    public function update(UpdateRequest $request, Product $product)
     {
-        $Product->update($request->validated());
-
+        $this->productHistoryCreateService->update($request,$product);
         return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');
     }
 

@@ -24,7 +24,9 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'cost' => 'required|numeric|min:0',
+            'purchase_price' => 'required|numeric|min:0',
+            'quantity' => 'required|numeric|min:0',
+            'type' => 'required',
         ];
     }
 
@@ -39,9 +41,9 @@ class UpdateRequest extends FormRequest
             'name.required' => 'Ism maydoni to\'ldirilishi shart.',
             'name.string' => 'Ism maydoni matn bo\'lishi kerak.',
             'name.max' => 'Ism maydoni 255 ta belgidan oshmasligi kerak.',
-            'cost.required' => 'Narx maydoni to\'ldirilishi shart.',
-            'cost.numeric' => 'Narx maydoni raqam bo\'lishi kerak.',
-            'cost.min' => 'Narx maydoni 0 dan kam bo\'lmasligi kerak.',
+            'quantity.required' => 'Mahsulot soni to\'ldirilishi shart.',
+//            'quantity.numeric' => 'Son maydoni raqam bo\'lishi kerak.',
+            'quantity.min' => 'Mahsulot Son 0 dan kam bo\'lmasligi kerak.',
         ];
     }
 }

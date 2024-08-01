@@ -31,8 +31,20 @@
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="cost" class="form-label">Mohsulot narxi</label>
-                            <input type="number" id="phone" class="form-control" name="cost" value="{{ $product->cost }}" />
+                            <label for="purchase_price" class="form-label">Mohsulot narxi</label>
+                            <input type="number" id="purchase_price" class="form-control" name="purchase_price" value="{{ $product->purchase_price }}" />
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="quantity" class="form-label">Mohsulot soni</label>
+                            <input type="number" id="quantity" class="form-control" name="quantity" />
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="type" class="form-label">Mohsulot turi</label>
+                            <input type="text" id="type" class="form-control" name="type" value="{{ $product->type }}" />
                         </div>
                     </div>
                     <div class="modal-footer">

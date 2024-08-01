@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('purchase_price');
             $table->bigInteger('cost_price')->default(0);
-            $table->integer('quantity')->nullable();
-            $table->integer('type');
+            $table->integer('quantity')->default(0);
+            $table->tinyInteger('type')->default(0);
             $table->timestamps();
         });
     }
