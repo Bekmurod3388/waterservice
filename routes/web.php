@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientFilterController;
 use App\Http\Controllers\DashboardController;
@@ -27,6 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('client/tasks/create', [TaskController::class, 'clientTasksCreate'])->name('clients.tasks.create');
 
     Route::resource('users', UserController::class);
+    Route::get('agents',[AgentController::class,'index'])->name('agents.index');
     Route::resource('services', ServiceController::class);
     Route::resource('products', ProductController::class);
     Route::resource('tasks', TaskController::class);
