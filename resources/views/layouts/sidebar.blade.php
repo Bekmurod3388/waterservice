@@ -21,7 +21,7 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
-        @role('admin|operator')
+        @role('admin|operator_agent')
         <li class="menu-item @if(request()->routeIs('clients.index','clients.tasks.index')) active @endif">
             <a href="{{ route('clients.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
@@ -34,10 +34,10 @@
                 <div data-i18n="Analytics">Ishlar ro'yxati</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="#" class="menu-link">
+        <li class="menu-item @if(request()->routeIs('agents.index')) active @endif">
+            <a href="{{route('agents.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Analytics">Agent ishlari</div>
+                <div data-i18n="Analytics">Agentlar</div>
             </a>
         </li>
         @endrole

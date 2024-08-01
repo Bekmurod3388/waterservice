@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin'),
             ]
         );
-        $operator->assignRole('operator');
+        $operator->assignRole('operator_agent');
 
         $agent = User::query()->firstOrCreate(
             [
