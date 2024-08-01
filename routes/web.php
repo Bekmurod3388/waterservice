@@ -31,11 +31,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('client/tasks/create', [TaskController::class, 'clientTasksCreate'])->name('clients.tasks.create');
 
     Route::resource('users', UserController::class);
-    Route::get('agents',[AgentController::class,'index'])->name('agents.index');
+    Route::get('agents', [AgentController::class,'index'])->name('agents.index');
+    Route::post('agents/create-task', [AgentController::class,'storeTask'])->name('agents.create_task');
     Route::resource('services', ServiceController::class);
     Route::resource('products', ProductController::class);
     Route::resource('tasks', TaskController::class);
     Route::get('work_list',[PointController::class,'work_list'])->name('work.list');
+    Route::put('work_list/store{id}',[PointController::class,'work_list_create'])->name('work.list.store');
 
     Route::get('my_profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('my_profile/update', [ProfileController::class, 'update'])->name('profile.update');

@@ -17,9 +17,6 @@
                     </button>
                 </form>
 
-
-
-
             </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
@@ -42,11 +39,12 @@
                             <td>{{ $point->client->phone }}</td>
                             <td>{{ $point->region->name }}</td>
                             <td>{{ $point->address }}</td>
-                            <td><span class="btn btn-outline-danger">{{$point->filter_expire_date->format('Y-m-d')}}</span></td>
+                            <td>
+                                @include('points.change_filter')
+                            </td>
                             <td>
                                 <div class="d-flex">
                                     @include('points.agent', ['client_id' => $point->client_id, 'point_id' => $point->id])
-
                                 </div>
                             </td>
                             @empty
