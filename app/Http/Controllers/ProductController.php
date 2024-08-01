@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Filters\StoreRequest;
-use App\Http\Requests\Filters\UpdateRequest;
-use App\Models\Filter;
+use App\Http\Requests\Products\StoreRequest;
+use App\Http\Requests\Products\UpdateRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class FilterController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('filters.index', [
-            'filters' => Filter::paginate(10),
+        return view('products.index', [
+            'products' => Product::paginate(10),
         ]);
     }
 
@@ -24,7 +24,7 @@ class FilterController extends Controller
      */
     public function create()
     {
-        return view('filters.create');
+        return view('products.create');
     }
 
     /**
@@ -32,7 +32,7 @@ class FilterController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Filter::create($request->validated());
+        Product::create($request->validated());
 
         return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
     }
@@ -40,7 +40,7 @@ class FilterController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Filter $filter)
+    public function show(Product $Product)
     {
         //
     }
@@ -48,9 +48,9 @@ class FilterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Filter $filter)
+    public function update(UpdateRequest $request, Product $Product)
     {
-        $filter->update($request->validated());
+        $Product->update($request->validated());
 
         return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');
     }
@@ -58,11 +58,12 @@ class FilterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Filter $filter)
+    public function destroy(Product $Product)
     {
-        $filter->delete();
 
-        return back()->with('success', 'Servis muvaffaqiyatli oʻchirildi!');
+        $Product->delete();
+
+        return back()->with('success', 'Product muvaffaqiyatli oʻchirildi!');
 
     }
 }

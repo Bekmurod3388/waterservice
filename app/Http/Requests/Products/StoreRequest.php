@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Filters;
+namespace App\Http\Requests\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
 

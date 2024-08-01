@@ -6,6 +6,7 @@ use App\Http\Requests\Points\StoreRequest;
 use App\Http\Requests\Points\UpdateRequest;
 use App\Models\Filter;
 use App\Models\Point;
+use App\Models\Product;
 use App\Models\Region;
 use App\Models\Service;
 use App\Models\Task;
@@ -21,7 +22,7 @@ class PointController extends Controller
         return view('points.index', [
             'points' => Point::with('client')->where('client_id', $client)->paginate(10),
             'regions' => Region::all(),
-            'filters' => Filter::all()
+            'products' => Product::all()
         ]);
     }
 

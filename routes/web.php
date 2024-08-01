@@ -3,9 +3,9 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientFilterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FilterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PointController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
@@ -19,7 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('clients', ClientController::class);
-    Route::resource('client/{client}/filters',PointController::class)->names('client.points');
+    Route::resource('client/{client}/products',PointController::class)->names('client.points');
 
 //    client tasks
 
@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('users', UserController::class);
     Route::resource('services', ServiceController::class);
-    Route::resource('filters', FilterController::class);
+    Route::resource('products', ProductController::class);
     Route::resource('tasks', TaskController::class);
     Route::get('work_list',[PointController::class,'work_list'])->name('work.list');
 

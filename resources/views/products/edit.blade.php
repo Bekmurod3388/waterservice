@@ -1,19 +1,17 @@
 <button
     type="button"
-    class="btn btn-secondary create-new btn-primary"
+    class="btn btn-warning me-2"
     data-bs-toggle="modal"
-    data-bs-target="#basicModal">
-    <span>
-        <i class="bx bx-plus me-sm-1"></i>
-        <span class="d-none d-sm-inline-block"> Filter yaratish </span>
-    </span>
+    data-bs-target="#editModal{{ $product->id }}"
+>
+    <i class="bx bx-edit-alt"></i>
 </button>
 
-<div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editModal{{ $product->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1"> Filter yaratish </h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Mohsulotni taxrirlash</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -22,19 +20,19 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('filters.store') }}">
+                <form method="POST" action="{{ route('products.update', $product->id) }}">
                     @csrf
+                    @method('PUT')
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Filter nomi</label>
-                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}" required/>
+                            <label for="nameBasic" class="form-label">Mohsulot nomi</label>
+                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ $product->name }}"/>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="cost" class="form-label">Filter narxi </label>
-                            <input type="number" id="cost" class="form-control" name="cost"
-                                   value="{{ old('cost') }}" required/>
+                            <label for="cost" class="form-label">Mohsulot narxi</label>
+                            <input type="number" id="phone" class="form-control" name="cost" value="{{ $product->cost }}" />
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -6,6 +6,7 @@
         @include('alerts.success-alert')
         @include('alerts.error-alert')
 
+
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
                 <!-- Search -->
@@ -18,7 +19,7 @@
                 </form>
 
 
-                @include('filters.create')
+                @include('products.create')
 
 
             </div>
@@ -27,22 +28,22 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Filter nomi</th>
+                        <th>Mahsulot nomi</th>
                         <th>Narxi</th>
                         <th>Ko'proq</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($filters as $filter)
+                    @forelse($products as $product)
                         <tr>
-                            <td>{{ $filter->id }}</td>
-                            <td>{{ $filter->name }}</td>
-                            <td>{{ $filter->cost }}</td>
+                            <td>{{ $product->id }}</td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->cost }}</td>
                             <td>
                                 <div class="d-flex">
 
-                                    @include('filters.edit')
-                                    @include('filters.edit')
+                                    @include('products.edit')
+                                    @include('products.delete')
 
                                 </div>
                             </td>
@@ -54,7 +55,7 @@
                 </table>
                 <!-- Basic Pagination -->
                 <div class="card-body">
-                    {{ $filters->links('pagination::bootstrap-5') }}
+                    {{ $products->links('pagination::bootstrap-5') }}
                 </div>
                 <!--/ Basic Pagination -->
             </div>

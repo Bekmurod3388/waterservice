@@ -90,9 +90,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-
-        dd('test');
-        $task->delete();
+        $task->query()->delete();
         return redirect()->back();
 
     }

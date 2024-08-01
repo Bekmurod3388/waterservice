@@ -55,10 +55,10 @@
             </a>
         </li>
 
-        <li class="menu-item @if(request()->routeIs('filters.index')) active @endif">
-            <a href="{{ route('filters.index') }}" class="menu-link">
+        <li class="menu-item @if(request()->routeIs('products.index')) active @endif">
+            <a href="{{ route('products.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-filter-alt"></i>
-                <div data-i18n="Analytics"> Filterlar </div>
+                <div data-i18n="Analytics"> Mahsulotlar </div>
             </a>
         </li>
         @endrole
