@@ -18,7 +18,10 @@ class CheckTokenMiddleware
     {
         $token = $request->route('token');
 
-        view()->composer('mobile.agent.pages.home', function (View $view) use ($token) {
+        view()->composer([
+            'mobile.agent.pages.home',
+            'mobile.agent.partials.navbar',
+        ], function (View $view) use ($token) {
             $view->with('apiToken', $token);
         });
 
