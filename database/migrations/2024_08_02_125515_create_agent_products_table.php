@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('task_services', function (Blueprint $table) {
+        Schema::create('agent_products', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('task_id');
             $table->bigInteger('agent_id');
-            $table->bigInteger('service_id');
-            $table->bigInteger('service_cost');
-            $table->boolean('status')->default(0);
-            $table->tinyInteger('is_free');
+            $table->bigInteger('product_id');
+            $table->bigInteger('quantity');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('task_services');
+        Schema::dropIfExists('agent_products');
     }
 };
