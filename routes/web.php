@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
 
-Route::prefix('mobile/{token}')->middleware([CheckTokenMiddleware::class, LoggerMiddleware::class])->group(function () {
+Route::prefix('mobile/{token}')->middleware(CheckTokenMiddleware::class)->group(function () {
 
     Route::prefix('agent')->group(function () {
         Route::get('index', [MobileAgentController::class, 'index'])->name('mobile.agent.index');
