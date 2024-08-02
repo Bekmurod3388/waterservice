@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('service_id');
             $table->bigInteger('service_cost');
             $table->boolean('status')->default(0);
-            $table->bigInteger('is_free');
+            $table->tinyInteger('is_free');
             $table->timestamps();
         });
     }

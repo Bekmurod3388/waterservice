@@ -24,7 +24,7 @@ return new class extends Migration
             $table->bigInteger('card');
             $table->bigInteger('terminal');
             $table->bigInteger('transfer');
-            $table->dateTime('service_time');
+            $table->dateTime('service_time')->nullable();
             $table->timestamps();
         });
     }
