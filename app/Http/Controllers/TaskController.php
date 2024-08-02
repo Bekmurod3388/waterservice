@@ -51,7 +51,7 @@ class TaskController extends Controller
             foreach ($request->get('service_ids') as $service_id) {
                 TaskService::query()->create([
                     'task_id' => $task->id,
-                    'user_id' => $request->get('user_id'),
+                    'agent_id' => $request->get('agent_id'),
                     'service_id' => $service_id,
                     'service_cost' => $services[$service_id]
                 ]);
