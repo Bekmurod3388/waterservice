@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('operator_dealer_id');
+            $table->bigInteger('telegram_id')->nullable();
             $table->string('name');
             $table->string('phone')->unique();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

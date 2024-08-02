@@ -24,6 +24,9 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'phone' => 'required|string|unique:clients,phone',
+            'operator_dealer_id' => 'integer',
+            'telegram_id' => 'nullable|integer',
+            'description' => 'nullable|string',
         ];
     }
 
@@ -41,6 +44,9 @@ class StoreRequest extends FormRequest
             'phone.required' => 'Telefon raqami kiritilishi shart.',
             'phone.string' => 'Telefon raqami faqat matn bo\'lishi kerak.',
             'phone.unique' => 'Bu telefon raqami allaqachon ro\'yxatdan o\'tgan.',
+            'operator_dealer_id.integer' => 'Operator Dealer ID faqat butun son bo\'lishi kerak.',
+            'telegram_id.integer' => 'Telegram ID faqat butun son bo\'lishi kerak.',
+            'description.string' => 'Tavsif faqat matn bo\'lishi kerak.',
         ];
     }
 }

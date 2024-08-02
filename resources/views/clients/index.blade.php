@@ -29,6 +29,9 @@
                         <th>ID</th>
                         <th>To'liq ism</th>
                         <th>Telefon raqami</th>
+                        <th>Operator Dilleri</th>
+                        <th>Telegram</th>
+                        <th>Tavsif</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
@@ -38,6 +41,9 @@
                             <td>{{ $client->id }}</td>
                             <td>{{ $client->name }}</td>
                             <td>{{ $client->phone }}</td>
+                            <td>{{ $client->operator?->name }}</td>
+                            <td>{{ $client->telegram_id }}</td>
+                            <td>{{ $client->description }}</td>
                             <td>
                                 <div class="d-flex">
                                     @include('clients.edit')

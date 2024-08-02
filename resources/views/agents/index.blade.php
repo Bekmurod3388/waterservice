@@ -41,13 +41,13 @@
                             <td>
                                 @if($agent->created_at->isSameDay(\Carbon\Carbon::today()))
                                     <span style="color: blue">
-                                    {{ $agent->tasks->first()->total_tasks }}
+                                    {{ $agent->tasks->first()->total_tasks ?? 0 }}
                                 </span>/
                                     <span style="color: green">
-                                    {{ $agent->tasks->first()->complete_tasks }}
+                                    {{ $agent->tasks->first()->complete_tasks ?? 0 }}
                                 </span>/
                                     <span style="color: red">
-                                    {{ $agent->tasks->first()->incomplete_tasks }}
+                                    {{ $agent->tasks->first()->incomplete_tasks ?? 0 }}
                                 </span>
                                 @else
                                     <span>Topshiriq yo'q</span>

@@ -15,8 +15,16 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('client_id');
             $table->bigInteger('point_id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('agent_id');
+            $table->bigInteger('user_id')->nullable(); //operatoragent yoki diller
             $table->boolean('is_completed')->default(0);
+            $table->bigInteger('service_cost_sum')->nullable();
+            $table->bigInteger('product_cost_sum')->nullable();
+            $table->bigInteger('cash');
+            $table->bigInteger('card');
+            $table->bigInteger('terminal');
+            $table->bigInteger('transfer');
+            $table->dateTime('service_time');
             $table->timestamps();
         });
     }

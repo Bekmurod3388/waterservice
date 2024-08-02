@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Clients\StoreRequest;
 use App\Http\Requests\Clients\UpdateRequest;
 use App\Models\Client;
+use App\Models\User;
 
 class ClientController extends Controller
 {
@@ -14,7 +15,8 @@ class ClientController extends Controller
     public function index()
     {
         return view('clients.index', [
-            'clients' => Client::query()->paginate(10),
+            'clients' => Client::with('operator')->paginate(10),
+            'operators' => User::role('operator_dealer')->get(),
         ]);
     }
 
@@ -23,6 +25,7 @@ class ClientController extends Controller
      */
     public function store(StoreRequest $request)
     {
+
         Client::query()->create($request->validated());
 
         return back()->with('success', 'Mijoz muvaffaqiyatli yaratildi!');

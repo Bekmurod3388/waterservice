@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TaskService extends Model
 {
     use HasFactory;
-    protected $fillable=['service_id','task_id','status','service_cost','user_id'];
+    protected $fillable=['service_id', 'task_id', 'status', 'service_cost', 'agent_id', 'is_free'];
 
 
 }
