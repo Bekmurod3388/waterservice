@@ -11,5 +11,5 @@ class ProductHistory extends Model
 
     protected $table = 'product_history';
 
-    protected $fillable = ['product_id', 'user_id', 'cost_price', 'purchase_price', 'difference', 'before', 'after'];
+    protected $fillable = ['product_id', 'manager_id', 'cost_price', 'purchase_price', 'difference', 'before', 'after'];
 }
