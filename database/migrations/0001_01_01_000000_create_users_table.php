@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('password');
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
+            $table->dateTime('last_active_time')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
