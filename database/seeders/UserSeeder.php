@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -38,7 +37,7 @@ class UserSeeder extends Seeder
 
         $operator = User::query()->firstOrCreate(
             [
-                    'phone' => '123123123',
+                'phone' => '123123123',
             ],
             [
                 'name' => 'operator',
