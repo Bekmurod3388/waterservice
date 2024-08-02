@@ -54,11 +54,16 @@
                 <div data-i18n="Analytics">Servislar</div>
             </a>
         </li>
-
         <li class="menu-item @if(request()->routeIs('products.index')) active @endif">
             <a href="{{ route('products.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-filter-alt"></i>
                 <div data-i18n="Analytics"> Mahsulotlar </div>
+            </a>
+        </li>
+        <li class="menu-item @if(request()->routeIs('logs.index')) active @endif">
+            <a href="{{ route('logs.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-filter-alt"></i>
+                <div data-i18n="Analytics"> Logs </div>
             </a>
         </li>
         @endrole
