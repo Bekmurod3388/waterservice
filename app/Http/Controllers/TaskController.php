@@ -35,7 +35,7 @@ class TaskController extends Controller
         $request->validate([
             'client_id' => 'required|int',
             'point_id' => 'required|int',
-            'user_id' => 'required|int',
+            'agent_id' => 'required|int',
             'service_ids' => '',
         ]);
 
@@ -45,7 +45,7 @@ class TaskController extends Controller
             $task = Task::query()->create([
                 'client_id' => $request->get('client_id'),
                 'point_id' => $request->get('point_id'),
-                'user_id' => $request->get('user_id')
+                'agent_id' => $request->get('agent_id')
             ]);
 
             foreach ($request->get('service_ids') as $service_id) {
@@ -108,7 +108,7 @@ class TaskController extends Controller
     {
         Task::query()->create([
             'client_id' => $request->get('client_id'),
-            'user_id' => auth()->id(),
+            'agent_id' => auth()->id(),
             'point_id' => 1,
         ]);
 
