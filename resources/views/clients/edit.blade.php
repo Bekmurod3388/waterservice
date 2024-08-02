@@ -26,13 +26,38 @@
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">To'liq ismi</label>
-                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ $client->name }}"/>
+                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ $client->name }}" required/>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="phone" class="form-label">Telefon raqami</label>
-                            <input type="tel" id="phone" class="form-control" name="phone" value="{{ $client->phone }}" pattern="[0-9]{9}" maxlength="9" />
+                            <input type="tel" id="phone" class="form-control" name="phone" value="{{ $client->phone }}" pattern="[0-9]{9}" maxlength="9" required/>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="exampleFormControlSelect1" class="form-label">Operator Dilleri</label>
+                            <select id="exampleFormControlSelect1" class="form-control" name="operator_dealer_id" aria-label="Default select example" required>
+                                <option disabled>Operator Dillerini tanlang</option>
+                                @foreach($operators as $operator)
+                                    <option value="{{ $operator->id }}" {{ $client->operator_dealer_id == $operator->id ? 'selected' : '' }}>
+                                        {{ $operator->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="telegramId" class="form-label">Telegram</label>
+                            <input type="number" id="telegramId" class="form-control" name="telegram_id" value="{{ $client->telegram_id }}"/>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="description" class="form-label">Tavsif</label>
+                            <textarea id="description" class="form-control" name="description">{{ $client->description }}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

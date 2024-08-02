@@ -7,6 +7,7 @@ use App\Models\Point;
 use App\Models\Product;
 use App\Models\Region;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class MockDataSeeder extends Seeder
@@ -22,8 +23,7 @@ class MockDataSeeder extends Seeder
         ];
 
         foreach ($filters as $filterData) {
-            $filter = Product::query()->firstOrCreate($filterData);
-            echo "Created Filter: " . $filter->name . "\n";
+            Product::query()->firstOrCreate($filterData);
         }
 
         $services = [
@@ -32,42 +32,47 @@ class MockDataSeeder extends Seeder
         ];
 
         foreach ($services as $serviceData) {
-            $service = Service::query()->firstOrCreate($serviceData);
-            echo "Created Service: " . $service->name . "\n";
+            Service::query()->firstOrCreate($serviceData);
         }
 
-        $clients = [
-            ['name' => 'test client', 'phone' => '991324657'],
-            ['name' => 'test2 client', 'phone' => '991324651']
-        ];
+        $operator = User::whereHas('roles', function($q) {
+            $q->where('name', 'operator_dealer');
+        })->first();
 
-        foreach ($clients as $clientData) {
-            $client = Client::query()->firstOrCreate($clientData);
-            echo "Created Client: " . $client->name . "\n";
-        }
+        if ($operator) {
+            $clients = [
+                ['name' => 'test client', 'phone' => '991324657', 'operator_dealer_id' => $operator->id],
+                ['name' => 'test2 client', 'phone' => '991324651', 'operator_dealer_id' => $operator->id]
+            ];
 
-        $points = [
-            ['client_name' => 'test client', 'filter_name' => 'test filter', 'address' => 'test address'],
-            ['client_name' => 'test2 client', 'filter_name' => 'test2 filter', 'address' => 'test2 address'],
-            ['client_name' => 'test2 client', 'filter_name' => 'test filter', 'address' => 'test3 address']
-        ];
-
-        foreach ($points as $pointData) {
-            $client = Client::where('name', $pointData['client_name'])->first();
-            $filter = Product::where('name', $pointData['filter_name'])->first();
-            $region = Region::query()->inRandomOrder()->first();
-
-            if ($client && $filter && $region) {
-                $point = Point::query()->firstOrCreate([
-                    'client_id' => $client->id,
-                    'region_id' => $region->id,
-                    'address' => $pointData['address'],
-                    'filter_id' => $filter->id,
-                    'filter_expire' => 3,
-                    'filter_expire_date' => now()
-                ]);
-                echo "Created Point for Client: " . $client->name . " and Filter: " . $filter->name . "\n";
+            foreach ($clients as $clientData) {
+                Client::query()->firstOrCreate($clientData);
             }
+
+            $points = [
+                ['client_name' => 'test client', 'filter_name' => 'test filter', 'address' => 'test address'],
+                ['client_name' => 'test2 client', 'filter_name' => 'test2 filter', 'address' => 'test2 address'],
+                ['client_name' => 'test2 client', 'filter_name' => 'test filter', 'address' => 'test3 address']
+            ];
+
+            foreach ($points as $pointData) {
+                $client = Client::where('name', $pointData['client_name'])->first();
+                $filter = Product::where('name', $pointData['filter_name'])->first();
+                $region = Region::query()->inRandomOrder()->first();
+
+                if ($client && $filter && $region) {
+                    Point::query()->firstOrCreate([
+                        'client_id' => $client->id,
+                        'region_id' => $region->id,
+                        'address' => $pointData['address'],
+                        'filter_id' => $filter->id,
+                        'filter_expire' => 3,
+                        'filter_expire_date' => now()
+                    ]);
+                }
+            }
+        } else {
+            $this->command->error('No operator dealer found. Please seed operator dealers first.');
         }
     }
 }

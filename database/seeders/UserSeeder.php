@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -45,6 +46,17 @@ class UserSeeder extends Seeder
             ]
         );
         $operator->assignRole('operator_dealer');
+
+        $operator2 = User::query()->firstOrCreate(
+            [
+                'phone' => '345345345',
+            ],
+            [
+                'name' => 'operator2',
+                'password' => Hash::make('admin'),
+            ]
+        );
+        $operator2->assignRole('operator_dealer');
 
         $agent = User::query()->firstOrCreate(
             [
