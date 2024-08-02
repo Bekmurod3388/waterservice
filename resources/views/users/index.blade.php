@@ -20,6 +20,7 @@
                 @include('users.create')
 
             </div>
+            @dd($users)
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
