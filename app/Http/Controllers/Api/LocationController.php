@@ -17,12 +17,12 @@ class LocationController extends Controller
         ]);
 
         $user = auth()->user();
+
         $user->update([
             'latitude' => $request->get('latitude'),
             'longitude' => $request->get('longitude'),
             'last_active_time' => now()
         ]);
-
 //        User::query()->where('user_id', $userId)->update([
 //            'latitude' => $request->get('latitude'),
 //            'longitude' => $request->get('longitude'),

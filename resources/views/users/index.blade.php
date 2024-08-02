@@ -28,6 +28,7 @@
                         <th>To'liq ism</th>
                         <th>Telefon raqami</th>
                         <th>Joylashuvi</th>
+                        <th>Oxirgi faollik</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
@@ -38,6 +39,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->latitude }} {{$user->longitude}}</td>
+                            <td>{{ $user->last_active_time }}</td>
                             <td>
                                 <div class="d-flex">
                                     @include('users.edit')
