@@ -50,6 +50,9 @@ Route::prefix('mobile/{token}')->group(function () {
     Route::prefix('agent')->group(function () {
         Route::get('index', [MobileAgentController::class, 'index'])->name('mobile.agent.index');
         Route::get('task-items', [MobileAgentController::class, 'taskItems'])->name('mobile.agent.task_items');
+        Route::get('products', [MobileAgentController::class, 'taskItems'])->name('mobile.agent.products');
+        Route::get('history', [MobileAgentController::class, 'taskItems'])->name('mobile.agent.history');
+        Route::get('settings', [MobileAgentController::class, 'taskItems'])->name('mobile.agent.settings');
     });
 
     Route::prefix('dealer')->group(function () {
