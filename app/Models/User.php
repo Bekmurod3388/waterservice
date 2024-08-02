@@ -23,6 +23,9 @@ class User extends Authenticatable
         'name',
         'phone',
         'password',
+        'latitude',
+        'longitude',
+        'last_active_time'
     ];
 
     /**
