@@ -43,7 +43,7 @@
                     <div class="buttons">
                         <a href="#" style="width: 29%;" class="green">Joylashuv</a>
                         <a href="" style="width: 19%;" class="orange"><i class="ri-phone-line"></i></a>
-                        <a href="{{route('mobile.agent.task_items', ['token' => $token])}}" style="width: 49%;" class="blue">Xizmat ko'rsatish</a>
+                        <a href="{{route('mobile.agent.task_items', ['token' => $apiToken])}}" style="width: 49%;" class="blue">Xizmat ko'rsatish</a>
                     </div>
                 </div>
             </div>

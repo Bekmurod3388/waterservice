@@ -11,9 +11,14 @@ class MobileAgentController extends Controller
 {
     public function index($token)
     {
+        $user = getUser($token);
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
         return view('mobile.agent.pages.home', [
-            'tasks' => Task::with('point')->where('user_id', auth()->id())->get(),
-            'token' => $token
+            'tasks' => Task::with('point')->where('user_id', $user->id)->get(),
         ]);
     }
     public function history($token)
