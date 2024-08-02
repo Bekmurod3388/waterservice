@@ -13,6 +13,10 @@ class MobileAgentController extends Controller
     {
         $user = getUser($token);
 
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
         return view('mobile.agent.pages.home', [
             'tasks' => Task::with('point')->where('user_id', $user->id)->get(),
         ]);
