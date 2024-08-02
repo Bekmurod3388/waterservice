@@ -17,7 +17,7 @@
                     </button>
                 </form>
 
-{{--                @include('users.create')--}}
+                {{--                @include('users.create')--}}
 
             </div>
             <div class="table-responsive text-nowrap">
@@ -39,19 +39,15 @@
                             <td>{{ $agent->name }}</td>
                             <td>{{ $agent->phone }}</td>
                             <td>
-                                @if($agent->created_at->isSameDay(\Carbon\Carbon::today()))
-                                    <span style="color: blue">
-                                    {{ $agent->tasks->first()->total_tasks ?? 0 }}
+                                <span style="color: blue">
+                                    {{ $agent->complete_tasks + $agent->incomplete_tasks }}
                                 </span>/
-                                    <span style="color: green">
-                                    {{ $agent->tasks->first()->complete_tasks ?? 0 }}
+                                <span style="color: green">
+                                    {{ $agent->complete_tasks }}
                                 </span>/
-                                    <span style="color: red">
-                                    {{ $agent->tasks->first()->incomplete_tasks ?? 0 }}
+                                <span style="color: red">
+                                    {{ $agent->incomplete_tasks }}
                                 </span>
-                                @else
-                                    <span>Topshiriq yo'q</span>
-                                @endif
                             </td>
                             <td>
                                 <div class="d-flex">

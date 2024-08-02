@@ -4,13 +4,14 @@ use App\Http\Controllers\Api\AgentController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Middleware\LoggerMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
 Route::post('/login',[LoginController::class,'login']);
 
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', LoggerMiddleware::class])->group(function () {
     Route::post('/logout',[LoginController::class,'logout'])->middleware('auth:sanctum');
     Route::put('/updateProfile', [LoginController::class, 'updateProfile'])->middleware('auth:sanctum');
 

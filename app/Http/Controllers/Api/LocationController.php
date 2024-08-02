@@ -16,13 +16,18 @@ class LocationController extends Controller
             'longitude' => 'required'
         ]);
 
-        $userId = auth()->id();
-
-        User::query()->where('user_id', $userId)->update([
+        $user = auth()->user();
+        $user->update([
             'latitude' => $request->get('latitude'),
             'longitude' => $request->get('longitude'),
             'last_active_time' => now()
         ]);
+
+//        User::query()->where('user_id', $userId)->update([
+//            'latitude' => $request->get('latitude'),
+//            'longitude' => $request->get('longitude'),
+//            'last_active_time' => now()
+//        ]);
 
         return response()->json([
             'success' => true

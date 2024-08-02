@@ -13,6 +13,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\CheckTokenMiddleware;
+use App\Http\Middleware\LoggerMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class, 'loginPage'])->name('loginPage');
@@ -23,6 +24,7 @@ Route::get('mobile-login', [LoginController::class, 'mobileLogin']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('logs', [DashboardController::class, 'logs'])->name('logs.index');
 
     Route::resource('clients', ClientController::class);
     Route::resource('client/{client}/products', PointController::class)->names('client.points');
