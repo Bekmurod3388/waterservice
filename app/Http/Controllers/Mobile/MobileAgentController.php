@@ -11,9 +11,10 @@ class MobileAgentController extends Controller
 {
     public function index($token)
     {
+        $user = getUser($token);
+
         return view('mobile.agent.pages.home', [
-            'tasks' => Task::with('point')->where('user_id', auth()->id())->get(),
-            'token' => $token
+            'tasks' => Task::with('point')->where('user_id', $user->id)->get(),
         ]);
     }
 }
