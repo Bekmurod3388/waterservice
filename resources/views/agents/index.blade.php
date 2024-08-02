@@ -32,6 +32,7 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     @forelse($agents as $agent)
                         <tr>
                             <td>{{ $agent->id }}</td>

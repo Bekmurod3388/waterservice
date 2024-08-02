@@ -27,5 +27,6 @@ class AgentController extends Controller
         return view('agents.index', [
             'agents' => $agents,
         ]);
+
     }
 }

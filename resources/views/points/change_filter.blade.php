@@ -2,11 +2,11 @@
     type="button"
     class="btn btn-outline-danger"
     data-bs-toggle="modal"
-    data-bs-target="#basicModal">
+    data-bs-target="#changeFilterModal">
     {{$point->filter_expire_date->format('Y-m-d')}}
 </button>
 
-<div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="changeFilterModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
