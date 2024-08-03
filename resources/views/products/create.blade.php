@@ -47,8 +47,10 @@
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="type" class="form-label"> turi </label>
-                            <input type="text" id="type" class="form-control" name="type"
-                                   value="{{ old('type') }}" required/>
+                            <select name="type" class="form-control" id="">
+                                <option value="{{ \App\Models\Product::TYPE_FILTER }}">Filter</option>
+                                <option value="{{ \App\Models\Product::TYPE_PRODUCT }}">Mahsulot</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
