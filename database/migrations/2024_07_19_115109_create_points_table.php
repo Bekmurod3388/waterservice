@@ -17,19 +17,19 @@ return new class extends Migration
             $table->decimal('latitude',11,8)->nullable();
             $table->decimal('longitude',11,8)->nullable();
             $table->bigInteger('region_id');
-            $table->string('address')->nullable();
-            $table->bigInteger('filter_id');
-            $table->tinyInteger('filter_expire'); //service_provide
-            $table->date('filter_expire_date');
-            $table->bigInteger('filter_cost');
-            $table->tinyInteger('status');
-            $table->boolean('is_full_pay');
-            $table->bigInteger('invited_client_id');
-            $table->date('contract_date');
+            $table->string('address');
+            $table->bigInteger('filter_id')->nullable();
+            $table->tinyInteger('filter_expire')->nullable(); //service_provide
+            $table->date('filter_expire_date')->nullable();
+            $table->bigInteger('filter_cost')->nullable();
+            $table->tinyInteger('status')->default(0);
+            $table->boolean('is_full_pay')->default(false);
+            $table->bigInteger('invited_client_id')->nullable();
+            $table->date('contract_date')->nullable();
             $table->date('installation_date')->nullable();
-            $table->bigInteger('operator_dealer_id');
-            $table->bigInteger('dealer_id');
-            $table->dateTime('demo_time'); //uchrashuv vaqti
+            $table->bigInteger('operator_dealer_id')->nullable();
+            $table->bigInteger('dealer_id')->nullable();
+            $table->dateTime('demo_time')->nullable(); //uchrashuv vaqti
             $table->timestamps();
         });
     }

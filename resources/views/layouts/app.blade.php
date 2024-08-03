@@ -57,6 +57,8 @@
 
     <!-- Page CSS -->
 
+    @stack('styles')
+
 </head>
 
 <body>
@@ -122,6 +124,6 @@
 <script src="{{ asset('assets/js/config.js') }}"></script>
 
 @yield('script')
-
+@stack('scripts')
 </body>
 </html>

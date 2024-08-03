@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Admin
         $admin = User::query()->firstOrCreate(
             [
                 'phone' => '123456789',
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
         );
         $admin->assignRole('admin');
 
+        // Manager
         $manager = User::query()->firstOrCreate(
             [
                 'phone' => '987654321',
@@ -36,6 +38,7 @@ class UserSeeder extends Seeder
         );
         $manager->assignRole('manager');
 
+        // Seller operator
         $operator = User::query()->firstOrCreate(
             [
                 'phone' => '123123123',
@@ -47,6 +50,7 @@ class UserSeeder extends Seeder
         );
         $operator->assignRole('operator_dealer');
 
+        // Service operator
         $operator2 = User::query()->firstOrCreate(
             [
                 'phone' => '345345345',
@@ -56,8 +60,9 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin'),
             ]
         );
-        $operator2->assignRole('operator_dealer');
+        $operator2->assignRole('operator_agent');
 
+        // Agent
         $agent = User::query()->firstOrCreate(
             [
                 'phone' => '123123124',
@@ -65,6 +70,9 @@ class UserSeeder extends Seeder
             [
                 'name' => 'agent',
                 'password' => Hash::make('admin'),
+                'latitude' => 41.551,
+                'longitude' => 60.6334,
+                'last_active_time' => now()
             ]
         );
         $agent->assignRole('agent');

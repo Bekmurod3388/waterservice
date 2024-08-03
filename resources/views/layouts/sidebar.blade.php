@@ -14,58 +14,24 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <!-- Dashboard -->
-        <li class="menu-item @if(request()->routeIs('dashboard')) active @endif">
-            <a href="{{ route('dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-            </a>
-        </li>
-        @role('admin|operator_agent')
-        <li class="menu-item @if(request()->routeIs('clients.index','clients.tasks.index')) active @endif">
-            <a href="{{ route('clients.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Analytics">Mijozlar</div>
-            </a>
-        </li>
-        <li class="menu-item @if(request()->routeIs('work.list')) active @endif">
-            <a href="{{route('work.list')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-task"></i>
-                <div data-i18n="Analytics">Ishlar ro'yxati</div>
-            </a>
-        </li>
-        <li class="menu-item @if(request()->routeIs('agents.index')) active @endif">
-            <a href="{{route('agents.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Analytics">Agentlar</div>
-            </a>
-        </li>
-        @endrole
         @role('admin')
-        <li class="menu-item @if(request()->routeIs('users.index')) active @endif">
-            <a href="{{ route('users.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                <div data-i18n="Analytics">Foydalanuvchilar</div>
-            </a>
-        </li>
-        <li class="menu-item @if(request()->routeIs('services.index')) active @endif">
-            <a href="{{ route('services.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-test-tube"></i>
-                <div data-i18n="Analytics">Servislar</div>
-            </a>
-        </li>
-        <li class="menu-item @if(request()->routeIs('products.index')) active @endif">
-            <a href="{{ route('products.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-filter-alt"></i>
-                <div data-i18n="Analytics"> Mahsulotlar </div>
-            </a>
-        </li>
-        <li class="menu-item @if(request()->routeIs('logs.index')) active @endif">
-            <a href="{{ route('logs.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-filter-alt"></i>
-                <div data-i18n="Analytics"> Logs </div>
-            </a>
-        </li>
+            @include('layouts.components.admin')
+        @endrole
+
+        @role('manager')
+            @include('layouts.components.manager')
+        @endrole
+
+        @role('operator_dealer')
+            @include('layouts.components.operator_dealer')
+        @endrole
+
+        @role('operator_agent')
+            @include('layouts.components.operator_agent')
+        @endrole
+
+        @role('operator_cashier')
+            @include('layouts.components.operator_cashier')
         @endrole
     </ul>
 </aside>

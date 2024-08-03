@@ -25,6 +25,8 @@ Route::get('mobile-login', [LoginController::class, 'mobileLogin']);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('logs', [DashboardController::class, 'logs'])->name('logs.index');
+    Route::get('map', [DashboardController::class, 'map'])->name('map.index');
+    Route::get('markers', [DashboardController::class, 'getMarkers'])->name('map.markers');
 
     Route::resource('clients', ClientController::class);
     Route::resource('client/{client}/products', PointController::class)->names('client.points');
