@@ -65,7 +65,8 @@ class TaskController extends Controller
                     'task_id' => $task->id,
                     'agent_id' => $request->get('agent_id'),
                     'service_id' => $service_id,
-                    'service_cost' => $services[$service_id]
+                    'service_cost' => $services[$service_id],
+                    'is_free' => '0'                                       //Migrationda default barib berdan o`chirish garak
                 ]);
             }
         });
