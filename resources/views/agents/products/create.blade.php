@@ -21,13 +21,14 @@
                     aria-label="Close"
                 ></button>
             </div>
+
             <div class="modal-body">
-                <form method="POST" action="{{ route('agent.products.store') }}">
+                <form method="POST" action="{{ route('agent.products.store',[$agent->id]) }}">
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="product" class="form-label">Mahsulot tanlang</label>
-                            <select name="products[]" class="form-control" id="product">
+                            <select name="product_id" class="form-control" id="product">
                                 @foreach($products as $product)
                                     <option value="{{ $product->id }}">{{$product->name}}</option>
                                 @endforeach
@@ -35,7 +36,7 @@
                         </div>
                         <div class="col mb-3">
                             <label for="quantity" class="form-label">Mahsulot soni</label>
-                            <input type="number" min="0" class="form-control">
+                            <input type="number" min="0" class="form-control" name="quantity">
                         </div>
                     </div>
 

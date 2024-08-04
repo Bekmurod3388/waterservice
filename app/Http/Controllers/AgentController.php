@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\AgentProduct;
 use App\Models\Product;
 use App\Models\User;
+use App\Services\AgentProductService;
+use Illuminate\Http\Request;
+use App\Http\Requests\AgentProducts\StoreRequest;
 use Illuminate\Support\Facades\DB;
 
 class AgentController extends Controller
 {
+    public function __construct(
+        protected AgentProductService $service
+    )
+    {
+    }
     public function index()
     {
         $agents = User::role('agent')
@@ -30,6 +38,9 @@ class AgentController extends Controller
     public function products(User $agent){
         $agent_products = AgentProduct::query()->where('agent_id',$agent->id)->paginate(10);
         $products = Product::all();
-        return view('agents.agent_products',['agent_products'=>$agent_products,'products'=>$products]);
+        return view('agents.products.index',['agent_products'=>$agent_products,'products'=>$products,'agent'=>$agent]);
+    }
+    public function product_store(StoreRequest $request, User $agent){
+        $this->service->create($request->validated(),$agent);
     }
 }

@@ -17,7 +17,7 @@
                     </button>
                 </form>
 
-                                @include('agents.product_create')
+                @include('agents.products.create')
 
             </div>
             <div class="table-responsive text-nowrap">

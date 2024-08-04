@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('before');
             $table->bigInteger('after');
             $table->bigInteger('price');
+            $table->bigInteger('service_price');
 
             $table->timestamps();
         });
