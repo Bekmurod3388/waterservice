@@ -50,6 +50,18 @@ class UserSeeder extends Seeder
         );
         $operator->assignRole('operator_dealer');
 
+        // Dealer
+        $dealer = User::query()->firstOrCreate(
+            [
+                'phone' => '123123122'
+            ],
+            [
+                'name' => 'diller',
+                'password' => Hash::make('admin')
+            ]
+        );
+        $dealer->assignRole('dealer');
+
         // Service operator
         $operator2 = User::query()->firstOrCreate(
             [

@@ -31,7 +31,9 @@
                         <th>Telefon raqami</th>
                         <th>Tuman</th>
                         <th>Manzil</th>
-                        <th>Muddati</th>
+                        @unlessrole('operator_dealer')
+                            <th>Muddati</th>
+                        @endunlessrole
                         <th>Amallar</th>
                     </tr>
                     </thead>
@@ -43,7 +45,9 @@
                             <td>{{ $point->client->phone }}</td>
                             <td>{{ $point->region->name }}</td>
                             <td>{{ $point->address }}</td>
-                            <td>{{ $point->filter_expire_date->format('Y-m-d') }}</td>
+                            @unlessrole('operator_dealer')
+                                <td>{{ $point->filter_expire_date->format('Y-m-d') }}</td>
+                            @endunlessrole
                             <td>
                                 <div class="d-flex">
                                     @include('points.edit')

@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('markers', [DashboardController::class, 'getMarkers'])->name('map.markers');
 
     Route::resource('clients', ClientController::class);
-    Route::resource('client/{client}/products', PointController::class)->names('client.points');
+    Route::resource('client/{client}/points', PointController::class)->names('client.points');
 
 //    client tasks
 

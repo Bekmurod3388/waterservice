@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('point_id');
             $table->bigInteger('agent_id');
             $table->bigInteger('user_id')->nullable(); //operatoragent yoki diller
+            $table->string('comment')->nullable();
             $table->boolean('is_completed')->default(0);
             $table->bigInteger('service_cost_sum')->nullable();
             $table->bigInteger('product_cost_sum')->nullable();

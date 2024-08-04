@@ -11,6 +11,7 @@ class Point extends Model
 
     protected $fillable = [
         'client_id', 'latitude', 'longitude', 'region_id', 'address',
+        'dealer_id', 'demo_time', 'comment',
         'filter_id', 'filter_expire', 'filter_expire_date', 'filter_cost',
         'status', 'is_full_pay', 'invited_client_id', 'contract_date',
         'installation_date', 'operator_dealer_id', 'dealer_id', 'demo_time'

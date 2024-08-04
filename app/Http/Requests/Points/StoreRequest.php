@@ -24,8 +24,11 @@ class StoreRequest extends FormRequest
         return [
             'region_id' => 'required',
             'address' => '',
-            'filter_id' => 'required',
-            'filter_expire' => 'required|int',
+            'filter_id' => 'int',
+            'filter_expire' => 'int',
+            'dealer_id' => 'int',
+            'demo_time' => '',
+            'comment' => 'nullable|string'
         ];
     }
 

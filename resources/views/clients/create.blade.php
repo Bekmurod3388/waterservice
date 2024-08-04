@@ -39,20 +39,7 @@
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="exampleFormControlSelect1" class="form-label">Operator Dilleri</label>
-                            <select id="exampleFormControlSelect1" class="form-control" name="operator_dealer_id" aria-label="Default select example">
-                                <option selected>Operator Dillerini tanlang</option>
-                                @foreach($operators as $operator)
-                                    <option value="{{ $operator->id }}" {{ old('operator_dealer_id') == $operator->id ? 'selected' : '' }}>
-                                        {{ $operator->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col mb-3">
-                            <label for="telegramId" class="form-label">Telegram</label>
+                            <label for="telegramId" class="form-label">Telegram ID (<a href="https://t.me/myidbot" target="_blank">@myidbot</a>)</label>
                             <input type="number" id="telegramId" class="form-control" name="telegram_id" value="{{ old('telegram_id') }}"/>
                         </div>
                     </div>

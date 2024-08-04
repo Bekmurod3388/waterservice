@@ -10,7 +10,10 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        return view('dashboard');
+        if (auth()->user()->hasRole(['admin', 'manager'])){
+            return view('dashboard');
+        }
+        return redirect()->route('clients.index');
     }
 
     public function logs()

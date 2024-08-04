@@ -20,46 +20,81 @@
                 ></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('client.points.update', [request()->route('client'), $point->id]) }}">
+                <form method="POST"
+                      action="{{ route('client.points.update', [request()->route('client'), $point->id]) }}">
                     @csrf
                     @method('PUT')
                     <div class="col mb-3">
                         <label for="region_id" class="form-label">Tuman</label>
                         <select id="region_id" class="form-control" name="region_id">
                             @foreach($regions as $region)
-                                <option @selected($region->id == $point->region_id) value="{{ $region->id }}">{{ $region->name }}</option>
+                                <option
+                                    @selected($region->id == $point->region_id) value="{{ $region->id }}">{{ $region->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="address" class="form-label">Manzil</label>
-                            <input type="text" id="address" class="form-control" name="address" value="{{ $point->address }}"
+                            <input type="text" id="address" class="form-control" name="address"
+                                   value="{{ $point->address }}"
                                    placeholder="Manzil" required/>
                         </div>
                     </div>
+                    @role('operator_dealer')
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="filter_id" class="form-label">Filterlar</label>
+                            <label for="filter_id" class="form-label">Dillerni tanlang</label>
                             <select id="filter_id" class="form-control" name="filter_id">
                                 <option disabled>Mavjud emas</option>
-                                @foreach($products as $product)
-                                    <option @selected($product->id == $point->filter_id) value="{{ $product->id }}">{{ $product->name }}</option>
+                                @foreach($dealers as $id => $dealer)
+                                    <option value="{{ $id }}">{{ $dealer }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="filter_expire" class="form-label">Almashtirish sanasi</label>
-                            <input type="number" id="filter_expire" class="form-control" name="filter_expire" value="{{ $point->filter_expire }}"
-                                   required min="1" max="12"/>
+                            <label for="comment" class="form-label">Izoh</label>
+                            <input type="text" id="comment" class="form-control" name="comment" value="{{ $point->comment }}"
+                                   placeholder="Izoh"/>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Yopish</button>
-                        <button type="submit" class="btn btn-primary">Saqlash</button>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="demo_time" class="form-label">Uchrashuv vaqti</label>
+                            <input type="datetime-local" id="demo_time" class="form-control" name="demo_time"
+                                   value="{{ $point->demo_time }}"
+                                   placeholder="Demo time"/>
+                        </div>
                     </div>
+                    @else
+                        <div class="row g-2">
+                            <div class="col mb-3">
+                                <label for="filter_id" class="form-label">Filterlar</label>
+                                <select id="filter_id" class="form-control" name="filter_id">
+                                    <option disabled>Mavjud emas</option>
+                                    @foreach($products as $product)
+                                        <option
+                                            @selected($product->id == $point->filter_id) value="{{ $product->id }}">{{ $product->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col mb-3">
+                                <label for="filter_expire" class="form-label">Almashtirish sanasi</label>
+                                <input type="number" id="filter_expire" class="form-control" name="filter_expire"
+                                       value="{{ $point->filter_expire }}"
+                                       required min="1" max="12"/>
+                            </div>
+                        </div>
+                        @endrole
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Yopish
+                            </button>
+                            <button type="submit" class="btn btn-primary">Saqlash</button>
+                        </div>
                 </form>
             </div>
         </div>

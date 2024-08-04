@@ -21,4 +21,11 @@ class Client extends Model
     {
         return $this->belongsTo(User::class, 'operator_dealer_id');
     }
+
+    public function scopeFilterByOperator($query)
+    {
+        if (!auth()->user()->hasRole(['admin|manager'])) {
+            $query->where('operator_dealer_id', auth()->id());
+        }
+    }
 }

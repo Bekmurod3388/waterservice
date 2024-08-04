@@ -15,7 +15,7 @@ class ClientController extends Controller
     public function index()
     {
         return view('clients.index', [
-            'clients' => Client::with('operator')->paginate(10),
+            'clients' => Client::with('operator')->filterByOperator()->paginate(10),
             'operators' => User::role('operator_dealer')->get(),
         ]);
     }
@@ -25,8 +25,15 @@ class ClientController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $data = $request->validated();
 
-        Client::query()->create($request->validated());
+        Client::query()->create([
+            'name' => $data['name'],
+            'phone' => $data['phone'],
+            'telegram_id' => $data['telegram_id'],
+            'description' => $data['description'],
+            'operator_dealer_id' => auth()->id()
+        ]);
 
         return back()->with('success', 'Mijoz muvaffaqiyatli yaratildi!');
     }

@@ -23,7 +23,8 @@ class PointController extends Controller
         return view('points.index', [
             'points' => Point::with('client')->where('client_id', $client)->paginate(10),
             'regions' => Region::all(),
-            'products' => Product::all()
+            'products' => Product::all(),
+            'dealers' => User::role('dealer')->pluck('name', 'id')
         ]);
     }
 
@@ -37,9 +38,12 @@ class PointController extends Controller
             'client_id' => $client,
             'region_id' => $request->get('region_id'),
             'address' => $request->get('address'),
+            'dealer_id' => $request->get('dealer_id'),
+            'demo_time' => $request->get('demo_time'),
+            'comment' => $request->get('comment'),
             'filter_id' => $request->get('filter_id'),
             'filter_expire' => $request->get('filter_expire'),
-            'filter_expire_date' => now()->addMonths((int)$request->get('filter_expire'))
+            'filter_expire_date' => $request->get('filter_expire') ? now()->addMonths((int)$request->get('filter_expire')) : null
         ]);
 
         return redirect()->back()->with('success', 'Manzil muvaffaqiyatli yaratildi!');
@@ -63,6 +67,9 @@ class PointController extends Controller
             'client_id' => $client,
             'region_id' => $request->get('region_id'),
             'address' => $request->get('address'),
+            'dealer_id' => $request->get('dealer_id'),
+            'demo_time' => $request->get('demo_time'),
+            'comment' => $request->get('comment'),
             'filter_id' => $request->get('filter_id'),
             'filter_expire' => $request->get('filter_expire')
         ]);
