@@ -14,12 +14,12 @@ class ProductService
 
         ProductHistory::query()->create([
             'product_id' => $product->id,
-            'user_id' => auth()->id(),
+            'manager_id' => auth()->id(),
             'cost_price' => 0,
-            'purchase_price' => $data->purchase_price,
+            'purchase_price' => $data['purchase_price'],
             'difference' => 0,
-            'before' => $data->quantity,
-            'after' => $data->quantity,
+            'before' => $data['quantity'],
+            'after' => $data['quantity'],
         ]);
     }
 

@@ -26,8 +26,8 @@
                     @csrf
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="user_id" class="form-label">Agentlarni tanlang</label><br>
-                            <select id="user_id" class="form-control" name="user_id">
+                            <label for="agent_id" class="form-label">Agentlarni tanlang</label><br>
+                            <select id="agent_id" class="form-control" name="agent_id">
                                 @foreach($agents as $agent)
                                     <option value="{{ $agent->id }}">{{ $agent->name }}</option>
                                 @endforeach
@@ -46,6 +46,12 @@
                                     </label>
                                 </div>
                             @endforeach
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="service_time" class="form-label">Service vaqti</label><br>
+                            <input type="datetime-local" id="service_time" name="service_time" class="form-control">
                         </div>
                     </div>
                     <div class="modal-footer">

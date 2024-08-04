@@ -11,5 +11,11 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'purchase_price', 'cost_price', 'quantity', 'type'];
+    const TYPE_FILTER = 1;
+    const TYPE_PRODUCT = 2;
 
+    public function getTypeLabelAttribute()
+    {
+        return $this->type == self::TYPE_FILTER ? 'Filter' : 'Product';
+    }
 }

@@ -42,7 +42,7 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->purchase_price}}</td>
                             <td>{{ $product->quantity}}</td>
-                            <td>{{ $product->type}}</td>
+                            <td>{{ $product->type_label}}</td>
                             <td>
                                 <div class="d-flex">
 

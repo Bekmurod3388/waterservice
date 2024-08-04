@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Products;
 
+use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -26,7 +27,7 @@ class StoreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'purchase_price' => 'required|numeric|min:0',
             'quantity' => 'required|numeric|min:0',
-            'type' => 'required',
+            'type' => 'required|in:' . implode(',', [Product::TYPE_FILTER, Product::TYPE_PRODUCT])
         ];
     }
 
