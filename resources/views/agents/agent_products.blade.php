@@ -17,7 +17,7 @@
                     </button>
                 </form>
 
-                {{--                @include('users.create')--}}
+                                @include('agents.product_create')
 
             </div>
             <div class="table-responsive text-nowrap">
@@ -33,7 +33,7 @@
                     </thead>
                     <tbody>
 
-                    @forelse($products as $product)
+                    @forelse($agent_products as $product)
                         <tr>
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->product_id }}</td>
@@ -56,7 +56,7 @@
                 </table>
                 <!-- Basic Pagination -->
                 <div class="card-body">
-                    {{ $products->links('pagination::bootstrap-5') }}
+                    {{ $agent_products->links('pagination::bootstrap-5') }}
                 </div>
                 <!--/ Basic Pagination -->
             </div>
