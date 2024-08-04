@@ -48,6 +48,12 @@
                             @endforeach
                         </div>
                     </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="service_time" class="form-label">Service vaqti</label><br>
+                            <input type="datetime-local" id="service_time" name="service_time" class="form-control">
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <input type="hidden" name="client_id" value="{{ $client_id }}">
                         <input type="hidden" name="point_id" value="{{ $point_id }}">

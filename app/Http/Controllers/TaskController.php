@@ -33,20 +33,33 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'client_id' => 'required|int',
-            'point_id' => 'required|int',
-            'agent_id' => 'required|int',
-            'service_ids' => '',
+            'client_id' => 'required|exists:clients,id',
+            'point_id' => 'required|exists:points,id',
+            'agent_id' => 'required|exists:users,id',
+            'service_ids' => 'required|array',
+            'service_time' => 'required|date_format:Y-m-d\TH:i',
         ]);
-        DB::transaction(function() use ($request) {
-            $services = Service::query()->whereIn('id', $request->get('service_ids'))->pluck('cost', 'id')->toArray();
 
+        DB::transaction(function() use ($request) {
+            // Fetching the services and calculating the total cost
+            $services = Service::query()->whereIn('id', $request->get('service_ids'))->pluck('cost', 'id')->toArray();
+            $servicesTotalCost = Service::query()->whereIn('id', $request->get('service_ids'))->sum('cost');
+
+            // Creating the task with the provided data
             $task = Task::query()->create([
                 'client_id' => $request->get('client_id'),
                 'point_id' => $request->get('point_id'),
-                'agent_id' => $request->get('agent_id')
+                'agent_id' => $request->get('agent_id'),
+                'user_id' => auth()->id(),                                 //Taskni kim biriktirdi? (operator agentni idsi)
+                'service_cost_sum' => $servicesTotalCost,                  //Taskning ummumiy summasi
+                'service_time' => $request->get('service_time'),      //Agent taskni bajarish uchun qachan borishi garak?
+                'cash' => 0,                                               //Migration da nullabale qilib yoki default 0 barib berdan o`chirish garak
+                'card' => 0,                                               //Migration da nullabale qilib yoki default 0 barib berdan o`chirish garak
+                'terminal' => 0,                                           //Migration da nullabale qilib yoki default 0 barib berdan o`chirish garak
+                'transfer' => 0,                                           //Migration da nullabale qilib yoki default 0 barib berdan o`chirish garak
             ]);
 
+            // Creating TaskService records for each selected service
             foreach ($request->get('service_ids') as $service_id) {
                 TaskService::query()->create([
                     'task_id' => $task->id,
