@@ -17,7 +17,7 @@ class AgentController extends Controller
 
     public function task(Task $task)
     {
-        $task->load('client:id,name', 'point.region', 'services');
+        $task->load('client:id,name,phone,description', 'point.region', 'services');
 
         return response()->json(
             [
