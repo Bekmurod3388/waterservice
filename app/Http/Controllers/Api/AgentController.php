@@ -17,14 +17,11 @@ class AgentController extends Controller
 
     public function task(Task $task)
     {
-        $task->load('client', 'point', 'services');
+        $task->load('client:id,name', 'point.region', 'services');
 
         return response()->json(
             [
                 "task" => $task,
-                "client" => $task->client,
-                "point" => $task->point,
-                "services" => $task->services,
                 "all_services" => Service::all()
             ]);
     }
