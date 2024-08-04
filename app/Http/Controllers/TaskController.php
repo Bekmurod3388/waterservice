@@ -38,7 +38,7 @@ class TaskController extends Controller
             'agent_id' => 'required|int',
             'service_ids' => '',
         ]);
-
+        dd($request);
         DB::transaction(function() use ($request) {
             $services = Service::query()->whereIn('id', $request->get('service_ids'))->pluck('cost', 'id')->toArray();
 
