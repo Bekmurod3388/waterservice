@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('difference');
             $table->integer('before');
             $table->integer('after');
+            $table->integer('service_price');
             $table->timestamps();
         });
     }

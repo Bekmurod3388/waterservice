@@ -32,6 +32,7 @@
                         <th>Narxi</th>
                         <th>Soni</th>
                         <th>turi</th>
+                        <th>Servis narxi</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
@@ -43,6 +44,7 @@
                             <td>{{ $product->purchase_price}}</td>
                             <td>{{ $product->quantity}}</td>
                             <td>{{ $product->type_label}}</td>
+                            <td>{{ $product->service_price}}</td>
                             <td>
                                 <div class="d-flex">
 
