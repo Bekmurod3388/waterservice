@@ -20,6 +20,7 @@ class ProductService
             'difference' => 0,
             'before' => $data['quantity'],
             'after' => $data['quantity'],
+            'service_price'=>$data['service_price']
         ]);
     }
 
@@ -29,12 +30,13 @@ class ProductService
 
         ProductHistory::query()->create([
             'product_id' => $product->id,
-            'user_id' => auth()->id(),
+            'manager_id' => auth()->id(),
             'cost_price' => 0,
             'purchase_price' => $request->purchase_price,
             'difference' => $request->quantity,
             'before' => $product->quantity,
             'after' => $after,
+            'service_price'=>$request->service_price
         ]);
 
         $product->update([
@@ -42,7 +44,8 @@ class ProductService
             'quantity' => $after,
             'cost_price' => 0,
             'purchase_price' => $request->purchase_price,
-            'type' => $request->type
+            'type' => $request->type,
+            'service_price'=>$request->service_price
         ]);
     }
 }

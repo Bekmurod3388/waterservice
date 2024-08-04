@@ -6,7 +6,6 @@
         @include('alerts.success-alert')
         @include('alerts.error-alert')
 
-
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
                 <!-- Search -->
@@ -18,9 +17,7 @@
                     </button>
                 </form>
 
-
-                @include('products.create')
-
+                {{--                @include('users.create')--}}
 
             </div>
             <div class="table-responsive text-nowrap">
@@ -28,33 +25,31 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Mahsulot nomi</th>
-                        <th>Narxi</th>
+                        <th>mahsulot id</th>
                         <th>Soni</th>
-                        <th>turi</th>
-                        <th>Servis narxi</th>
+                        <th>Narxi</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
                     <tbody>
+
                     @forelse($products as $product)
                         <tr>
                             <td>{{ $product->id }}</td>
-                            <td>{{ $product->name }}</td>
-                            <td>{{ $product->purchase_price}}</td>
-                            <td>{{ $product->quantity}}</td>
-                            <td>{{ $product->type_label}}</td>
-                            <td>{{ $product->service_price}}</td>
+                            <td>{{ $product->product_id }}</td>
+                            <td>{{ $product->quantity }}</td>
+                            <td>{{ $product->price }}</td>
                             <td>
                                 <div class="d-flex">
-
-                                    @include('products.edit')
-                                    @include('products.delete')
-
+                                    {{-- @include('agents.create_task') --}}
+                                    {{-- @include('users.delete') --}}
+                                    <a href="" class="btn btn-primary"><i class="bx bxs-cart"></i></a>
                                 </div>
                             </td>
-                            @empty
-                                <td colspan="6" class="text-center">Ma'lumot yo'q</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">Ma'lumot yo'q</td>
                         </tr>
                     @endforelse
                     </tbody>
@@ -68,4 +63,29 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const passwordToggleIcons = document.querySelectorAll('.form-password-toggle .input-group-text');
+
+            passwordToggleIcons.forEach(function (icon) {
+                icon.addEventListener('click', function () {
+                    const input = icon.parentElement.querySelector('input');
+                    const iconElement = icon.querySelector('i');
+
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        iconElement.classList.remove('bx-hide');
+                        iconElement.classList.add('bx-show');
+                    } else {
+                        input.type = 'password';
+                        iconElement.classList.remove('bx-show');
+                        iconElement.classList.add('bx-hide');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

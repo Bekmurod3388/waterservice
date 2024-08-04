@@ -53,6 +53,7 @@
                                 <div class="d-flex">
                                     {{-- @include('agents.create_task') --}}
                                     {{-- @include('users.delete') --}}
+                                    <a href="{{route('agent.products',$agent->id)}}" class="btn btn-primary"><i class="bx bxs-cart"></i></a>
                                 </div>
                             </td>
                         </tr>

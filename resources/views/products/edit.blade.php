@@ -43,8 +43,18 @@
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="type" class="form-label">Mohsulot turi</label>
-                            <input type="text" id="type" class="form-control" name="type" value="{{ $product->type }}" />
+                            <label for="service_price" class="form-label"> Servis narxi </label>
+                            <input type="number" id="service_price" class="form-control" name="service_price"
+                                   value="{{ $product->service_price}}" required/>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-3">
+                            <label for="type" class="form-label"> turi </label>
+                            <select name="type" class="form-control" id="">
+                                <option value="{{ \App\Models\Product::TYPE_FILTER }}" {{ $product->type == \App\Models\Product::TYPE_FILTER ? 'selected' : '' }}>Filter</option>
+                                <option value="{{ \App\Models\Product::TYPE_PRODUCT }}" {{ $product->type == \App\Models\Product::TYPE_PRODUCT ? 'selected' : '' }}>Mahsulot</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

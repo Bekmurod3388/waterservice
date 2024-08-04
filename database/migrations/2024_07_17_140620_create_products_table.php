@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('cost_price')->default(0);
             $table->integer('quantity')->default(0);
             $table->tinyInteger('type')->default(0);
+            $table->integer('service_price')->default(0);
             $table->timestamps();
         });
     }

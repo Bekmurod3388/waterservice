@@ -27,7 +27,8 @@ class StoreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'purchase_price' => 'required|numeric|min:0',
             'quantity' => 'required|numeric|min:0',
-            'type' => 'required|in:' . implode(',', [Product::TYPE_FILTER, Product::TYPE_PRODUCT])
+            'type' => 'required|in:' . implode(',', [Product::TYPE_FILTER, Product::TYPE_PRODUCT]),
+            'service_price'=>'required|numeric|min:0'
         ];
     }
 
