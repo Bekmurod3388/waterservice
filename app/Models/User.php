@@ -53,6 +53,6 @@ class User extends Authenticatable
 
     public function tasks(): HasMany
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class, 'agent_id');
     }
 }

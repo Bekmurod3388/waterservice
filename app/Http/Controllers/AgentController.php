@@ -10,10 +10,7 @@ class AgentController extends Controller
 {
     public function index()
     {
-        $agents = User::query()
-            ->whereHas('roles', function ($query) {
-                $query->where('name', 'agent');
-            })
+        $agents = User::role('agent')
             ->withCount([
                 'tasks as incomplete_tasks' => function ($query) {
                     $query->where('is_completed', 0);//->whereDate('created_at', today()->format('Y-m-d'));
@@ -29,8 +26,11 @@ class AgentController extends Controller
         ]);
 
     }
-    public function products(User $agent){
-        $products = AgentProduct::query()->where('agent_id',$agent->id)->paginate(10);
-        return view('agents.agent_products',['products'=>$products]);
+
+    public function products(User $agent)
+    {
+        return view('agents.agent_products', [
+            'products' => AgentProduct::query()->where('agent_id', $agent->id)->paginate(10)
+        ]);
     }
 }

@@ -17,9 +17,7 @@
                     </button>
                 </form>
 
-
                 @include('clients.create')
-
 
             </div>
             <div class="table-responsive text-nowrap">
@@ -48,7 +46,10 @@
                                 <div class="d-flex">
                                     @include('clients.edit')
                                     <a href="{{route('client.points.index',$client->id)}}" class="btn btn-success me-2"><i class="bx bx-map"></i></a><!--Lokatsiyalar Client Filter-->
-                                    <a href="{{route('clients.tasks.index',$client->id)}}" class="btn btn-primary me-2"><i class="bx bx-list-check"></i></a><!--Tasks-->
+                                    <a href="{{route('clients.tasks.index',$client->id)}}" class="btn btn-primary me-2">
+                                        <i class="bx bx-list-check"></i>
+                                        <span class="badge bg-white text-primary ms-1">{{ $client->tasks_count }}</span>
+                                    </a>
                                 </div>
                             </td>
                             @empty

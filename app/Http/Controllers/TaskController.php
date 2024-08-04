@@ -62,7 +62,7 @@ class TaskController extends Controller
             ]);
 
             // Creating TaskService records for each selected service
-            foreach ($request->get('service_ids') as $service_id) {
+            foreach ($request->get('service_ids') ?? [] as $service_id) {
                 TaskService::query()->create([
                     'task_id' => $task->id,
                     'agent_id' => $request->get('agent_id'),
