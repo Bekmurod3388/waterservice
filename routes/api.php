@@ -20,4 +20,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/services',[ServiceController::class,'getServices']);
 
     Route::post('set-location', [LocationController::class, 'setLocation']);
+
+    Route::put('point/location', [LocationController::class, 'setPointLocation']);
 });
