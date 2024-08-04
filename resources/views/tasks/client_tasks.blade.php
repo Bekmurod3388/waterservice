@@ -40,12 +40,11 @@
                                 ></button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST" action="{{route($action)}}">
-
+                                <form method="POST" action="{{route('tasks.store')}}">
                                     @csrf
                                     <div class="row g-2">
                                         <div class="col mb-3">
-                                            <label for="agent_id" class="form-label">Agentlarni tanlang</label><br>
+                                            <label for="agent_id" class="form-label">Agentni tanlang</label><br>
                                             <select id="agent_id" class="form-control" name="agent_id">
                                                 @foreach($agents as $agent)
                                                     <option value="{{ $agent->id }}">{{ $agent->name }}</option>
@@ -56,15 +55,12 @@
 
                                     <div class="row g-2">
                                         <div class="col mb-3">
-                                            <label for="phone" class="form-label">Manzillar</label><br>
-                                            @foreach($client->points as $point)
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" value="{{ $point->id }}" name="point_id">
-                                                        <span class="p-1">{{ $point->address }}</span>
-                                                    </label>
-                                                </div>
-                                            @endforeach
+                                            <label for="point_id" class="form-label"> Manzil </label>
+                                            <select name="point_id" class="form-control" id="point_id">
+                                                @foreach($client->points as $point)
+                                                    <option value="{{ $point->id }}">{{ $point->address }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row g-2">
@@ -80,7 +76,6 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="client_id" value="{{$client->id}}">
-                                    <input type="text">
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                             Yopish

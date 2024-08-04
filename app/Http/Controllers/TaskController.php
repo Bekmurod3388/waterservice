@@ -126,8 +126,8 @@ class TaskController extends Controller
     {
         Task::query()->create([
             'client_id' => $request->get('client_id'),
-            'agent_id' => auth()->id(),
-            'point_id' => 1,
+            'point_id' => $request->get('point_id'),
+            'agent_id' => $request->get('agent_id'),
         ]);
 
         return redirect()->back();
