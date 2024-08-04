@@ -30,6 +30,7 @@
                         <th>Mijoz</th>
                         <th>Telefon raqami</th>
                         <th>Tuman</th>
+                        <th>Lat/Long</th>
                         <th>Manzil</th>
                         @unlessrole('operator_dealer')
                             <th>Muddati</th>
@@ -44,6 +45,7 @@
                             <td>{{ $point->client->name }}</td>
                             <td>{{ $point->client->phone }}</td>
                             <td>{{ $point->region->name }}</td>
+                            <td>{{ $point->latitude }}/{{ $point->longitude }}</td>
                             <td>{{ $point->address }}</td>
                             @unlessrole('operator_dealer')
                                 <td>{{ $point->filter_expire_date->format('Y-m-d') }}</td>
