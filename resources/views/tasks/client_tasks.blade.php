@@ -31,7 +31,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel1">Manzil qo'shish</h5>
+                                <h5 class="modal-title" id="exampleModalLabel1">Ish yaratish</h5>
                                 <button
                                     type="button"
                                     class="btn-close"
@@ -40,12 +40,42 @@
                                 ></button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST" action="{{route($action)}}">
-
+                                <form method="POST" action="{{route('tasks.store')}}">
                                     @csrf
+                                    <div class="row g-2">
+                                        <div class="col mb-3">
+                                            <label for="agent_id" class="form-label">Agentni tanlang</label><br>
+                                            <select id="agent_id" class="form-control" name="agent_id">
+                                                @foreach($agents as $agent)
+                                                    <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
 
+                                    <div class="row g-2">
+                                        <div class="col mb-3">
+                                            <label for="point_id" class="form-label"> Manzil </label>
+                                            <select name="point_id" class="form-control" id="point_id">
+                                                @foreach($client->points as $point)
+                                                    <option value="{{ $point->id }}">{{ $point->address }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col mb-3">
+                                            <label for="comment" class="form-label">Izoh</label><br>
+                                            <input type="text" id="comment" name="comment" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col mb-3">
+                                            <label for="service_time" class="form-label">Service vaqti</label><br>
+                                            <input type="datetime-local" id="service_time" name="service_time" class="form-control">
+                                        </div>
+                                    </div>
                                     <input type="hidden" name="client_id" value="{{$client->id}}">
-
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                             Yopish
@@ -57,7 +87,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
 

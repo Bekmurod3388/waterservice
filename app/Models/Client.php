@@ -12,6 +12,11 @@ class Client extends Model
 
     protected $fillable = ['name', 'phone', 'operator_dealer_id', 'telegram_id', 'description'];
 
+    public function points()
+    {
+        return $this->hasMany(Point::class);
+    }
+
     public function tasks()
     {
         return $this->hasMany(Task::class);
