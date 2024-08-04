@@ -16,6 +16,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/updateProfile', [LoginController::class, 'updateProfile'])->middleware('auth:sanctum');
 
     Route::get('/tasks', [AgentController::class, 'getTasks']);
+    Route::get('/tasks/{task}',[AgentController::class,'task']);
     Route::get('/services',[ServiceController::class,'getServices']);
 
     Route::post('set-location', [LocationController::class, 'setLocation']);

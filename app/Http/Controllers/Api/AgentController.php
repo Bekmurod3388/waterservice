@@ -13,4 +13,7 @@ class AgentController extends Controller
             'tasks' => Task::with('point', 'client')->where('agent_id', auth()->id())->get()
         ]);
     }
+    public function task(Task $task){
+        return response()->json($task);
+    }
 }

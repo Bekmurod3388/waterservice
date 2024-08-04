@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AgentProduct;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -26,11 +27,9 @@ class AgentController extends Controller
         ]);
 
     }
-
-    public function products(User $agent)
-    {
-        return view('agents.agent_products', [
-            'products' => AgentProduct::query()->where('agent_id', $agent->id)->paginate(10)
-        ]);
+    public function products(User $agent){
+        $agent_products = AgentProduct::query()->where('agent_id',$agent->id)->paginate(10);
+        $products = Product::all();
+        return view('agents.agent_products',['agent_products'=>$agent_products,'products'=>$products]);
     }
 }
