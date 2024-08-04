@@ -66,18 +66,16 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>kim qo'shdi</th>
-                        <th>mijoz</th>
+                        <th>Kim qo'shdi</th>
+                        <th>Izoh</th>
                     </tr>
                     </thead>
                     <tbody>
-
-                    {{--                    @dd($tasks)--}}
                     @forelse($tasks as $task)
                         <tr>
                             <th>{{$task->id}}</th>
                             <th>{{$task->user->name}}</th>
-                            <th>{{$task->client->name}}</th>
+                            <th>{{$task->comment}}</th>
                             <th>
                                 @include('tasks.delete')
                             </th>

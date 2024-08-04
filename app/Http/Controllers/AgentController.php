@@ -11,10 +11,7 @@ class AgentController extends Controller
 {
     public function index()
     {
-        $agents = User::query()
-            ->whereHas('roles', function ($query) {
-                $query->where('name', 'agent');
-            })
+        $agents = User::role('agent')
             ->withCount([
                 'tasks as incomplete_tasks' => function ($query) {
                     $query->where('is_completed', 0);//->whereDate('created_at', today()->format('Y-m-d'));

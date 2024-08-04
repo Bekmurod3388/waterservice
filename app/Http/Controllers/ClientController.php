@@ -15,7 +15,7 @@ class ClientController extends Controller
     public function index()
     {
         return view('clients.index', [
-            'clients' => Client::with('operator')->filterByOperator()->paginate(10),
+            'clients' => Client::with('operator')->withCount('tasks')->filterByOperator()->paginate(10),
             'operators' => User::role('operator_dealer')->get(),
         ]);
     }
