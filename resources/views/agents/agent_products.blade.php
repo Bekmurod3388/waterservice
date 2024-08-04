@@ -25,48 +25,38 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>To'liq ism</th>
-                        <th>Telefon raqami</th>
-                        <th>Bugungi ishlar</th>
+                        <th>mahsulot id</th>
+                        <th>Soni</th>
+                        <th>Narxi</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    @forelse($agents as $agent)
+                    @forelse($products as $product)
                         <tr>
-                            <td>{{ $agent->id }}</td>
-                            <td>{{ $agent->name }}</td>
-                            <td>{{ $agent->phone }}</td>
-                            <td>
-                                <span style="color: blue">
-                                    {{ $agent->complete_tasks + $agent->incomplete_tasks }}
-                                </span>/
-                                <span style="color: green">
-                                    {{ $agent->complete_tasks }}
-                                </span>/
-                                <span style="color: red">
-                                    {{ $agent->incomplete_tasks }}
-                                </span>
-                            </td>
+                            <td>{{ $product->id }}</td>
+                            <td>{{ $product->product_id }}</td>
+                            <td>{{ $product->quantity }}</td>
+                            <td>{{ $product->price }}</td>
                             <td>
                                 <div class="d-flex">
                                     {{-- @include('agents.create_task') --}}
                                     {{-- @include('users.delete') --}}
-                                    <a href="{{route('agent.products',$agent->id)}}" class="btn btn-primary"><i class="bx bxs-cart"></i></a>
+                                    <a href="" class="btn btn-primary"><i class="bx bxs-cart"></i></a>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center">Ma'lumot yo'q</td>
+                            <td colspan="5" class="text-center">Ma'lumot yo'q</td>
                         </tr>
                     @endforelse
                     </tbody>
                 </table>
                 <!-- Basic Pagination -->
                 <div class="card-body">
-                    {{ $agents->links('pagination::bootstrap-5') }}
+                    {{ $products->links('pagination::bootstrap-5') }}
                 </div>
                 <!--/ Basic Pagination -->
             </div>

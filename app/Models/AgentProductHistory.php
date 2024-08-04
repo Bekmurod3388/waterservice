@@ -10,6 +10,6 @@ class AgentProductHistory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'agent_id', 'operator_agent_id', 'product_id', 'difference', 'before', 'after'
+        'agent_id', 'operator_agent_id', 'product_id', 'difference', 'before', 'after','price'
     ];
 }

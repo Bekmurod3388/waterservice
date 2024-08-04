@@ -19,6 +19,8 @@ return new class extends Migration
             $table->bigInteger('difference');
             $table->bigInteger('before');
             $table->bigInteger('after');
+            $table->bigInteger('price');
+
             $table->timestamps();
         });
     }

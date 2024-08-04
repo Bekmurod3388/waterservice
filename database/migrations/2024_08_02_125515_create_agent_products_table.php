@@ -16,6 +16,8 @@ return new class extends Migration
             $table->bigInteger('agent_id');
             $table->bigInteger('product_id');
             $table->bigInteger('quantity');
+            $table->bigInteger('price');//purchase_Price
+
             $table->timestamps();
         });
     }

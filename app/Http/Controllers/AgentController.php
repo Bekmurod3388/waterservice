@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AgentProduct;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -27,5 +28,9 @@ class AgentController extends Controller
             'agents' => $agents,
         ]);
 
+    }
+    public function products(User $agent){
+        $products = AgentProduct::query()->where('agent_id',$agent->id)->paginate(10);
+        return view('agents.agent_products',['products'=>$products]);
     }
 }

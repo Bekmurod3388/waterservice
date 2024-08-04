@@ -29,7 +29,7 @@ class ProductService
 
         ProductHistory::query()->create([
             'product_id' => $product->id,
-            'user_id' => auth()->id(),
+            'manager_id' => auth()->id(),
             'cost_price' => 0,
             'purchase_price' => $request->purchase_price,
             'difference' => $request->quantity,
