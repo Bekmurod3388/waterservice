@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Service;
 use App\Models\Task;
 use App\Models\TaskService;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -112,9 +113,11 @@ class TaskController extends Controller
 
     public function clientTasks(Client $client)
     {
+
         return view('tasks.client_tasks', [
             'client' => $client,
             'tasks' => Task::with('client', 'point', 'user')->where('client_id', '=', $client->id)->get(),
+            'agents' => User::role('agent')->get(),
             'action' => 'clients.tasks.create'
         ]);
     }
