@@ -30,4 +30,9 @@ class Point extends Model
     {
         return $this->belongsTo(Region::class);
     }
+
+    public function lastReason()
+    {
+        return $this->hasOne(TaskReason::class)->latestOfMany();
+    }
 }

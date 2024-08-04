@@ -35,17 +35,23 @@
                         </div>
                     </div>
 
+{{--                    <div class="row g-2">--}}
+{{--                        <div class="col mb-3">--}}
+{{--                            <label for="phone" class="form-label">Servislar</label><br>--}}
+{{--                            @foreach($services as $service)--}}
+{{--                                <div class="form-check">--}}
+{{--                                    <label class="form-check-label">--}}
+{{--                                        <input type="checkbox" class="form-check-input" value="{{ $service->id }}" name="service_ids[]">--}}
+{{--                                        <span class="p-1">{{ $service->name }} {{ $service->count }}</span>--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="phone" class="form-label">Servislar</label><br>
-                            @foreach($services as $service)
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" value="{{ $service->id }}" name="service_ids[]">
-                                        <span class="p-1">{{ $service->name }} {{ $service->count }}</span>
-                                    </label>
-                                </div>
-                            @endforeach
+                            <label for="comment" class="form-label">Izoh</label><br>
+                            <input type="text" id="comment" name="comment" class="form-control">
                         </div>
                     </div>
                     <div class="row g-2">

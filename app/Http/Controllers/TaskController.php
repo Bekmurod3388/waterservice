@@ -36,14 +36,15 @@ class TaskController extends Controller
             'client_id' => 'required|exists:clients,id',
             'point_id' => 'required|exists:points,id',
             'agent_id' => 'required|exists:users,id',
-            'service_ids' => 'required|array',
+            'service_ids' => 'array',
+            'comment' => 'nullable|string',
             'service_time' => 'required|date_format:Y-m-d\TH:i',
         ]);
 
         DB::transaction(function() use ($request) {
             // Fetching the services and calculating the total cost
-            $services = Service::query()->whereIn('id', $request->get('service_ids'))->pluck('cost', 'id')->toArray();
-            $servicesTotalCost = Service::query()->whereIn('id', $request->get('service_ids'))->sum('cost');
+            $services = Service::query()->whereIn('id', $request->get('service_ids') ?? [])->pluck('cost', 'id')->toArray();
+            $servicesTotalCost = Service::query()->whereIn('id', $request->get('service_ids') ?? [])->sum('cost');
 
             // Creating the task with the provided data
             $task = Task::query()->create([
@@ -52,6 +53,7 @@ class TaskController extends Controller
                 'agent_id' => $request->get('agent_id'),
                 'user_id' => auth()->id(),                                 //Taskni kim biriktirdi? (operator agentni idsi)
                 'service_cost_sum' => $servicesTotalCost,                  //Taskning ummumiy summasi
+                'comment' => $request->get('comment'),      //Agent taskni bajarish uchun qachan borishi garak?
                 'service_time' => $request->get('service_time'),      //Agent taskni bajarish uchun qachan borishi garak?
                 'cash' => 0,                                               //Migration da nullabale qilib yoki default 0 barib berdan o`chirish garak
                 'card' => 0,                                               //Migration da nullabale qilib yoki default 0 barib berdan o`chirish garak
@@ -66,7 +68,7 @@ class TaskController extends Controller
                     'agent_id' => $request->get('agent_id'),
                     'service_id' => $service_id,
                     'service_cost' => $services[$service_id],
-                    'is_free' => '0'                                       //Migrationda default barib berdan o`chirish garak
+                    'is_free' => 0                                       //Migrationda default barib berdan o`chirish garak
                 ]);
             }
         });

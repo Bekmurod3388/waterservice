@@ -28,6 +28,7 @@
                         <th>Tuman</th>
                         <th>Manzil</th>
                         <th>Filtr almashtirish sanasi</th>
+                        <th>Oxirgi izoh</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
@@ -42,6 +43,7 @@
                             <td>
                                 @include('points.change_filter')
                             </td>
+                            <td>{{ $point->lastreason?->reason }}</td>
                             <td>
                                 <div class="d-flex">
                                     @include('points.agent', ['client_id' => $point->client_id, 'point_id' => $point->id])

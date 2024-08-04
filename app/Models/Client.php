@@ -24,7 +24,7 @@ class Client extends Model
 
     public function scopeFilterByOperator($query)
     {
-        if (!auth()->user()->hasRole(['admin|manager'])) {
+        if (!auth()->user()->hasRole(['admin|manager|operator_agent'])) {
             $query->where('operator_dealer_id', auth()->id());
         }
     }

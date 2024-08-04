@@ -11,7 +11,12 @@ class Task extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['client_id', 'point_id', 'agent_id', 'user_id', 'is_completed', 'service_cost_sum', 'product_cost_sum', 'cash', 'card', 'terminal', 'transfer', 'service_time'];
+    protected $fillable = [
+        'client_id', 'point_id', 'agent_id', 'user_id', 'is_completed',
+        'service_cost_sum', 'product_cost_sum',
+        'cash', 'card', 'terminal', 'transfer',
+        'comment', 'service_time'
+    ];
 
     public function point()
     {

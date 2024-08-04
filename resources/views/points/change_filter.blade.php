@@ -10,7 +10,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Agent belgilash</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Sanani o'zgartirish</h5>
                 <button
                     type="button"
                     class="btn-close"
