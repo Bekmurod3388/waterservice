@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('set-location', [LocationController::class, 'setLocation']);
 
-    Route::put('set-point-location', [LocationController::class, 'setPointLocation']);
+    Route::put('point/location', [LocationController::class, 'setPointLocation']);
 });
