@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('product_id');
             $table->bigInteger('quantity');
             $table->bigInteger('price');//purchase_Price
-
+            $table->bigInteger('service_price');
             $table->timestamps();
         });
     }

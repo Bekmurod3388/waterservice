@@ -24,11 +24,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'purchase_price' => 'required|numeric|min:0',
+            'product_id' => 'required',
             'quantity' => 'required|numeric|min:0',
-            'type' => 'required|in:' . implode(',', [Product::TYPE_FILTER, Product::TYPE_PRODUCT]),
-            'service_price'=>'required|numeric|min:0'
+
         ];
     }
 
@@ -40,12 +38,9 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Ism maydoni to\'ldirilishi shart.',
-            'name.string' => 'Ism maydoni matn bo\'lishi kerak.',
-            'name.max' => 'Ism maydoni 255 ta belgidan oshmasligi kerak.',
-            'quantity.required' => 'Mahsulot soni to\'ldirilishi shart.',
-//            'quantity.numeric' => 'Son maydoni raqam bo\'lishi kerak.',
-            'quantity.min' => 'Mahsulot Son 0 dan kam bo\'lmasligi kerak.',
+            'quantity.required' => 'Son maydoni to\'ldirilishi shart.',
+            'quantity.numeric' => 'Son maydoni raqam bo\'lishi kerak.',
+            'quantity.min' => 'Son maydoni 0 dan kam bo\'lmasligi kerak.',
         ];
     }
 }
