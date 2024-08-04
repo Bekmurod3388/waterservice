@@ -18,4 +18,6 @@ class Product extends Model
     {
         return $this->type == self::TYPE_FILTER ? 'Filter' : 'Mahsulot';
     }
+
+
 }

@@ -36,14 +36,14 @@
                     @forelse($agent_products as $product)
                         <tr>
                             <td>{{ $product->id }}</td>
-                            <td>{{ $product->product_id }}</td>
+                            <td>{{ $product->product->name }}</td>
                             <td>{{ $product->quantity }}</td>
                             <td>{{ $product->price }}</td>
                             <td>
                                 <div class="d-flex">
                                     {{-- @include('agents.create_task') --}}
                                     {{-- @include('users.delete') --}}
-                                    <a href="" class="btn btn-primary"><i class="bx bxs-cart"></i></a>
+                                    <a href="" class="btn btn-warning"><i class="bx bxs-edit"></i></a>
                                 </div>
                             </td>
                         </tr>

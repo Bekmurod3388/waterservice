@@ -41,6 +41,7 @@ class AgentController extends Controller
         return view('agents.products.index',['agent_products'=>$agent_products,'products'=>$products,'agent'=>$agent]);
     }
     public function product_store(StoreRequest $request, User $agent){
-        $this->service->create($request->validated(),$agent);
+        $res = $this->service->create($request->validated(),$agent);
+        return redirect()->route('agent.products', [$agent->id])->with($res);
     }
 }

@@ -10,4 +10,8 @@ class AgentProduct extends Model
     use HasFactory;
 
     protected $fillable = ['agent_id', 'product_id', 'quantity','price','service_price'];
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }
