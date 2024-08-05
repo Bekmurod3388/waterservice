@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             RegionSeeder::class,
-            MockDataSeeder::class
+            MockDataSeeder::class,
+            ProductSeeder::class,
+            AgentProductSeeder::class
         ]);
     }
 }
