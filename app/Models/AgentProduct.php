@@ -9,9 +9,10 @@ class AgentProduct extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['agent_id', 'product_id', 'quantity','price','service_price'];
+    protected $fillable = ['agent_id', 'product_id', 'quantity', 'price', 'service_price'];
 
-    public function product(){
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
 }
