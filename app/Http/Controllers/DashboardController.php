@@ -2,16 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Log;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function dashboard()
     {
-        if (auth()->user()->hasRole(['admin', 'manager'])){
-            return view('dashboard');
+
+        if (auth()->user()->hasRole(['admin', 'manager'])) {
+            return view('dashboard', [
+                'number_client' => Client::count(),
+                'new_clients' => Client::whereDate('created_at', Carbon::today())->count(),
+                'agents' => User::role('agent')->withCount([
+                    'tasks as incomplete_tasks' => function ($query) {
+                        $query->where('is_completed', 0);//->whereDate('created_at', today()->format('Y-m-d'));
+                    },
+                    'tasks as complete_tasks' => function ($query) {
+                        $query->where('is_completed', 1);//->whereDate('created_at', today()->format('Y-m-d'));
+                    }
+                ])->get(),
+            ]);
         }
         return redirect()->route('clients.index');
     }
