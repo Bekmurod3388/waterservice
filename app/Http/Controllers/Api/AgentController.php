@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\AgentProduct;
+use App\Models\Product;
 use App\Models\Service;
 use App\Models\Task;
 
@@ -22,7 +24,13 @@ class AgentController extends Controller
         return response()->json(
             [
                 "task" => $task,
-                "all_services" => Service::all()
+                "agent_products" => AgentProduct::query()
+                    ->with('product:id,name,type')
+                    ->whereHas('product', function ($q) {
+                        $q->where('type', Product::TYPE_PRODUCT);
+                    })
+                    ->where('agent_id', auth()->id())
+                    ->get()
             ]);
     }
 }

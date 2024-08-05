@@ -62,6 +62,10 @@
 
                     // Add new points with custom icons to the map
                     data.forEach(point => {
+                        if(point.latitude == null || point.longitude == null) {
+                            return;
+                        }
+
                         var icon;
                         if (point.type === 'dealer') {
                             icon = dealerIcon;
@@ -86,5 +90,6 @@
         fetchPoints();
         setInterval(fetchPoints, 10000);
 
+        document.querySelector('.leaflet-control-attribution').remove()
     </script>
 @endpush
