@@ -37,7 +37,7 @@
    background-color: var(--first-color);
    border-radius: 50%;
    cursor: pointer;
-   
+
    &-icon{
       display: inline-block;
       color: var(--white-color);
@@ -68,7 +68,7 @@
       }
       & li:nth-child(1){
          transition-delay: .2s;
-      }  
+      }
       & li:nth-child(2){
          transition-delay: .3s;
       }
@@ -82,7 +82,7 @@
       flex-direction: column;
       align-items: center;
       transition: color .4s;
-   
+
       & i{
          font-size: 1.5rem;
       }
