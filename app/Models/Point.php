@@ -11,7 +11,7 @@ class Point extends Model
 
     protected $fillable = [
         'client_id', 'latitude', 'longitude', 'region_id', 'address',
-        'dealer_id', 'demo_time', 'comment',
+        'dealer_id', 'demo_time', 'operator_comment', 'dealer_comment',
         'filter_id', 'filter_expire', 'filter_expire_date', 'filter_cost',
         'status', 'is_full_pay', 'invited_client_id', 'contract_date',
         'installation_date', 'operator_dealer_id', 'dealer_id', 'demo_time'
@@ -20,6 +20,12 @@ class Point extends Model
     protected $casts = [
         'filter_expire_date' => 'date'
     ];
+
+    public const STATUS_CANCEL = -1;
+    public const STATUS_NEW = 0;
+    public const STATUS_SOLD = 1;
+    public const STATUS_AGENT = 2;
+    public const STATUS_INSTALLED = 3;
 
     public function client()
     {

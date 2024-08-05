@@ -18,7 +18,8 @@ return new class extends Migration
             $table->decimal('longitude',11,8)->nullable();
             $table->bigInteger('region_id');
             $table->string('address');
-            $table->string('comment')->nullable();
+            $table->string('operator_comment')->nullable();
+            $table->string('dealer_comment')->nullable();
             $table->bigInteger('filter_id')->nullable();
             $table->tinyInteger('filter_expire')->nullable(); //service_provide
             $table->date('filter_expire_date')->nullable();
