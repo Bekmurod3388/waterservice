@@ -53,7 +53,8 @@ class AgentProductService
                         'service_price' => $product->service_price,
                         'price' => $product->purchase_price
                     ]);
-                } else {
+                }
+                else {
 
                     AgentProduct::query()->create([
                         'agent_id' => $agent->id,
