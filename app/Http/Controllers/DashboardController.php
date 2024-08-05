@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-        if (auth()->user()->hasRole(['admin', 'manager'])) {
+        if (auth()->user()->hasRole([ 'admin' ])) {
             return view('dashboard', [
                 'number_client' => Client::count(),
                 'new_clients' => Client::whereDate('created_at', Carbon::today())->count(),
