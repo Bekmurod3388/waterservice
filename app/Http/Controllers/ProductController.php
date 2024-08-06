@@ -6,6 +6,8 @@ use App\Http\Requests\Products\StoreRequest;
 use App\Http\Requests\Products\UpdateRequest;
 use App\Models\Product;
 use App\Services\ProductService;
+use App\Services\SearchService;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -14,15 +16,22 @@ class ProductController extends Controller
      */
 
     public function __construct(
-        protected ProductService $service
+        protected ProductService $serviceProduct,
+        protected SearchService $searchService,
     )
     {
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+        $searchColumn = 'name';
+
+        $productsQuery = Product::query();
+        $products = $this->searchService->applySearch($productsQuery, $search, $searchColumn)->paginate(10);
+
         return view('products.index', [
-            'products' => Product::query()->paginate(10),
+            'products' => $products,
         ]);
     }
 
@@ -57,7 +66,7 @@ class ProductController extends Controller
      */
     public function update(UpdateRequest $request, Product $product)
     {
-        $this->service->update($request, $product);
+        $this->serviceProduct->update($request, $product);
 
         return back()->with('success', 'Servis muvaffaqiyatli yangilandi!');
     }

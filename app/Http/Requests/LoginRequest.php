@@ -23,7 +23,17 @@ class LoginRequest extends FormRequest
     {
         return [
             'phone' => 'required|numeric',
-            'password' => 'required|string'
+            'password' => 'required|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'phone.required' => 'Telefon raqami kiritilishi shart.',
+            'phone.numeric' => 'Telefon raqami faqat raqamlardan iborat bo\'lishi kerak.',
+            'password.required' => 'Parol kiritilishi shart.',
+            'password.string' => 'Parol matn turida bo\'lishi kerak.',
         ];
     }
 }

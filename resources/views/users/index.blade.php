@@ -9,8 +9,8 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
                 <!-- Search -->
-                <form action="" method="GET" class="d-flex align-items-center mb-2 mb-sm-0 me-sm-2">
-                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="">
+                <form action="{{ route('users.index') }}" method="GET" class="d-flex align-items-center mb-2 mb-sm-0 me-sm-2">
+                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="{{ request('search') }}">
 
                     <button class="btn btn-primary me-2" type="submit">
                         <i class="bx bx-search"></i>
@@ -37,7 +37,7 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>{{ $user->phone }}</td>
+                            <td>+998 {{ $user->phone }}</td>
                             <td>{{ $user->latitude }} {{$user->longitude}}</td>
                             <td>{{ $user->last_active_time }}</td>
                             <td>

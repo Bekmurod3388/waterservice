@@ -11,10 +11,15 @@ use App\Models\Service;
 use App\Models\Task;
 use App\Models\TaskReason;
 use App\Models\User;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
 {
+    public function __construct(protected SearchService $service)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -85,18 +90,34 @@ class PointController extends Controller
         //
     }
 
-    public function workList()
+    public function workList(Request $request)
     {
+        $search = $request->input('search');
+        $filter = $request->input('filter');
+        $searchColumn = 'address';
+
         $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
-        $points = Point::with('lastReason')
+
+        $pointsQuery = Point::with('lastReason')
             ->whereDate('filter_expire_date', '<=', now())
-            ->whereNotIn('id', $tasks)
-            ->get();
+            ->whereNotIn('id', $tasks);
+
+        if ($filter === 'yesterday') {
+            $pointsQuery->whereDate('filter_expire_date', now()->subDay());
+        } elseif ($filter === 'today') {
+            $pointsQuery->whereDate('filter_expire_date', now());
+        } elseif ($filter === 'tomorrow') {
+            $pointsQuery->whereDate('filter_expire_date', now()->addDay());
+        } elseif ($filter === 'week') {
+            $pointsQuery->whereBetween('filter_expire_date', [now()->startOfWeek(), now()->endOfWeek()]);
+        }
+
+        $points = $this->service->applySearch($pointsQuery, $search, $searchColumn)->get();
 
         return view('points.work_list', [
             'agents' => User::role('agent')->get(),
             'services' => Service::all(),
-            'points' => $points
+            'points' => $points,
         ]);
     }
 

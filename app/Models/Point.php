@@ -14,7 +14,7 @@ class Point extends Model
         'dealer_id', 'demo_time', 'operator_comment', 'dealer_comment',
         'filter_id', 'filter_expire', 'filter_expire_date', 'filter_cost',
         'status', 'is_full_pay', 'invited_client_id', 'contract_date',
-        'installation_date', 'operator_dealer_id', 'dealer_id', 'demo_time'
+        'installation_date', 'operator_dealer_id',
     ];
 
     protected $casts = [

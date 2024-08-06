@@ -27,15 +27,18 @@
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">To'liq ismi</label>
-                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}" required/>
+                            <input type="text" id="nameBasic" class="form-control" name="name" value="{{ old('name') }}"
+                                   required/>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="phone" class="form-label">Telefon raqami</label>
-
-                            <input type="tel" id="phone" class="form-control" name="phone" placeholder="940810048"
-                                   pattern="[0-9]{9}" maxlength="9" value="{{ old('phone') }}" required/>
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text">+998</span>
+                                <input type="tel" id="phone" class="form-control" name="phone"
+                                       pattern="[0-9]{9}" maxlength="9" value="{{ old('phone') }}" required/>
+                            </div>
                         </div>
                     </div>
                     <div class="row g-2">
@@ -43,7 +46,8 @@
                             <label for="roles" class="form-label">Rollar</label>
                             @foreach($roles as $role)
                                 <div class="form-check mt-3">
-                                    <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $role->name }}" id="role{{ $role->id }}" />
+                                    <input class="form-check-input" type="checkbox" name="roles[]"
+                                           value="{{ $role->name }}" id="role{{ $role->id }}"/>
                                     <label class="form-check-label" for="role{{ $role->id }}">{{ $role->name }}</label>
                                 </div>
                             @endforeach
