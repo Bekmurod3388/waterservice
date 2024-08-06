@@ -17,7 +17,7 @@
                     </button>
                 </form>
 
-                @include('agents.products.create')
+
 
             </div>
             <div class="table-responsive text-nowrap">
@@ -25,23 +25,29 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>mahsulot id</th>
-                        <th>Soni</th>
-                        <th>Narxi</th>
+                        <th>Mijoz nomi</th>
+                        <th>Mijoz addressi</th>
+                        <th>Izoh</th>
+                        <th>Yakunlandimi</th>
+                        <th>Servis narx</th>
+                        <th>Mahsulot narx</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    @forelse($agent_products as $product)
+                    @forelse($tasks as $task)
                         <tr>
-                            <td>{{ $product->id }}</td>
-                            <td>{{ $product->product->name }}</td>
-                            <td>{{ $product->quantity }}</td>
-                            <td>{{ $product->price }}</td>
+                            <td>{{ $task->id }}</td>
+                            <td>{{ $task->client->name }}</td>
+                            <td>{{ $task->point->address }}</td>
+                            <td>{{ $task->comment }}</td>
+                            <td>{{ $task->is_completed }}</td>
+                            <td>{{ $task->service_cost_sum }}</td>
+                            <td>{{ $task->product_cost_sum }}</td>
                             <td>
                                 <div class="d-flex">
-                                     @include('agents.products.edit')
+{{--                                     @include('agents.products.edit')--}}
 {{--                                     @include('agents.tasks.index')--}}
 
                                 </div>
@@ -54,11 +60,7 @@
                     @endforelse
                     </tbody>
                 </table>
-                <!-- Basic Pagination -->
-                <div class="card-body">
-                    {{ $agent_products->links('pagination::bootstrap-5') }}
-                </div>
-                <!--/ Basic Pagination -->
+
             </div>
         </div>
     </div>

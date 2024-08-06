@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AgentProduct;
 use App\Models\Product;
+use App\Models\Task;
 use App\Models\User;
 use App\Services\AgentProductService;
 use App\Services\SearchService;
@@ -55,5 +56,10 @@ class AgentController extends Controller
     public function product_update(UpdateRequest $request, User $agent, AgentProduct $product){
         $res = $this->service->update($request->validated(),$agent, $product);
         return redirect()->back()->with($res['key'], $res['message']);
+    }
+    public function agent_tasks(User $agent){
+        return view('agents.tasks.index',[
+            'tasks' => Task::with('point', 'client')->where('agent_id', $agent->id)->get()
+        ]);
     }
 }
