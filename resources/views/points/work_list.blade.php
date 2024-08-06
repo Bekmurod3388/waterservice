@@ -7,17 +7,38 @@
         @include('alerts.error-alert')
 
         <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
-                <!-- Search -->
-                <form action="" method="GET" class="d-flex align-items-center mb-2 mb-sm-0 me-sm-2">
-                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="">
+
+            <div class="card-header d-flex justify-content-start align-items-center flex-column flex-md-row">
+                <!-- Search Form -->
+                <form action="{{ route('work.list') }}" method="GET" class="d-flex align-items-center mb-2 mb-sm-0 me-sm-2">
+                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="{{ request('search') }}">
+                    <!-- Filter Dropdown -->
+                    <div class="btn-group me-1">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <span><i class="bx bx-filter me-sm-1"></i> Kunlar</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item btn-outline-primary" href="{{ route('work.list', ['filter' => 'yesterday']) }}">Muddati
+                                    otgan</a></li>
+                            <li><a class="dropdown-item btn-outline-primary"
+                                   href="{{ route('work.list', ['filter' => 'today']) }}">Bugun</a>
+                            </li>
+                            <li><a class="dropdown-item btn-outline-primary"
+                                   href="{{ route('work.list', ['filter' => 'tomorrow']) }}">Ertaga</a></li>
+                            <li><a class="dropdown-item btn-outline-primary"
+                                   href="{{ route('work.list', ['filter' => 'week']) }}">Haftalik</a>
+                            </li>
+                        </ul>
+                    </div>
 
                     <button class="btn btn-primary me-2" type="submit">
                         <i class="bx bx-search"></i>
                     </button>
                 </form>
-
             </div>
+
+
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
@@ -56,10 +77,10 @@
                     </tbody>
                 </table>
                 <!-- Basic Pagination -->
-{{--                <div class="card-body">--}}
-{{--                    {{ $points->links('pagination::bootstrap-5') }}--}}
-{{--                </div>--}}
-{{--                <!--/ Basic Pagination -->--}}
+                {{--                <div class="card-body">--}}
+                {{--                    {{ $points->links('pagination::bootstrap-5') }}--}}
+                {{--                </div>--}}
+                {{--                <!--/ Basic Pagination -->--}}
             </div>
         </div>
     </div>
