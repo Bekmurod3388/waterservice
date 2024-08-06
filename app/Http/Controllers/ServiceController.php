@@ -35,7 +35,7 @@ class ServiceController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Service::create($request->all());
+        Service::query()->create($request->all());
 
         return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
     }

@@ -8,8 +8,10 @@ use App\Models\Product;
 use App\Models\ProductHistory;
 use Illuminate\Support\Facades\DB;
 
-class AgentProductService {
-    public function create($data, $agent) {
+class AgentProductService
+{
+    public function create($data, $agent)
+    {
         $response = [];
         try {
             DB::beginTransaction();
@@ -41,7 +43,7 @@ class AgentProductService {
                     $agentProduct->quantity += $data['quantity'];
                     $agentProduct->save();
 
-                    AgentProductHistory::create([
+                    AgentProductHistory::query()->create([
                         'agent_id' => $agent->id,
                         'operator_agent_id' => auth()->id(),
                         'product_id' => $product->id,
@@ -51,9 +53,10 @@ class AgentProductService {
                         'service_price' => $product->service_price,
                         'price' => $product->purchase_price
                     ]);
-                } else {
+                }
+                else {
 
-                    AgentProduct::create([
+                    AgentProduct::query()->create([
                         'agent_id' => $agent->id,
                         'product_id' => $product->id,
                         'quantity' => $data['quantity'],
@@ -61,7 +64,7 @@ class AgentProductService {
                         'service_price' => $product->service_price
                     ]);
 
-                    AgentProductHistory::create([
+                    AgentProductHistory::query()->create([
                         'agent_id' => $agent->id,
                         'operator_agent_id' => auth()->id(),
                         'product_id' => $product->id,
@@ -74,13 +77,14 @@ class AgentProductService {
                 }
 
                 DB::commit();
-                $response = ['success'=> 'Muvaffaqiyatli yaratildi'];
+                $response = ['key' => 'success', 'message' => 'Muvaffaqiyatli yaratildi'];
             } else {
-                $response = ['error'=> 'Ombordagi mahsulot soni yetarli emas!'];
+                DB::rollBack();
+                $response = ['key' => 'error', 'message' => 'Ombordagi mahsulot soni yetarli emas!'];
             }
         } catch (\Exception $exception) {
             DB::rollBack();
-            $response = ['error'=> $exception->getMessage()];
+            $response = ['key' => 'error', 'message' => $exception->getMessage()];
         }
         return $response;
     }

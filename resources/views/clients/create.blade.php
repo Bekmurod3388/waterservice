@@ -48,7 +48,7 @@
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="description" class="form-label">Tavsif</label>
+                            <label for="description" class="form-label">Qo'shimcha ma'lumot</label>
                             <textarea id="description" class="form-control" name="description">{{ old('description') }}</textarea>
                         </div>
                     </div>

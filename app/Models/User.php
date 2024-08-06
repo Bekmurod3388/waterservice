@@ -28,11 +28,17 @@ class User extends Authenticatable
         'last_active_time'
     ];
 
+
+
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
+
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -54,5 +60,24 @@ class User extends Authenticatable
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class, 'agent_id');
+    }
+
+
+    public function countProduct($id){
+
+
+        $number = AgentProduct::where('agent_id',$id)->get();
+        $sum=0;
+        $count = 0;
+        foreach ($number as $item){
+
+            $sum += $item -> price;
+            $count += $item -> quantity;
+
+        }
+
+        $result = str($count) .'  /  ' . str( $sum) ;
+        return $result;
+
     }
 }

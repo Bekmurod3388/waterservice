@@ -11,7 +11,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Mohsulotni taxrirlash</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Mahsulotni taxrirlash</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -25,20 +25,20 @@
                     @method('PUT')
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="nameBasic" class="form-label">Mohsulot nomi</label>
+                            <label for="nameBasic" class="form-label">Mahsulot nomi</label>
                             <input type="text" id="nameBasic" class="form-control" name="name" value="{{ $product->name }}"/>
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="purchase_price" class="form-label">Mohsulot narxi</label>
+                            <label for="purchase_price" class="form-label">Mahsulot narxi</label>
                             <input type="number" id="purchase_price" class="form-control" name="purchase_price" value="{{ $product->purchase_price }}" />
                         </div>
                     </div>
                     <div class="row g-2">
                         <div class="col mb-3">
-                            <label for="quantity" class="form-label">Mohsulot soni</label>
-                            <input type="number" id="quantity" class="form-control" name="quantity" />
+                            <label for="quantity" class="form-label">Mahsulot soni</label>
+                            <input type="number" id="quantity" class="form-control" name="quantity" value="{{ $product->quantity }}"/>
                         </div>
                     </div>
                     <div class="row g-2">

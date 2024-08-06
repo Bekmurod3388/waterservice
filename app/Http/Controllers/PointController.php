@@ -45,9 +45,9 @@ class PointController extends Controller
             'address' => $request->get('address'),
             'dealer_id' => $request->get('dealer_id'),
             'demo_time' => $request->get('demo_time'),
-            'comment' => $request->get('comment'),
-            'filter_id' => $request->get('filter_id'),
-            'filter_expire' => $request->get('filter_expire'),
+            'operator_comment' => $request->get('comment'),
+            'filter_id' => $request->get('filter_id') ?? null,
+            'filter_expire' => $request->get('filter_expire') ?? null,
             'filter_expire_date' => $request->get('filter_expire') ? now()->addMonths((int)$request->get('filter_expire')) : null
         ]);
 
@@ -74,7 +74,7 @@ class PointController extends Controller
             'address' => $request->get('address'),
             'dealer_id' => $request->get('dealer_id'),
             'demo_time' => $request->get('demo_time'),
-            'comment' => $request->get('comment'),
+            'operator_comment' => $request->get('comment'),
             'filter_id' => $request->get('filter_id'),
             'filter_expire' => $request->get('filter_expire')
         ]);

@@ -80,7 +80,43 @@ class UserSeeder extends Seeder
                 'phone' => '123123124',
             ],
             [
-                'name' => 'agent',
+                'name' => 'agent1',
+                'password' => Hash::make('admin'),
+                'latitude' => 41.551,
+                'longitude' => 60.6334,
+                'last_active_time' => now()
+            ]
+        );
+        $agent->assignRole('agent');$agent = User::query()->firstOrCreate(
+            [
+                'phone' => '111111111',
+            ],
+            [
+                'name' => 'agent2',
+                'password' => Hash::make('admin'),
+                'latitude' => 41.551,
+                'longitude' => 60.6334,
+                'last_active_time' => now()
+            ]
+        );
+        $agent->assignRole('agent');$agent = User::query()->firstOrCreate(
+            [
+                'phone' => '222222222',
+            ],
+            [
+                'name' => 'agent3',
+                'password' => Hash::make('admin'),
+                'latitude' => 41.551,
+                'longitude' => 60.6334,
+                'last_active_time' => now()
+            ]
+        );
+        $agent->assignRole('agent');$agent = User::query()->firstOrCreate(
+            [
+                'phone' => '333333333',
+            ],
+            [
+                'name' => 'agent4',
                 'password' => Hash::make('admin'),
                 'latitude' => 41.551,
                 'longitude' => 60.6334,
