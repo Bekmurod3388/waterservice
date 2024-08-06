@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Requests\Products;
+namespace App\Http\Requests\AgentProducts;
 
-use App\Models\Product;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -24,7 +23,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id' => 'required',
+
             'quantity' => 'required|numeric|min:0',
 
         ];

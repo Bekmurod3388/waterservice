@@ -41,9 +41,9 @@
                             <td>{{ $product->price }}</td>
                             <td>
                                 <div class="d-flex">
-                                    {{-- @include('agents.create_task') --}}
+                                     @include('agents.products.edit')
                                     {{-- @include('users.delete') --}}
-                                    <a href="" class="btn btn-warning"><i class="bx bxs-edit"></i></a>
+
                                 </div>
                             </td>
                         </tr>

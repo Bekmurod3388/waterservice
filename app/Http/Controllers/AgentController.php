@@ -9,6 +9,7 @@ use App\Services\AgentProductService;
 use App\Services\SearchService;
 use Illuminate\Http\Request;
 use App\Http\Requests\AgentProducts\StoreRequest;
+use App\Http\Requests\AgentProducts\UpdateRequest;
 use Illuminate\Support\Facades\DB;
 
 class AgentController extends Controller
@@ -50,5 +51,9 @@ class AgentController extends Controller
     public function product_store(StoreRequest $request, User $agent){
         $res = $this->productService->create($request->validated(),$agent);
         return redirect()->route('agent.products', [$agent->id])->with($res);
+    }
+    public function product_update(UpdateRequest $request, User $agent, AgentProduct $product){
+        $res = $this->service->update($request->validated(),$agent, $product);
+        return redirect()->back()->with($res['key'], $res['message']);
     }
 }

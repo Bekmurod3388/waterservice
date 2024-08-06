@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('products', ProductController::class);
     Route::get('agents/{agent}/products',[AgentController::class,'products'])->name('agent.products');
     Route::post('agent/{agent}/products/store',[AgentController::class,'product_store'])->name('agent.products.store');
+    Route::post('agent/{agent}/products/update/{product}',[AgentController::class,'product_update'])->name('agent.products.update');
     Route::resource('tasks', TaskController::class);
     Route::get('work/list', [PointController::class, 'workList'])->name('work.list');
     Route::put('work/change-expire/{point}', [PointController::class, 'changeExpireDate'])->name('work.change_expire_date');
