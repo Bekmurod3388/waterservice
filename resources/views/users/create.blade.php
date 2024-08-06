@@ -34,10 +34,19 @@
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="phone" class="form-label">Telefon raqami</label>
+
                             <div class="input-group input-group-merge">
-                                <span class="input-group-text">+998</span>
-                                <input type="tel" id="phone" class="form-control" name="phone"
-                                       pattern="[0-9]{9}" maxlength="9" value="{{ old('phone') }}" required/>
+                                <span class="input-group-text">+99 8</span>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    pattern="[0-9]{9}"
+                                    maxlength="9"
+                                    class="form-control"
+                                    placeholder="912345678"
+                                    value="{{ old('phone') }}"
+                                />
                             </div>
                         </div>
                     </div>
