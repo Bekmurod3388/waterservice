@@ -28,10 +28,10 @@ class AgentController extends Controller
         $agentsQuery = User::role('agent')
             ->withCount([
                 'tasks as incomplete_tasks' => function ($query) {
-                    $query->where('is_completed', 0);
+                    $query->where('is_completed', 0);//->whereDate('created_at', today()->format('Y-m-d'))
                 },
                 'tasks as complete_tasks' => function ($query) {
-                    $query->where('is_completed', 1);
+                    $query->where('is_completed', 1);//->whereDate('created_at', today()->format('Y-m-d'))
                 }
             ]);
 

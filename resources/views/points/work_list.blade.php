@@ -12,24 +12,16 @@
                 <!-- Search Form -->
                 <form action="{{ route('work.list') }}" method="GET" class="d-flex align-items-center mb-2 mb-sm-0 me-sm-2">
                     <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="{{ request('search') }}">
-                    <!-- Filter Dropdown -->
+
+                    <!-- Filter -->
                     <div class="btn-group me-1">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                            <span><i class="bx bx-filter me-sm-1"></i> Kunlar</span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item btn-outline-primary" href="{{ route('work.list', ['filter' => 'yesterday']) }}">Muddati
-                                    otgan</a></li>
-                            <li><a class="dropdown-item btn-outline-primary"
-                                   href="{{ route('work.list', ['filter' => 'today']) }}">Bugun</a>
-                            </li>
-                            <li><a class="dropdown-item btn-outline-primary"
-                                   href="{{ route('work.list', ['filter' => 'tomorrow']) }}">Ertaga</a></li>
-                            <li><a class="dropdown-item btn-outline-primary"
-                                   href="{{ route('work.list', ['filter' => 'week']) }}">Haftalik</a>
-                            </li>
-                        </ul>
+                        <select class="form-select" id="dropdownMenuButton" name="filter" aria-label="Default select example">
+                            <option value="" selected disabled>Kun Filter</option>
+                            <option value="yesterday">Muddati o‘tgan</option>
+                            <option value="today">Bugun</option>
+                            <option value="tomorrow">Ertaga</option>
+                            <option value="week">Haftalik</option>
+                        </select>
                     </div>
 
                     <button class="btn btn-primary me-2" type="submit">
