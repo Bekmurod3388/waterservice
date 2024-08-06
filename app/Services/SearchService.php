@@ -11,12 +11,13 @@ class SearchService
      *
      * @param Builder $query
      * @param string|null $search
+     * @param string $column
      * @return Builder
      */
-    public function applySearch(Builder $query, ?string $search): Builder
+    public function applySearch(Builder $query, ?string $search, string $column): Builder
     {
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $query->where($column, 'like', '%' . $search . '%');
         }
 
         return $query;
