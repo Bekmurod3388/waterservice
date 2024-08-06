@@ -6,16 +6,32 @@ use App\Http\Requests\Clients\StoreRequest;
 use App\Http\Requests\Clients\UpdateRequest;
 use App\Models\Client;
 use App\Models\User;
+use App\Services\SearchService;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    public function __construct(protected SearchService $service)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+        $searchColumn = 'name';
+
+        $clientsQuery = Client::with('operator')
+            ->withCount('tasks')
+            ->filterByOperator();
+
+        $clients = $this->service->applySearch($clientsQuery, $search, $searchColumn)
+            ->paginate(10);
+
         return view('clients.index', [
-            'clients' => Client::with('operator')->withCount('tasks')->filterByOperator()->paginate(10),
+            'clients' => $clients,
             'operators' => User::role('operator_dealer')->get(),
         ]);
     }
