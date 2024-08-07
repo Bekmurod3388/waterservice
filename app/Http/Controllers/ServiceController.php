@@ -5,15 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Services\StoreRequest;
 use App\Http\Requests\Services\UpdateRequest;
 use App\Models\Service;
-use App\Services\SearchService;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    public function __construct(protected SearchService $searchService)
-    {
-    }
-
     /**
      * Display a listing of the resource.
      */
