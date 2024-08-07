@@ -52,7 +52,7 @@ class MessageService {
             'password' => config('app.sms_password'),
         ])->json();
 
-        return $response['data']['token'];
+        return $response['token'];
     }
 
     public function receive(Request $request) {// EXPIRED
