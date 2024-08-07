@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [LoginController::class, 'login']);
 
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', LoggerMiddleware::class])->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 
     Route::put('updateProfile', [LoginController::class, 'updateProfile'])->middleware('auth:sanctum');

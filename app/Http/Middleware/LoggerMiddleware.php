@@ -16,6 +16,8 @@ class LoggerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        dd($request->all());
+
         Log::query()->create([
             'url' => $request->fullUrl(),
             'method' => $request->method(),
