@@ -21,12 +21,18 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $searchColumn = 'name';
 
         $usersQuery = User::query()->whereDoesntHave('roles', function ($query) {
             $query->where('name', 'admin');
         });
-        $users = $this->searchService->applySearch($usersQuery, $search, $searchColumn)->paginate(10);
+
+        if ($search) {
+            $usersQuery->where(function ($query) use ($search) {
+                $query->whereAny(['id', 'name', 'phone', 'latitude', 'longitude', 'last_active_time'], 'LIKE', "%$search%");
+            });
+        }
+
+        $users = $usersQuery->paginate(10);
 
         return view('users.index', [
             'roles' => Role::where('name', '!=', 'admin')->get(),

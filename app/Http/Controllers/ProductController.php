@@ -17,7 +17,6 @@ class ProductController extends Controller
 
     public function __construct(
         protected ProductService $serviceProduct,
-        protected SearchService $searchService,
     )
     {
     }
@@ -25,10 +24,18 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $searchColumn = 'name';
 
         $productsQuery = Product::query();
-        $products = $this->searchService->applySearch($productsQuery, $search, $searchColumn)->paginate(10);
+
+        if ($search) {
+            $productsQuery->where(function ($query) use ($search) {
+                $query->whereAny([
+                    'id', 'name', 'purchase_price', 'cost_price', 'quantity', 'type', 'service_price'
+                ], 'LIKE', "%$search%");
+            });
+        }
+
+        $products = $productsQuery->paginate(10);
 
         return view('products.index', [
             'products' => $products,

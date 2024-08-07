@@ -11,24 +11,26 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function __construct(protected SearchService $service)
-    {
-    }
-
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $searchColumn = 'name';
 
-        $clientsQuery = Client::with('operator')
-            ->withCount('tasks')
-            ->filterByOperator();
+        $query = Client::query()->with('operator')->withCount('tasks')->filterByOperator();
 
-        $clients = $this->service->applySearch($clientsQuery, $search, $searchColumn)
-            ->paginate(10);
+        if ($search) {
+            $query->where(function($query) use ($search) {
+                $query->whereAny(['id', 'name', 'phone', 'description'], 'LIKE', "%$search%");
+            });
+
+            $query->orWhereHas('operator', function ($query) use ($search) {
+                $query->whereAny(['name'], 'LIKE', "%$search%");
+            });
+        }
+
+        $clients = $query->paginate(10);
 
         return view('clients.index', [
             'clients' => $clients,

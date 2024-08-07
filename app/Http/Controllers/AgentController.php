@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\DB;
 class AgentController extends Controller
 {
     public function __construct(
-        protected AgentProductService $productService,
-        protected SearchService $searchService
+        protected AgentProductService $productService
     )
     {
     }
@@ -25,9 +24,8 @@ class AgentController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $searchColumn = 'name';
 
-        $agentsQuery = User::role('agent')
+        $agentQuery = User::role('agent')
             ->withCount([
                 'tasks as incomplete_tasks' => function ($query) {
                     $query->where('is_completed', 0);//->whereDate('created_at', today()->format('Y-m-d'))
@@ -37,7 +35,17 @@ class AgentController extends Controller
                 }
             ]);
 
-        $agents = $this->searchService->applySearch($agentsQuery, $search, $searchColumn)->paginate(10);
+        if ($search) {
+            $agentQuery->where(function($query) use ($search) {
+                $query->whereAny(['id', 'name', 'phone'], 'LIKE', "%$search%");
+            });
+
+            $agentQuery->orWhereHas('tasks', function ($query) use ($search) {
+                $query->whereAny(['is_completed'], 'LIKE', "%$search%");
+            });
+        }
+
+        $agents = $agentQuery->paginate(10);
 
         return view('agents.index', [
             'agents' => $agents,

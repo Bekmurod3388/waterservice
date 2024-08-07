@@ -16,10 +16,6 @@ use Illuminate\Http\Request;
 
 class PointController extends Controller
 {
-    public function __construct(protected SearchService $service)
-    {
-    }
-
     /**
      * Display a listing of the resource.
      */
@@ -94,7 +90,6 @@ class PointController extends Controller
     {
         $search = $request->input('search');
         $filter = $request->input('filter');
-        $searchColumn = 'address';
 
         $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
 
@@ -112,7 +107,21 @@ class PointController extends Controller
             $pointsQuery->whereBetween('filter_expire_date', [now()->startOfWeek(), now()->endOfWeek()]);
         }
 
-        $points = $this->service->applySearch($pointsQuery, $search, $searchColumn)->get();
+        if ($search) {
+            $pointsQuery->where(function ($query) use ($search) {
+                $query->whereAny(['id', 'address'], 'LIKE', "%{$search}%");
+            });
+
+            $pointsQuery->orWhereHas('client', function ($query) use ($search) {
+                $query->whereAny(['name',], 'LIKE', "%{$search}%");
+            });
+
+            $pointsQuery->orWhereHas('region', function ($query) use ($search) {
+                $query->whereAny(['name',], 'LIKE', "%{$search}%");
+            });
+        }
+
+        $points = $pointsQuery->paginate(10);
 
         return view('points.work_list', [
             'agents' => User::role('agent')->get(),
@@ -128,8 +137,8 @@ class PointController extends Controller
 
         TaskReason::query()->create([
             'point_id' => $point->id,
-            'filter_expire_date'=>$request->filter_expire_date,
-            'reason'=>$request->reason
+            'filter_expire_date' => $request->filter_expire_date,
+            'reason' => $request->reason
         ]);
 
         return redirect()->route('work.list')->with('success', 'Manzil muvaffaqiyatli yaratildi!');

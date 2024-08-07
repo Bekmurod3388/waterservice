@@ -9,7 +9,7 @@
             <div class="card-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
                 <!-- Search -->
                 <form action="{{ route('services.index') }}" method="GET" class="d-flex align-items-center mb-2 mb-sm-0 me-sm-2">
-                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="{{ request('search') }}">
+                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="{{ request('search') ? request('search') : '' }}">
 
                     <button class="btn btn-primary me-2" type="submit">
                         <i class="bx bx-search"></i>

@@ -20,10 +20,20 @@ class ServiceController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $searchColumn = 'name';
 
         $servicesQuery = Service::query();
-        $services = $this->searchService->applySearch($servicesQuery, $search, $searchColumn)->paginate(10);
+
+        if ($search) {
+            $servicesQuery->where(function ($query) use ($search) {
+                $query->whereAny(['id', 'name', 'cost'], 'LIKE', "%$search%");
+            });
+
+            $servicesQuery->orWhereHas('tasks', function ($query) use ($search) {
+                $query->whereAny(['name'], 'LIKE', "%$search%");
+            });
+        }
+
+        $services = $servicesQuery->paginate(10);
 
         return view('services.index', [
             'services' => $services,
