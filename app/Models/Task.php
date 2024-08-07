@@ -22,10 +22,11 @@ class Task extends Model
     public const TYPE_INSTALL = 1;
     public const TYPE_SERVICE = 2;
 
-    public const PAYED = 2;
 
-    public const SELF = 1;
-    public const FREE = 0;
+    public const INITIAL = 0;
+    public const WAITING = 1;
+    public const COMPLETED = 2;
+    public const PAYED = 3;
 
     public function point()
     {
@@ -42,11 +43,8 @@ class Task extends Model
         return $this->belongsToMany(Service::class, 'task_services')->using(TaskService::class);
     }
 
-    public function client(){
-
+    public function client()
+    {
         return $this->belongsTo(Client::class);
-
     }
-
-
 }

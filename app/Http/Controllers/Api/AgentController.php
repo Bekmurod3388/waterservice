@@ -49,9 +49,6 @@ class AgentController extends Controller
             'products' => 'array'
         ]);
 
-        // send sms
-        $code = mt_rand(1111, 9999);
-
 
         foreach ($request->get('products') as $product) {
             TaskProduct::query()->create([
@@ -69,9 +66,12 @@ class AgentController extends Controller
                 ->decrement('quantity');
         }
 
+        $code = mt_rand(100000, 999999);
+
         $task->update([
             'service_cost_sum',
             'product_cost_sum',
+            'status' => Task::WAITING,
             'sms_code' => $code,
             'sms_expire_time' => now()->addMinutes(2)
         ]);
@@ -93,6 +93,7 @@ class AgentController extends Controller
         if (now()->greaterThan($task->sms_expire_time) && $request->get('code') == $task->sms_code) {
 
             $task->update([
+                'status' => Task::COMPLETED,
                 'sms_code' => null,
                 'sms_expire_time' => null,
                 'is_completed' => true
