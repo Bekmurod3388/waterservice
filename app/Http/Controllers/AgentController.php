@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Models\Task;
 use App\Models\User;
 use App\Services\AgentProductService;
-use App\Services\SearchService;
 use Illuminate\Http\Request;
 use App\Http\Requests\AgentProducts\StoreRequest;
 use App\Http\Requests\AgentProducts\UpdateRequest;
@@ -16,8 +15,7 @@ use Illuminate\Support\Facades\DB;
 class AgentController extends Controller
 {
     public function __construct(
-        protected AgentProductService $productService,
-        protected SearchService $searchService
+        protected AgentProductService $productService
     )
     {
     }
@@ -25,19 +23,28 @@ class AgentController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $searchColumn = 'name';
 
-        $agentsQuery = User::role('agent')
+        $agentQuery = User::role('agent')
             ->withCount([
                 'tasks as incomplete_tasks' => function ($query) {
-                    $query->where('is_completed', 0);
+                    $query->where('is_completed', 0);//->whereDate('created_at', today()->format('Y-m-d'))
                 },
                 'tasks as complete_tasks' => function ($query) {
-                    $query->where('is_completed', 1);
+                    $query->where('is_completed', 1);//->whereDate('created_at', today()->format('Y-m-d'))
                 }
             ]);
 
-        $agents = $this->searchService->applySearch($agentsQuery, $search, $searchColumn)->paginate(10);
+        if ($search) {
+            $agentQuery->where(function($query) use ($search) {
+                $query->whereAny(['id', 'name', 'phone'], 'LIKE', "%$search%");
+            });
+
+            $agentQuery->orWhereHas('tasks', function ($query) use ($search) {
+                $query->whereAny(['is_completed'], 'LIKE', "%$search%");
+            });
+        }
+
+        $agents = $agentQuery->paginate(10);
 
         return view('agents.index', [
             'agents' => $agents,
@@ -54,7 +61,7 @@ class AgentController extends Controller
         return redirect()->route('agent.products', [$agent->id])->with($res);
     }
     public function product_update(UpdateRequest $request, User $agent, AgentProduct $product){
-        $res = $this->service->update($request->validated(),$agent, $product);
+        $res = $this->productService->update($request->validated(),$agent, $product);
         return redirect()->back()->with($res['key'], $res['message']);
     }
     public function agent_tasks(User $agent){

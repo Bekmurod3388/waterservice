@@ -5,15 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Users\StoreRequest;
 use App\Http\Requests\Users\UpdateRequest;
 use App\Models\User;
-use App\Services\SearchService;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function __construct(protected SearchService $searchService)
-    {
-    }
 
     /**
      * Display a listing of the resource.
@@ -21,12 +17,18 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $searchColumn = 'name';
 
         $usersQuery = User::query()->whereDoesntHave('roles', function ($query) {
             $query->where('name', 'admin');
         });
-        $users = $this->searchService->applySearch($usersQuery, $search, $searchColumn)->paginate(10);
+
+        if ($search) {
+            $usersQuery->where(function ($query) use ($search) {
+                $query->whereAny(['id', 'name', 'phone', 'latitude', 'longitude', 'last_active_time'], 'LIKE', "%$search%");
+            });
+        }
+
+        $users = $usersQuery->paginate(10);
 
         return view('users.index', [
             'roles' => Role::where('name', '!=', 'admin')->get(),

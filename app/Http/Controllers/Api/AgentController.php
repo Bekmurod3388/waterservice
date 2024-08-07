@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\TaskProduct;
 use Illuminate\Http\JsonResponse;
 use App\Services\MessageService;
 use Illuminate\Http\Request;
@@ -51,13 +52,32 @@ class AgentController extends Controller
         // send sms
         $code = mt_rand(1111, 9999);
 
+
+        foreach ($request->get('products') as $product) {
+            TaskProduct::query()->create([
+                'agent_id' => auth()->id(),
+                'task_id' => $task->id,
+                'is_free' => $product['isFree'],
+                'product_id' => $product['id'],
+                'quantity' => 1,
+                'product_cost' => $product['price']
+            ]);
+
+            AgentProduct::query()
+                ->where('product_id', $product['product_id'])
+                ->where('agent_id', auth()->id())
+                ->decrement('quantity');
+        }
+
         $task->update([
+            'service_cost_sum',
+            'product_cost_sum',
             'sms_code' => $code,
             'sms_expire_time' => now()->addMinutes(2)
         ]);
 
         $phone = $task->client?->phone;
-        $this->service->sendMessage($phone, "Tasdiqlash kodi: $code");
+//        $this->service->sendMessage($phone, "Tasdiqlash kodi: $code");
 
         return response()->json([
             'success' => true

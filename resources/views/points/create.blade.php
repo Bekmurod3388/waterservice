@@ -37,8 +37,7 @@
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="address" class="form-label">Manzil</label>
-                            <input type="text" id="address" class="form-control" name="address" value="{{ old('address') }}"
-                                   placeholder="Full Name" required/>
+                            <input type="text" id="address" class="form-control" name="address" value="{{ old('address') }}" required/>
                         </div>
                     </div>
                     @role('operator_dealer')
