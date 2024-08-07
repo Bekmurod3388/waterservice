@@ -22,6 +22,11 @@ class Task extends Model
     public const TYPE_INSTALL = 1;
     public const TYPE_SERVICE = 2;
 
+    public const PAYED = 2;
+
+    public const SELF = 1;
+    public const FREE = 0;
+
     public function point()
     {
         return $this->belongsTo(Point::class);

@@ -72,7 +72,7 @@
                                     <div class="row g-2">
                                         <div class="col mb-3">
                                             <label for="service_time" class="form-label">Service vaqti</label><br>
-                                            <input type="datetime-local" id="service_time" name="service_time" class="form-control">
+                                            <input type="datetime-local" id="service_time" min="09:00" max="18:00" name="service_time" class="form-control dob-picker flatpickr-input">
                                         </div>
                                     </div>
                                     <input type="hidden" name="client_id" value="{{$client->id}}">

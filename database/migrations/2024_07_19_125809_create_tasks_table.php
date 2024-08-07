@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('is_completed')->default(0);
             $table->bigInteger('service_cost_sum')->nullable();
             $table->bigInteger('product_cost_sum')->nullable();
+            $table->tinyInteger('status')->default(Task::FREE);
             $table->bigInteger('cash');
             $table->bigInteger('card');
             $table->bigInteger('terminal');

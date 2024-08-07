@@ -31,6 +31,7 @@
                         <th>Yakunlandimi</th>
                         <th>Servis narx</th>
                         <th>Mahsulot narx</th>
+                        <th>Xizmat vaqti</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>
@@ -45,6 +46,7 @@
                             <td>{{ $task->is_completed }}</td>
                             <td>{{ $task->service_cost_sum }}</td>
                             <td>{{ $task->product_cost_sum }}</td>
+                            <td>{{ $task->service_time }}</td>
                             <td>
                                 <div class="d-flex">
 {{--                                     @include('agents.products.edit')--}}
