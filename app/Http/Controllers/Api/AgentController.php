@@ -62,7 +62,7 @@ class AgentController extends Controller
             ]);
 
             AgentProduct::query()
-                ->where('product_id', $product['product_id'])
+                ->where('product_id', $product['id'])
                 ->where('agent_id', auth()->id())
                 ->decrement('quantity');
         }
