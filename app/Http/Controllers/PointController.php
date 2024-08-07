@@ -11,7 +11,6 @@ use App\Models\Service;
 use App\Models\Task;
 use App\Models\TaskReason;
 use App\Models\User;
-use App\Services\SearchService;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
@@ -19,10 +18,30 @@ class PointController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($client)
+    public function index($client, Request $request)
     {
+        $search = $request->input('search');
+
+        $pointsQuery = Point::with('client')->where('client_id', $client);
+
+        if ($search) {
+            $pointsQuery->where(function ($query) use ($search) {
+                $query->whereAny(['id', 'address', 'latitude', 'longitude', 'address', 'filter_expire_date'], 'LIKE', "%$search%");
+            });
+
+            $pointsQuery->orWhereHas('client', function ($query) use ($search) {
+                $query->whereAny(['name', 'phone'], 'LIKE', "%$search%");
+            });
+
+            $pointsQuery->orWhereHas('region', function ($query) use ($search) {
+                $query->whereAny(['name'], 'LIKE', "%$search%");
+            });
+        }
+
+        $points = $pointsQuery->paginate(10);
+
         return view('points.index', [
-            'points' => Point::with('client')->where('client_id', $client)->paginate(10),
+            'points' => $points,
             'regions' => Region::all(),
             'products' => Product::all(),
             'dealers' => User::role('dealer')->pluck('name', 'id')
