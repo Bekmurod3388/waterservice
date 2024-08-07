@@ -121,7 +121,7 @@
                   <span class="app-brand-logo demo">
                         <img src="{{ asset('assets/Images/login-image.jpg') }}" width="60" alt="Brand Logo"/>
                   </span>
-                            <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                            <span class="app-brand-text demo text-body fw-bolder">RGD</span>
                         </div>
                     </div>
 
