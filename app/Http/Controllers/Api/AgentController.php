@@ -54,7 +54,7 @@ class AgentController extends Controller
             TaskProduct::query()->create([
                 'agent_id' => auth()->id(),
                 'task_id' => $task->id,
-                'is_free' => $product['isFree'] ?? false,
+                'is_free' => $product['isFree'] ? 0 : 1,
                 'product_id' => $product['id'],
                 'quantity' => 1,
                 'product_cost' => $product['price']
