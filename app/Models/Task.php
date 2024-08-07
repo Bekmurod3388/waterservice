@@ -15,8 +15,12 @@ class Task extends Model
         'client_id', 'point_id', 'agent_id', 'user_id', 'is_completed',
         'service_cost_sum', 'product_cost_sum',
         'cash', 'card', 'terminal', 'transfer',
-        'comment', 'service_time'
+        'comment', 'service_time', 'type',
+        'sms_code', 'sms_expire_time'
     ];
+
+    public const TYPE_INSTALL = 1;
+    public const TYPE_SERVICE = 2;
 
     public function point()
     {

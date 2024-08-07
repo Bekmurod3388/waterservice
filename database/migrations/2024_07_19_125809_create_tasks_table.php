@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Task;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -26,6 +27,9 @@ return new class extends Migration
             $table->bigInteger('terminal');
             $table->bigInteger('transfer');
             $table->dateTime('service_time')->nullable();
+            $table->tinyInteger('type')->default(Task::TYPE_INSTALL);
+            $table->integer('sms_code')->nullable();
+            $table->dateTime('sms_expire_time')->nullable();
             $table->timestamps();
         });
     }

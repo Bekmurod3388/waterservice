@@ -15,6 +15,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'sms_email'=> env('SMS_SERVICE_EMAIL'),
+
+    'sms_password' => env('SMS_SERVICE_PASSWORD'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
