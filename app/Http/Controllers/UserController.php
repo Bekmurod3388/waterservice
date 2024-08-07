@@ -5,15 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Users\StoreRequest;
 use App\Http\Requests\Users\UpdateRequest;
 use App\Models\User;
-use App\Services\SearchService;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function __construct(protected SearchService $searchService)
-    {
-    }
 
     /**
      * Display a listing of the resource.
