@@ -48,7 +48,7 @@
                             <td>{{ $point->client->name }}</td>
                             <td>{{ $point->client->phone }}</td>
                             <td>{{ $point->region->name }}</td>
-                            <td>{{ $point->showLocation() }}</td>
+                            <td>{!! $point->showLocation() !!}</td>
                             <td>{{ $point->address }}</td>
                             @unlessrole('operator_dealer')
                             <td>{{ $point->filter_expire_date->format('Y-m-d') }}</td>
