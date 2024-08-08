@@ -80,7 +80,7 @@
                     </div>
                         <div class="row g-2">
                             <div class="col mb-3">
-                                <label for="filter_expire" class="form-label">Almashtirish sanasi</label>
+                                <label for="filter_expire" class="form-label">Filter almashtirish oralig'i (oylarda 1 - 12)</label>
                                 <input type="number" id="filter_expire" class="form-control" name="filter_expire" value="{{ old('expire')}}"
                                        required min="1" max="12"/>
                             </div>
@@ -88,7 +88,7 @@
 
                         <div class="row g-2">
                             <div class="col mb-3">
-                                <label for="filter_expire" class="form-label">filter_expire_date</label>
+                                <label for="filter_expire" class="form-label">Filterning so'ngi almashtirilgan sanasi</label>
                                 <input type="date" id="filter_expire" class="form-control" name="filter_expire_date" value="{{ old('filter_expire_date') }}"
                                        required min="1" max="12"/>
                             </div>
@@ -96,7 +96,7 @@
 
                         <div class="row g-2">
                             <div class="col mb-3">
-                                <label for="filter_expire" class="form-label"> contract_date </label>
+                                <label for="filter_expire" class="form-label">  Shartnoma sanasi  </label>
                                 <input type="date" id="filter_expire" class="form-control" name="contract_date" value="{{ old('contract_date')}}"
                                        required min="1" max="12"/>
                             </div>
@@ -104,7 +104,7 @@
 
                         <div class="row g-2">
                             <div class="col mb-3">
-                                <label for="filter_expire" class="form-label"> installation_date </label>
+                                <label for="filter_expire" class="form-label"> >Filter o'rnatilgan sana </label>
                                 <input type="date"  id="filter_expire" class="form-control" name="installation_date" value="{{ old('installation_date')}}"
                                        required min="1" max="12"/>
                             </div>
