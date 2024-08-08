@@ -11,6 +11,7 @@ use App\Models\Service;
 use App\Models\Task;
 use App\Models\TaskReason;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
@@ -54,8 +55,13 @@ class PointController extends Controller
     public function store(StoreRequest $request, $client)
     {
 
+        $contractDate = $request->get('contract_date') ? Carbon::parse($request->get('contract_date'))->format('d-m-Y') : null;
+        $installationDate = $request->get('installation_date') ? Carbon::parse($request->get('installation_date'))->format('d-m-Y') : null;
+        $filterExpireDate = $request->get('filter_expire_date') ? Carbon::parse($request->get('filter_expire_date'))->addMonths((int)$request->get('filter_expire'))->format('d-m-Y') : null;
 
-        Point::query()->create([
+
+
+        $point = Point::query()->create([
             'client_id' => $client,
             'region_id' => $request->get('region_id'),
             'address' => $request->get('address'),
@@ -64,12 +70,17 @@ class PointController extends Controller
             'operator_comment' => $request->get('comment'),
             'filter_id' => $request->get('filter_id') ?? null,
             'filter_expire' => $request->get('filter_expire') ?? null,
-            'filter_expire_date' => $request->get('filter_expire_date') ? now()->addMonths((int)$request->get('filter_expire')) : null,
-            'contract_date'=> $request->get('contract_date') ?? null,
-            'installation_date' => $request->get('installation_date') ?? null,
+            'filter_expire_date' =>  $filterExpireDate,
+            'contract_date'=> $contractDate,
+            'installation_date' => $installationDate
+
         ]);
 
+//        dd($filterExpireDate, $point);
+
+
         return redirect()->back()->with('success', 'Manzil muvaffaqiyatli yaratildi!');
+
     }
 
 
@@ -78,6 +89,8 @@ class PointController extends Controller
      */
     public function update(UpdateRequest $request, $client, Point $point)
     {
+
+
         // if changed expire cycle
         if ($request->get('filter_expire') != $point->filter_expire) {
             $point->filter_expire_date->subMonths($point->filter_expire)->addMonths((int)$request->get('filter_expire'));
