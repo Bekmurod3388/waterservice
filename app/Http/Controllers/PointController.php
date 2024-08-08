@@ -48,12 +48,13 @@ class PointController extends Controller
         ]);
     }
 
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreRequest $request, $client)
     {
+
+
         Point::query()->create([
             'client_id' => $client,
             'region_id' => $request->get('region_id'),
@@ -63,7 +64,9 @@ class PointController extends Controller
             'operator_comment' => $request->get('comment'),
             'filter_id' => $request->get('filter_id') ?? null,
             'filter_expire' => $request->get('filter_expire') ?? null,
-            'filter_expire_date' => $request->get('filter_expire') ? now()->addMonths((int)$request->get('filter_expire')) : null
+            'filter_expire_date' => $request->get('filter_expire_date') ? now()->addMonths((int)$request->get('filter_expire')) : null,
+            'contract_date'=> $request->get('contract_date') ?? null,
+            'installation_date' => $request->get('installation_date') ?? null,
         ]);
 
         return redirect()->back()->with('success', 'Manzil muvaffaqiyatli yaratildi!');
@@ -91,7 +94,9 @@ class PointController extends Controller
             'demo_time' => $request->get('demo_time'),
             'operator_comment' => $request->get('comment'),
             'filter_id' => $request->get('filter_id'),
-            'filter_expire' => $request->get('filter_expire')
+            'filter_expire' => $request->get('filter_expire'),
+//            'installation_date'=>$request->get('installation_date'),
+//            'contract_date'=> $request->get('contract_date') ?? null,
         ]);
 
         return redirect()->back()->with('success', 'Manzil muvaffaqiyatli yangilandi!');

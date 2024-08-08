@@ -27,7 +27,8 @@ return new class extends Migration
             $table->bigInteger('terminal');
             $table->bigInteger('transfer');
             $table->dateTime('service_time')->nullable();
-            $table->tinyInteger('type')->default(Task::TYPE_INSTALL);
+            $table->tinyInteger('status')->default(Task::INITIAL);
+            $table->tinyInteger('type')->default(Task::TYPE_SERVICE);
             $table->integer('sms_code')->nullable();
             $table->dateTime('sms_expire_time')->nullable();
             $table->timestamps();
