@@ -7,18 +7,22 @@ use App\Http\Requests\Clients\UpdateRequest;
 use App\Models\Client;
 use App\Models\User;
 use App\Services\SearchService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $operatorDealerId = Auth::id();
+        $startOfMonth = Carbon::now()->startOfMonth();
 
-        $query = Client::query()->with('operator')->withCount('tasks')->filterByOperator();
+        $query = Client::with('operator')
+            ->withCount('tasks')
+            ->where('operator_dealer_id', $operatorDealerId)
+            ->where('created_at', '>=', $startOfMonth);
 
         if ($search) {
             $query->where(function($query) use ($search) {
@@ -35,6 +39,7 @@ class ClientController extends Controller
         return view('clients.index', [
             'clients' => $clients,
             'operators' => User::role('operator_dealer')->get(),
+            'clientCount' => $clients->total(),
         ]);
     }
 
