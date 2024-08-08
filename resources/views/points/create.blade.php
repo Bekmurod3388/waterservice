@@ -88,7 +88,7 @@
 
                         <div class="row g-2">
                             <div class="col mb-3">
-                                <label for="filter_expire" class="form-label">filter_expire_date wrong</label>
+                                <label for="filter_expire" class="form-label">filter_expire_date</label>
                                 <input type="date" id="filter_expire" class="form-control" name="filter_expire_date" value="{{ old('filter_expire_date') }}"
                                        required min="1" max="12"/>
                             </div>
@@ -109,6 +109,7 @@
                                        required min="1" max="12"/>
                             </div>
                         </div>
+
 
                     @endrole
                     <div class="modal-footer">

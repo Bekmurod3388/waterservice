@@ -74,11 +74,11 @@ class AgentController extends Controller
             'product_cost_sum',
             'status' => Task::WAITING,
             'sms_code' => $code,
-            'sms_expire_time' => now()->addMinutes(2)
+            'sms_expire_time' => now()->addMinutes(5)
         ]);
 
         $phone = $task->client?->phone;
-        $this->service->sendMessage($phone, "Tasdiqlash kodi: $code");
+//        $this->service->sendMessage($phone, "Tasdiqlash kodi: $code");
 
         return response()->json([
             'success' => true
@@ -91,7 +91,7 @@ class AgentController extends Controller
             'code' => 'required|int'
         ]);
 
-        if (now()->greaterThan($task->sms_expire_time) && $request->get('code') == $task->sms_code) {
+        if (now()->lessThan($task->sms_expire_time) && $request->get('code') == $task->sms_code) {
 
             $task->update([
                 'status' => Task::COMPLETED,
