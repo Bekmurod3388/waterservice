@@ -6,6 +6,7 @@
         @include('alerts.success-alert')
         @include('alerts.error-alert')
 
+
         <div class="card">
 
             <div class="card">
@@ -20,6 +21,7 @@
                     </form>
 
                     @include('responsible.create')
+                    @include('responsible.edit')
 
                 </div>
             <h5 class="card-header">
@@ -43,7 +45,16 @@
                             <td>{{$val->operator->name}}</td>
                             <td>{{$val->cashier->name}}</td>
                             <td>{{\Carbon\Carbon::createFromFormat('Y-m', $val->month)->format('F')}}</td>
-                            <td>@include('responsible.edit')</td>
+                            <td>
+                                <button
+                                    onclick="editModal({{$val->id}})"
+                                    type="button"
+                                    class="btn btn-warning me-2"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editModal">
+                                    <i class="bx bx-edit-alt"></i>
+                                </button>
+                            </td>
                         </tr>
                     @empty
                         <tr>
