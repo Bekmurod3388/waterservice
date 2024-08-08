@@ -34,8 +34,8 @@
                         <th>Manzil</th>
                         @unlessrole('operator_dealer')
                             <th>Muddati</th>
-                            <th>contract_date</th>
-                            <th>installation_date</th>
+                            <th>Shartnoma sanasi </th>
+                            <th>Filter o'rnatilgan sana</th>
                         @endunlessrole
                         <th>Amallar</th>
                     </tr>
