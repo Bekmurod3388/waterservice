@@ -10,7 +10,12 @@ class LoginService
 {
     public function login(array $data)
     {
-        $user = User::where('phone', $data['phone'])->first();
+        $user = User::query()
+            ->withoutRole('dealer')
+            ->withoutRole('agent')
+            ->withoutRole('cashier')
+            ->where('phone', $data['phone'])
+            ->first();
 
         if ($user && Hash::check($data['password'], $user->password)) {
             Auth::login($user);

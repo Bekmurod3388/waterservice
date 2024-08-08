@@ -18,13 +18,20 @@ class RoleSeeder extends Seeder
         $admin->syncPermissions(Permission::query()->pluck('id'));
 
         $manager = Role::findOrCreate('manager');
+        $manager->syncPermissions(
+            Permission::query()
+                ->whereIn('name',[
+                    'own_clients', 'create_client', 'client_tasks', 'client_points'
+                ])
+                ->pluck('id')
+        );
 
         // Sotuv operatori
         $operatorDealer = Role::findOrCreate('operator_dealer');
         $operatorDealer->syncPermissions(
             Permission::query()
                 ->whereIn('name',[
-                    'own_clients', 'create_client'
+                    'own_clients', 'create_client', 'client_points'
                 ])
                 ->pluck('id')
         );
