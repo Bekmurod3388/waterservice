@@ -41,4 +41,11 @@ class Point extends Model
     {
         return $this->hasOne(TaskReason::class)->latestOfMany();
     }
+    public function showLocation(){
+        if($this->latitude && $this->longitude){
+            $link = "https://www.google.com/maps?q={$this->latitude},{$this->longitude}";
+            return "<a href=$link class='btn btn-warning'>Joylashuv</a>";
+        }
+        return "-";
+    }
 }
