@@ -78,7 +78,7 @@ class AgentController extends Controller
         ]);
 
         $phone = $task->client?->phone;
-        $this->service->sendMessage($phone, "Tasdiqlash kodi: $code");
+//        $this->service->sendMessage($phone, "Tasdiqlash kodi: $code");
 
         return response()->json([
             'success' => true
