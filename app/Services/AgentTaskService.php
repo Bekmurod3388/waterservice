@@ -60,9 +60,6 @@ class AgentTaskService
 
     public function verify(Task $task)
     {
-
-        $response = [];
-
         try {
 
             DB::beginTransaction();
@@ -96,7 +93,7 @@ class AgentTaskService
             ]);
 
             DB::commit();
-            $response = ['key' => 'success', 'message' => 'Muvaffaqiyatli yaratildi'];
+            $response = ['key' => 'success', 'message' => $this->textService->taskCompleted()];
 
         } catch (\Exception $exception) {
 
