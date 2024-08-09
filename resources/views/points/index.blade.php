@@ -33,7 +33,7 @@
                         <th>Lat/Long</th>
                         <th>Manzil</th>
                         @unlessrole('operator_dealer')
-                            <th>Muddati</th>
+                            <th>Filter almashtirish sanasi</th>
                             <th>Shartnoma sanasi </th>
                             <th>Filter o'rnatilgan sana</th>
                         @endunlessrole
@@ -47,12 +47,12 @@
                             <td>{{ $point->client->name }}</td>
                             <td>{{ $point->client->phone }}</td>
                             <td>{{ $point->region->name }}</td>
-                            <td>{{ $point->latitude }}/{{ $point->longitude }}</td>
+                            <td>{!! $point->showLocation() !!}</td>
                             <td>{{ $point->address }}</td>
                             @unlessrole('operator_dealer')
-                                <td>{{ $point->filter_expire_date->format('m-d-Y') }}</td>
-                                <td>{{ $point->contract_date}}</td>
-                                <td>{{ $point->installation_date}}</td>
+                                <td>{{ $point->filter_expire_date?->format('d.m.Y') }}</td>
+                                <td>{{ $point->contract_date?->format('d.m.Y') }}</td>
+                                <td>{{ $point->installation_date?->format('d.m.Y') }}</td>
                             @endunlessrole
                             <td>
                                 <div class="d-flex">

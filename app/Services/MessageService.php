@@ -29,7 +29,7 @@ class MessageService {
             $res = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
             ])->post("notify.eskiz.uz/api/message/sms/send", [
-                'mobile_phone' => "$phone",
+                'mobile_phone' => "998" . "$phone",
                 'message' => "$message",
                 'from' => '4546',
                 //'callback_url' => route('receive_status')

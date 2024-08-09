@@ -13,11 +13,45 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        for ( $i=1 ; $i<=10; $i++) {
-            Product::query()->firstOrCreate([
-                'name' => 'filter' . $i,
-                'purchase_price' => $i . '000'
-            ]);
-        }
+        Product::query()->firstOrCreate(
+            [
+                'name' => 'ruchka',
+                'purchase_price' => '623000',
+                'cost_price' => 123123,
+                'quantity' => 40,
+                'type' => Product::TYPE_PRODUCT,
+                'service_price' => 0,
+            ]
+        );
+        Product::query()->firstOrCreate(
+            [
+                'name' => 'qalam',
+                'purchase_price' => '523000',
+                'cost_price' => 123123,
+                'quantity' => 30,
+                'type' => Product::TYPE_PRODUCT,
+                'service_price' => 0,
+            ]
+        );
+        Product::query()->firstOrCreate(
+            [
+                'name' => 'kitob',
+                'purchase_price' => '323000',
+                'cost_price' => 123123,
+                'quantity' => 20,
+                'type' => Product::TYPE_PRODUCT,
+                'service_price' => 0,
+            ]
+        );
+        Product::query()->firstOrCreate(
+            [
+                'name' => 'daftar',
+                'purchase_price' => '123000',
+                'cost_price' => 123123,
+                'quantity' => 50,
+                'type' => Product::TYPE_PRODUCT,
+                'service_price' => 0,
+            ]
+        );
     }
 }
