@@ -39,8 +39,8 @@ class MockDataSeeder extends Seeder
 
         if ($operator) {
             $clients = [
-                ['name' => 'Bekmurad', 'phone' => '977913883', 'operator_dealer_id' => $operator->id],
-                ['name' => 'Azamat', 'phone' => '920810048', 'operator_dealer_id' => $operator->id]
+                ['name' => 'Bekmurod', 'phone' => '977913883', 'operator_dealer_id' => $operator->id],
+                ['name' => 'Azamat', 'phone' => '940810048', 'operator_dealer_id' => $operator->id]
             ];
 
             foreach ($clients as $clientData) {
