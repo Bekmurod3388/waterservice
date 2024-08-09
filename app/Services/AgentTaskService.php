@@ -42,7 +42,7 @@ class AgentTaskService
         $task->update([
             'status' => Task::WAITING,
             'sms_code' => $code,
-            'sms_expire_time' => now()->addMinutes(2)
+            'sms_expire_time' => now()->addMinutes(5)
         ]);
 
         return $code;
@@ -58,10 +58,9 @@ class AgentTaskService
                 'agent_id' => $agentId,
                 'task_id' => $task->id,
                 'is_free' => $product['isFree'],
-                'is_checked' => 0, // bazada default barib berdan o`chirish garak
                 'product_id' => $product['id'],
                 'quantity' => 1,
-                'product_cost' => $product['price']
+                'product_cost' => $product['price'],
             ]);
 
             AgentProduct::query()
