@@ -18,7 +18,9 @@ class Point extends Model
     ];
 
     protected $casts = [
-        'filter_expire_date' => 'date'
+        'filter_expire_date' => 'date',
+        'contract_date' => 'date',
+        'installation_date' => 'date',
     ];
 
     public const STATUS_CANCEL = -1;
