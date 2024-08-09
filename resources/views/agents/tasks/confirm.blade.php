@@ -23,7 +23,7 @@
             </div>
 
             <div class="modal-body">
-                <form method="POST" action="{{ route('agent.tasks.confirm',[$agent->id, $task->id]) }}">
+                <form method="POST" action="{{ route('agent.tasks.confirm',[$task->agent_id, $task->id]) }}">
                     @csrf
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">YO'Q</button>
