@@ -16,7 +16,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        checkPermission('all_users');
+        if (!checkPermission('all_users')) {
+            abort(403);
+        }
 
         $search = $request->input('search');
 
