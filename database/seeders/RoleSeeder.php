@@ -25,7 +25,7 @@ class RoleSeeder extends Seeder
         $manager->syncPermissions(
             Permission::query()
                 ->whereIn('name',[
-                    'dashboard', 'own_clients', 'create_client', 'client_tasks', 'client_points', 'all_products', 'show_map', 'show_log', 'all_services', 'all_agents', 'work_list', 'work_change_expire'
+                    'all_clients', 'create_client', 'client_tasks', 'client_points', 'all_products', 'show_map', 'all_services', 'all_agents', 'work_list', 'work_change_expire'
                 ])
                 ->pluck('id')
         );
@@ -35,7 +35,7 @@ class RoleSeeder extends Seeder
         $operatorDealer->syncPermissions(
             Permission::query()
                 ->whereIn('name',[
-                    'dashboard', 'all_clients', 'own_clients', 'create_client', 'client_points', 'client_tasks'
+                    'all_clients', 'own_clients', 'create_client', 'client_points', 'client_tasks'
                 ])
                 ->pluck('id')
         );
@@ -44,7 +44,7 @@ class RoleSeeder extends Seeder
         $operatorCashier->syncPermissions(
             Permission::query()
                 ->whereIn('name',[
-                    'dashboard', 'own_clients', 'create_client', 'client_points', 'all_clients', 'dashboard', 'work_list', 'all_agents', 'work_change_expire'
+                    'own_clients', 'create_client', 'client_points', 'all_clients', 'dashboard', 'work_list', 'all_agents', 'work_change_expire'
                 ])
                 ->pluck('id')
         );
