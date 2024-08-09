@@ -18,7 +18,9 @@ class Point extends Model
     ];
 
     protected $casts = [
-        'filter_expire_date' => 'date'
+        'filter_expire_date' => 'date',
+        'contract_date' => 'date',
+        'installation_date' => 'date',
     ];
 
     public const STATUS_CANCEL = -1;
@@ -46,10 +48,44 @@ class Point extends Model
     {
         return $this->hasOne(TaskReason::class)->latestOfMany();
     }
-    public function showLocation(){
-        if($this->latitude && $this->longitude){
+
+    public function scopeFilterDate($query, $filter)
+    {
+        if ($filter === 'yesterday') {
+            $query->whereDate('filter_expire_date', '<=', now()->subDay()->toDateString());
+        } elseif ($filter === 'tomorrow') {
+            $query->whereDate('filter_expire_date', now()->addDay()->toDateString());
+        } elseif ($filter === 'week') {
+            $query->whereBetween('filter_expire_date', [now()->startOfWeek(), now()->endOfWeek()]);
+        } else {
+            $query->whereDate('filter_expire_date', now()->toDateString());
+        }
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+
+                $query->whereAny(['id', 'address'], 'LIKE', "%$search%");
+
+                $query->orWhereHas('client', function ($q) use ($search) {
+                    $q->whereAny(['name'], 'LIKE', "%$search%");
+                });
+
+                $query->orWhereHas('region', function ($q) use ($search) {
+                    $q->whereAny(['name'], 'LIKE', "%$search%");
+                });
+
+            });
+        }
+    }
+
+    public function showLocation()
+    {
+        if ($this->latitude && $this->longitude) {
             $link = "https://www.google.com/maps?q={$this->latitude},{$this->longitude}";
-            return "<a href=$link class='btn btn-warning'>Joylashuv</a>";
+            return "<a href=$link target='_blank' class='btn btn-warning'>Joylashuv</a>";
         }
         return "-";
     }

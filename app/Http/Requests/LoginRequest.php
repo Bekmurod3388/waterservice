@@ -24,6 +24,7 @@ class LoginRequest extends FormRequest
         return [
             'phone' => 'required|numeric',
             'password' => 'required|string',
+            'role' => 'string|in:dealer,agent,cashier'
         ];
     }
 

@@ -12,4 +12,9 @@ class TaskProduct extends Model
     protected $fillable = [
         'agent_id', 'task_id', 'is_free', 'product_id', 'quantity', 'product_cost', 'is_checked'
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

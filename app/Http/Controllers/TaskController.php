@@ -117,7 +117,9 @@ class TaskController extends Controller
 
     public function clientTasks(Client $client)
     {
-        checkPermission('client_tasks');
+        if (!checkPermission('client_tasks')) {
+            abort(403);
+        }
 
         return view('tasks.client_tasks', [
             'client' => $client,

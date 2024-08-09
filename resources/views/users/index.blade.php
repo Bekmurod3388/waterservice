@@ -38,7 +38,7 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>+998 {{ $user->phone }}</td>
-                            <td>{{ $user->latitude }} {{$user->longitude}}</td>
+                            <td>{!! $user->showLocation() !!}</td>
                             <td>{{ $user->last_active_time }}</td>
                             <td>
                                 <div class="d-flex">

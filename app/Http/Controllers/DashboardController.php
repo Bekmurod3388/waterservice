@@ -11,7 +11,6 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-
         if (auth()->user()->hasRole([ 'admin' ])) {
             return view('dashboard', [
                 'number_client' => Client::count(),
@@ -26,12 +25,17 @@ class DashboardController extends Controller
                 ])->get(),
             ]);
         }
+        if (auth()->user()->hasRole('operator_cashier')) {
+            return redirect()->route('installments.index');
+        }
         return redirect()->route('clients.index');
     }
 
     public function logs()
     {
-        checkPermission('show_log');
+        if (!checkPermission('show_log')) {
+            abort(403);
+        }
 
         return view('logs', [
             'logs' => Log::query()->latest()->paginate(15)
@@ -40,7 +44,9 @@ class DashboardController extends Controller
 
     public function map()
     {
-        checkPermission('show_map');
+        if (!checkPermission('show_map')) {
+            abort(403);
+        }
 
         return view('map', [
             'users' => User::query()->whereHas('roles', function ($q) {
