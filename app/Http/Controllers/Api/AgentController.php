@@ -109,4 +109,26 @@ class AgentController extends Controller
             ]);
         }
     }
+
+    public function completedTasks(Request $request): JsonResponse
+    {
+        $request->validate([
+            'completed_time' => 'required|regex:/^([0-2][0-9]|(3)[0-1])\/(0[1-9]|1[0-2])\/\d{4}$/'
+            ]);
+        $completedTime = \DateTime::createFromFormat('d/m/Y', $request['completed_time']);
+        if (!$completedTime) {
+            // Handle invalid date format
+            abort(400, 'Invalid date format. Please use dd/mm/yyyy.');
+        }
+
+        $completedTime = $completedTime->format('Y-m-d');
+
+        $tasks = Task::with('point', 'client')
+            ->where('agent_id', auth()->id())
+            ->whereDate('service_time', $completedTime)
+            ->get();
+        return response()->json([
+            'tasks' => $tasks
+        ]);
+    }
 }
