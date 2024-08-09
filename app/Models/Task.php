@@ -47,4 +47,23 @@ class Task extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(TaskProduct::class);
+    }
+
+    public function showProducts()
+    {
+        $productsInfoText = "";
+
+        foreach ($this->products as $product) {
+            if ($product['isFree'])
+                $productsInfoText .= $product->name . " - Bepul\n";
+            else
+                $productsInfoText .= $product->name . ' - ' . $product['price'] . " so'm\n";
+        }
+
+        return $productsInfoText;
+    }
 }
