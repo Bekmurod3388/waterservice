@@ -25,6 +25,9 @@ class DashboardController extends Controller
                 ])->get(),
             ]);
         }
+        if (auth()->user()->hasRole('operator_cashier')) {
+            return redirect()->route('installments.index');
+        }
         return redirect()->route('clients.index');
     }
 
