@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Task;
 use App\Models\TaskProduct;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class AgentTaskService
 {
@@ -52,43 +54,59 @@ class AgentTaskService
         ]);
 
         return $task->type == Task::TYPE_INSTALL ?
-                $this->textService->taskInstallCode($task->point->filter?->name, $code)
-                :
-                $this->textService->taskServiceCode($productsInfoText, $code);
+            $this->textService->taskInstallCode($task->point->filter?->name, $code)
+            :
+            $this->textService->taskServiceCode($productsInfoText, $code);
     }
 
     public function verify(Task $task)
     {
-        $agentId = auth()->id();
-        $data = Cache::get("agent_task_complete_$agentId");
 
-        foreach ($data['products'] as $product) {
-            TaskProduct::query()->create([
-                'agent_id' => $agentId,
-                'task_id' => $task->id,
-                'is_free' => $product['isFree'],
-                'product_id' => $product['id'],
-                'quantity' => 1,
-                'product_cost' => $product['price'],
+        $response = [];
+
+        try {
+
+            DB::beginTransaction();
+
+            $agentId = auth()->id();
+            $data = Cache::get("agent_task_complete_$agentId");
+
+            foreach ($data['products'] as $product) {
+                TaskProduct::query()->create([
+                    'agent_id' => $agentId,
+                    'task_id' => $task->id,
+                    'is_free' => $product['isFree'],
+                    'product_id' => $product['id'],
+                    'quantity' => 1,
+                    'product_cost' => $product['price'],
+                ]);
+
+                AgentProduct::query()
+                    ->where('product_id', $product['id'])
+                    ->where('agent_id', $agentId)
+                    ->decrement('quantity');
+            }
+
+            $task->update([
+                'service_cost_sum' => $data['service_cost_sum'],
+                'product_cost_sum' => $data['product_cost_sum'],
+                'status' => Task::COMPLETED,
+                'sms_code' => null,
+                'sms_expire_time' => null,
+                'is_completed' => true
             ]);
 
-            AgentProduct::query()
-                ->where('product_id', $product['id'])
-                ->where('agent_id', $agentId)
-                ->decrement('quantity');
+            DB::commit();
+            $response = ['key' => 'success', 'message' => 'Muvaffaqiyatli yaratildi'];
+
+        } catch (\Exception $exception) {
+
+            DB::rollBack();
+            $response = ['key' => 'error', 'message' => $exception->getMessage()];
+
         }
 
-        $task->update([
-            'service_cost_sum' => $data['service_cost_sum'],
-            'product_cost_sum' => $data['product_cost_sum'],
-            'status' => Task::COMPLETED,
-            'sms_code' => null,
-            'sms_expire_time' => null,
-            'is_completed' => true
-        ]);
-
-        return $this->textService->taskCompleted();
+        return $response;
     }
-
 
 }
