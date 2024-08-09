@@ -41,6 +41,7 @@ class ProductService
             $response = ['key' => 'error', 'message' => $exception->getMessage()];
 
         }
+        return $response;
 
     }
 
@@ -82,6 +83,9 @@ class ProductService
             $response = ['key' => 'error', 'message' => $exception->getMessage()];
 
         }
+
+//        dd($response);
+        return $response;
 
     }
 }
