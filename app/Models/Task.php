@@ -16,7 +16,7 @@ class Task extends Model
         'service_cost_sum', 'product_cost_sum',
         'cash', 'card', 'terminal', 'transfer',
         'comment', 'service_time', 'type',
-        'sms_code', 'sms_expire_time'
+        'sms_code', 'sms_expire_time', 'status'
     ];
 
     public const TYPE_INSTALL = 1;
