@@ -11,11 +11,12 @@ use Illuminate\Http\Request;
 use App\Models\AgentProduct;
 use App\Models\Product;
 use App\Models\Task;
+use Illuminate\Support\Carbon;
 
 class AgentController extends Controller
 {
     public function __construct(
-        protected MessageService $service,
+        protected MessageService   $service,
         protected AgentTaskService $taskService
     )
     {
@@ -34,7 +35,11 @@ class AgentController extends Controller
     public function getTasks(): JsonResponse
     {
         return response()->json([
-            'tasks' => Task::with('point', 'client')->where('agent_id', auth()->id())->get()
+            'tasks' => Task::query()
+                ->with('point', 'client')
+                ->whereIn('status', [Task::INITIAL, Task::WAITING])
+                ->where('agent_id', auth()->id())
+                ->get()
         ]);
     }
 
@@ -100,21 +105,21 @@ class AgentController extends Controller
     {
         $request->validate([
             'completed_time' => 'required|string'
-            ]);
+        ]);
+
         $completedTime = \DateTime::createFromFormat('d/m/Y', $request['completed_time']);
+
         if (!$completedTime) {
-            // Handle invalid date format
             abort(400, 'Invalid date format. Please use dd/mm/yyyy.');
         }
 
-        $completedTime = $completedTime->format('Y-m-d');
-
-        $tasks = Task::with('client:id,name,phone,description', 'point.region', 'services')
-            ->where('agent_id', auth()->id())
-            ->whereDate('service_time', $completedTime)
-            ->get();
         return response()->json([
-            'tasks' => $tasks
+            'tasks' => Task::query()
+                ->with('client:id,name,phone,description', 'point.region', 'services')
+                ->where('status', Task::COMPLETED)
+                ->where('agent_id', auth()->id())
+                ->whereDate('service_time', $completedTime->format('Y-m-d'))
+                ->get()
         ]);
     }
 }

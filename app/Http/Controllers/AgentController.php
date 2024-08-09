@@ -22,6 +22,8 @@ class AgentController extends Controller
 
     public function index(Request $request)
     {
+        checkPermission('all_agents');
+
         $search = $request->input('search');
 
         $agentQuery = User::role('agent')
