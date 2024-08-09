@@ -135,7 +135,7 @@ class PointController extends Controller
         $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
 
         $pointsQuery = Point::with('lastReason')
-            ->whereDate('filter_expire_date', '<=', now())
+            ->whereDate('filter_expire_date', '<=', now()->toDateString())
             ->whereNotIn('id', $tasks);
 
         if ($filter === 'yesterday') {

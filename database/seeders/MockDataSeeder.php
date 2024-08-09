@@ -44,22 +44,26 @@ class MockDataSeeder extends Seeder
             ];
 
             foreach ($clients as $clientData) {
-                Client::query()->firstOrCreate($clientData);
+                Client::query()->firstOrCreate(
+                    [
+                        'phone' => $clientData['phone']
+                    ],
+                    $clientData
+                );
             }
 
             $points = [
-                ['client_name' => 'test client', 'filter_name' => 'test filter', 'address' => 'test address'],
-                ['client_name' => 'test2 client', 'filter_name' => 'test2 filter', 'address' => 'test2 address'],
-                ['client_name' => 'test2 client', 'filter_name' => 'test filter', 'address' => 'test3 address']
+                ['client_phone' => '977913883', 'filter_name' => 'test filter', 'address' => 'test address'],
+                ['client_phone' => '920810048', 'filter_name' => 'test2 filter', 'address' => 'test2 address'],
             ];
 
             foreach ($points as $pointData) {
-                $client = Client::query()->where('name', $pointData['client_name'])->first();
-                $filter = Product::query()->where('name', $pointData['filter_name'])->first();
+                $client = Client::query()->where('phone', $pointData['client_phone'])->first();
+                $filter = Product::query()->inRandomOrder()->first();
                 $region = Region::query()->inRandomOrder()->first();
 
                 if ($client && $filter && $region) {
-                    Point::query()->firstOrCreate([
+                    Point::query()->create([
                         'client_id' => $client->id,
                         'region_id' => $region->id,
                         'address' => $pointData['address'],
