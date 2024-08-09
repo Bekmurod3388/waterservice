@@ -35,7 +35,7 @@ class RoleSeeder extends Seeder
         $operatorDealer->syncPermissions(
             Permission::query()
                 ->whereIn('name',[
-                    'all_clients', 'own_clients', 'create_client', 'client_points'
+                    'all_clients', 'own_clients', 'create_client', 'client_points', 'client_tasks'
                 ])
                 ->pluck('id')
         );
