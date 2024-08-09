@@ -22,7 +22,9 @@ class AgentController extends Controller
 
     public function index(Request $request)
     {
-        checkPermission('all_agents');
+        if (!checkPermission('all_agents')) {
+            abort(403);
+        }
 
         $search = $request->input('search');
 

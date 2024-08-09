@@ -23,8 +23,10 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        checkPermission('all_products');
-        
+        if (!checkPermission('all_products')) {
+            abort(403);
+        }
+
         $search = $request->input('search');
 
         $productsQuery = Product::query();
