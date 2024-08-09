@@ -41,7 +41,6 @@ class AgentTaskService
             'products' => $items,
             'product_cost_sum' => $productsPrice,
             'service_cost_sum' => $servicePrice,
-            'productsInfoText' => $productsInfoText
         ], now()->addMinutes(5));
 
 
