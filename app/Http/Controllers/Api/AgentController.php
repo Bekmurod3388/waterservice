@@ -87,12 +87,26 @@ class AgentController extends Controller
             'code' => 'required|int'
         ]);
 
+        if ($task->status != Task::WAITING) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Task is already completed'
+            ]);
+        }
+
         if (now()->lessThan($task->sms_expire_time) && $request->get('code') == $task->sms_code) {
 
-            $message = $this->taskService->verify($task);
+            $data = $this->taskService->verify($task);
+            if ($data['key'] == 'error') {
+                return response()->json([
+                    'success' => false,
+                    'message' => $data['message']
+                ]);
+            }
+
 
             $phone = $task->client?->phone;
-            $this->service->sendMessage($phone, $message);
+            $this->service->sendMessage($phone, $data['message']);
 
             return response()->json([
                 'success' => true

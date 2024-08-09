@@ -51,6 +51,14 @@ class RoleSeeder extends Seeder
 
 
         $operatorAgent = Role::findOrCreate('operator_agent');//servis operatori
+        $operatorAgent->syncPermissions(
+            Permission::query()
+                ->whereIn('name',[
+                    'all_clients', 'create_client', 'client_points', 'work_list', 'all_agents', 'work_change_expire'
+                ])
+                ->pluck('id')
+        );
+
         $dealer= Role::findOrCreate('dealer');//diller
         $agent = Role::findOrCreate('agent');//servischik
         $cashier = Role::findOrCreate('cashier');//kassir

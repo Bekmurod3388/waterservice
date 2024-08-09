@@ -44,7 +44,7 @@ class PointController extends Controller
         return view('points.index', [
             'points' => $points,
             'regions' => Region::all(),
-            'products' => Product::all(),
+            'products' => Product::query()->where('type', Product::TYPE_FILTER)->get(),
             'dealers' => User::role('dealer')->pluck('name', 'id')
         ]);
     }
@@ -55,13 +55,12 @@ class PointController extends Controller
     public function store(StoreRequest $request, $client)
     {
 
-        $contractDate = $request->get('contract_date') ? Carbon::parse($request->get('contract_date'))->format('d-m-Y') : null;
-        $installationDate = $request->get('installation_date') ? Carbon::parse($request->get('installation_date'))->format('d-m-Y') : null;
-        $filterExpireDate = $request->get('filter_expire_date') ? Carbon::parse($request->get('filter_expire_date'))->addMonths((int)$request->get('filter_expire'))->format('d-m-Y') : null;
+        $contractDate = $request->get('contract_date') ? Carbon::parse($request->get('contract_date')) : null;
+        $installationDate = $request->get('installation_date') ? Carbon::parse($request->get('installation_date')) : null;
+        $filterExpireDate = $request->get('filter_expire_date') ? Carbon::parse($request->get('filter_expire_date'))->addMonths((int)$request->get('filter_expire')) : null;
 
 
-
-        $point = Point::query()->create([
+        Point::query()->create([
             'client_id' => $client,
             'region_id' => $request->get('region_id'),
             'address' => $request->get('address'),
@@ -76,9 +75,6 @@ class PointController extends Controller
 
         ]);
 
-//        dd($filterExpireDate, $point);
-
-
         return redirect()->back()->with('success', 'Manzil muvaffaqiyatli yaratildi!');
 
     }
@@ -89,8 +85,6 @@ class PointController extends Controller
      */
     public function update(UpdateRequest $request, $client, Point $point)
     {
-
-
         // if changed expire cycle
         if ($request->get('filter_expire') != $point->filter_expire) {
             $point->filter_expire_date->subMonths($point->filter_expire)->addMonths((int)$request->get('filter_expire'));
@@ -137,7 +131,7 @@ class PointController extends Controller
         $pointsQuery = Point::with('lastReason')->whereNotIn('id', $tasks);
 
         if ($filter === 'yesterday') {
-            $pointsQuery->whereDate('filter_expire_date', now()->subDay());
+            $pointsQuery->whereDate('filter_expire_date', '<=', now()->subDay()->toDateString());
         } elseif ($filter === 'tomorrow') {
             $pointsQuery->whereDate('filter_expire_date', now()->addDay()->toDateString());
         } elseif ($filter === 'week') {
