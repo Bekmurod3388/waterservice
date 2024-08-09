@@ -123,7 +123,7 @@ class AgentController extends Controller
 
         $completedTime = $completedTime->format('Y-m-d');
 
-        $tasks = Task::with('point', 'client')
+        $tasks = Task::with('client:id,name,phone,description', 'point.region', 'services')
             ->where('agent_id', auth()->id())
             ->whereDate('service_time', $completedTime)
             ->get();
