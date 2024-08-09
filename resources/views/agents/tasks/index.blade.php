@@ -46,7 +46,7 @@
                             <td>{{ $task->service_cost_sum }}</td>
                             <td>
                                 {{ $task->product_cost_sum }} <br>
-                                {{ $task->showProducts() }}
+                                {!! $task->showProducts() !!}
                             </td>
                             <td>{{ $task->service_time }}</td>
                             <td>
