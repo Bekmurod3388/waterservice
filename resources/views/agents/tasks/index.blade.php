@@ -45,8 +45,7 @@
                             <td>{{ $task->is_completed }}</td>
                             <td>{{ $task->service_cost_sum }}</td>
                             <td>
-                                <b>{{ $task->product_cost_sum }}</b>
-                                <br>
+                                <span style="font-weight: bold">{{ $task->product_cost_sum }}</span> <br>
                                 {!! $task->showProducts() !!}
                             </td>
                             <td>{{ $task->service_time }}</td>
