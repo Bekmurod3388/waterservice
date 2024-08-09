@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
     {
         $admin = Role::findOrCreate('admin');
         $admin->syncPermissions(Permission::query()
-            ->whereIn('name',[
+            ->whereIn('name', [
                 'dashboard', 'all_clients', 'create_client', 'edit_client', 'client_points', 'client_tasks', 'work_list', 'work_change_expire', 'create_task', 'all_agents', 'all_users', 'all_services', 'all_products', 'show_map', 'show_log'
             ])
             ->pluck('id'));
@@ -24,8 +24,8 @@ class RoleSeeder extends Seeder
         $manager = Role::findOrCreate('manager');
         $manager->syncPermissions(
             Permission::query()
-                ->whereIn('name',[
-                    'own_clients', 'create_client', 'client_tasks', 'client_points', 'all_products', 'show_map', 'show_log', 'all_services', 'all_agents', 'work_list', 'work_change_expire'
+                ->whereIn('name', [
+                    'all_clients', 'all_users', 'create_client', 'client_tasks', 'client_points', 'all_products', 'show_map', 'all_services', 'all_agents', 'work_list', 'work_change_expire'
                 ])
                 ->pluck('id')
         );
@@ -34,7 +34,7 @@ class RoleSeeder extends Seeder
         $operatorDealer = Role::findOrCreate('operator_dealer');
         $operatorDealer->syncPermissions(
             Permission::query()
-                ->whereIn('name',[
+                ->whereIn('name', [
                     'all_clients', 'own_clients', 'create_client', 'client_points', 'client_tasks'
                 ])
                 ->pluck('id')
@@ -43,7 +43,7 @@ class RoleSeeder extends Seeder
         $operatorCashier = Role::findOrCreate('operator_cashier');//to'lov operatori
         $operatorCashier->syncPermissions(
             Permission::query()
-                ->whereIn('name',[
+                ->whereIn('name', [
                     'own_clients', 'create_client', 'client_points', 'all_clients', 'dashboard', 'work_list', 'all_agents', 'work_change_expire'
                 ])
                 ->pluck('id')
@@ -53,13 +53,13 @@ class RoleSeeder extends Seeder
         $operatorAgent = Role::findOrCreate('operator_agent');//servis operatori
         $operatorAgent->syncPermissions(
             Permission::query()
-                ->whereIn('name',[
-                    'all_clients', 'create_client', 'client_points', 'work_list', 'all_agents', 'work_change_expire'
+                ->whereIn('name', [
+                    'dashboard', 'all_clients', 'create_client', 'client_points', 'work_list', 'all_agents', 'work_change_expire'
                 ])
                 ->pluck('id')
         );
 
-        $dealer= Role::findOrCreate('dealer');//diller
+        $dealer = Role::findOrCreate('dealer');//diller
         $agent = Role::findOrCreate('agent');//servischik
         $cashier = Role::findOrCreate('cashier');//kassir
     }

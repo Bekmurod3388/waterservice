@@ -41,7 +41,6 @@ class AgentTaskService
             'products' => $items,
             'product_cost_sum' => $productsPrice,
             'service_cost_sum' => $servicePrice,
-            'productsInfoText' => $productsInfoText
         ], now()->addMinutes(5));
 
 
@@ -61,9 +60,6 @@ class AgentTaskService
 
     public function verify(Task $task)
     {
-
-        $response = [];
-
         try {
 
             DB::beginTransaction();
@@ -96,8 +92,12 @@ class AgentTaskService
                 'is_completed' => true
             ]);
 
+            $task->point()->update([
+                'filter_expire_date' => now()->addMonths($task->point->filter_expire)
+            ]);
+
             DB::commit();
-            $response = ['key' => 'success', 'message' => 'Muvaffaqiyatli yaratildi'];
+            $response = ['key' => 'success', 'message' => $this->textService->taskCompleted()];
 
         } catch (\Exception $exception) {
 

@@ -39,8 +39,8 @@ class MockDataSeeder extends Seeder
 
         if ($operator) {
             $clients = [
-                ['name' => 'Bekmurad', 'phone' => '977913883', 'operator_dealer_id' => $operator->id],
-                ['name' => 'Azamat', 'phone' => '920810048', 'operator_dealer_id' => $operator->id]
+                ['name' => 'Bekmurod', 'phone' => '977913883', 'operator_dealer_id' => $operator->id],
+                ['name' => 'Azamat', 'phone' => '940810048', 'operator_dealer_id' => $operator->id]
             ];
 
             foreach ($clients as $clientData) {
@@ -59,7 +59,7 @@ class MockDataSeeder extends Seeder
 
             foreach ($points as $pointData) {
                 $client = Client::query()->where('phone', $pointData['client_phone'])->first();
-                $filter = Product::query()->inRandomOrder()->first();
+                $filter = Product::query()->inRandomOrder()->where('type',Product::TYPE_FILTER)->first();
                 $region = Region::query()->inRandomOrder()->first();
 
                 if ($client && $filter && $region) {

@@ -123,45 +123,17 @@ class PointController extends Controller
             abort(403);
         }
 
-        $search = $request->input('search');
-        $filter = $request->input('filter');
-
         $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
-
-        $pointsQuery = Point::with('lastReason')->whereNotIn('id', $tasks);
-
-        if ($filter === 'yesterday') {
-            $pointsQuery->whereDate('filter_expire_date', now()->subDay());
-        } elseif ($filter === 'tomorrow') {
-            $pointsQuery->whereDate('filter_expire_date', now()->addDay()->toDateString());
-        } elseif ($filter === 'week') {
-            $pointsQuery->whereBetween('filter_expire_date', [now()->startOfWeek(), now()->endOfWeek()]);
-        } else {
-            $pointsQuery->whereDate('filter_expire_date', now()->toDateString());
-        }
-
-        if ($search) {
-            $pointsQuery->where(function ($query) use ($search) {
-
-                $query->whereAny(['id', 'address'], 'LIKE', "%$search%");
-
-                $query->orWhereHas('client', function ($q) use ($search) {
-                    $q->whereAny(['name'], 'LIKE', "%$search%");
-                });
-
-                $query->orWhereHas('region', function ($q) use ($search) {
-                    $q->whereAny(['name'], 'LIKE', "%$search%");
-                });
-
-            });
-        }
-
-        $points = $pointsQuery->paginate(10);
 
         return view('points.work_list', [
             'agents' => User::role('agent')->get(),
             'services' => Service::all(),
-            'points' => $points,
+            'points' => Point::query()
+                ->with('lastReason')
+                ->whereNotIn('id', $tasks)
+                ->filterDate($request->get('filter'))
+                ->search($request->get('search'))
+                ->paginate(10),
         ]);
     }
 

@@ -16,21 +16,19 @@
                         <i class="bx bx-search"></i>
                     </button>
                 </form>
-
-
-
             </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Mijoz nomi</th>
-                        <th>Mijoz addressi</th>
+                        <th>Mijoz</th>
+                        <th>Manzil</th>
+                        <th>Telefon</th>
                         <th>Izoh</th>
                         <th>Yakunlandimi</th>
                         <th>Servis narx</th>
-                        <th>Mahsulot narx</th>
+                        <th>Mahsulotlar</th>
                         <th>Xizmat vaqti</th>
                         <th>Amallar</th>
                     </tr>
@@ -42,10 +40,14 @@
                             <td>{{ $task->id }}</td>
                             <td>{{ $task->client->name }}</td>
                             <td>{{ $task->point->address }}</td>
+                            <td>{{ $task->client->phone }}</td>
                             <td>{{ $task->comment }}</td>
                             <td>{{ $task->is_completed }}</td>
                             <td>{{ $task->service_cost_sum }}</td>
-                            <td>{{ $task->product_cost_sum }}</td>
+                            <td>
+                                {{ $task->product_cost_sum }} <br>
+                                {!! $task->showProducts() !!}
+                            </td>
                             <td>{{ $task->service_time }}</td>
                             <td>
                                 <div class="d-flex">
