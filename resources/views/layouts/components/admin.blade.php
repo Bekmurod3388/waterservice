@@ -52,3 +52,9 @@
         <div data-i18n="Analytics"> Logs </div>
     </a>
 </li>
+<li class="menu-item @if(request()->routeIs('responsible.index')) active @endif">
+    <a href="{{ route('responsible.index') }}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-user-check"></i>
+        <div data-i18n="Analytics"> Mas'ul shaxslar </div>
+    </a>
+</li>

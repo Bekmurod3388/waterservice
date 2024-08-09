@@ -113,6 +113,7 @@ class TaskController extends Controller
 
     public function clientTasks(Client $client)
     {
+        checkPermission('client_tasks');
 
         return view('tasks.client_tasks', [
             'client' => $client,

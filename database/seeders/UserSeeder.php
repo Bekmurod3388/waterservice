@@ -125,5 +125,51 @@ class UserSeeder extends Seeder
         );
         $agent->assignRole('agent');
 
+        // Cashier operator
+        $operator3 = User::query()->firstOrCreate(
+            [
+                'phone' => '889568874',
+            ],
+            [
+                'name' => 'Casher Operator 1',
+                'password' => Hash::make('admin'),
+            ]
+        );
+        $operator3->assignRole('operator_cashier');
+
+        $operator3 = User::query()->firstOrCreate(
+            [
+                'phone' => '908578445',
+            ],
+            [
+                'name' => 'Casher Operator 2',
+                'password' => Hash::make('admin'),
+            ]
+        );
+        $operator3->assignRole('operator_cashier');
+
+        // Cashier
+        $cashier = User::query()->firstOrCreate(
+            [
+                'phone' => '935689965',
+            ],
+            [
+                'name' => 'Casher 1',
+                'password' => Hash::make('admin'),
+            ]
+        );
+        $cashier->assignRole('cashier');
+
+        $cashier = User::query()->firstOrCreate(
+            [
+                'phone' => '9415254117',
+            ],
+            [
+                'name' => 'Casher 2',
+                'password' => Hash::make('admin'),
+            ]
+        );
+        $cashier->assignRole('cashier');
+
     }
 }
