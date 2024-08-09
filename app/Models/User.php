@@ -65,7 +65,6 @@ class User extends Authenticatable
 
     public function countProduct($id){
 
-
         $number = AgentProduct::where('agent_id',$id)->get();
         $sum=0;
         $count = 0;
@@ -78,6 +77,14 @@ class User extends Authenticatable
 
         $result = str($count) .'  /  ' . str( $sum) ;
         return $result;
+    }
 
+    public function showLocation()
+    {
+        if ($this->latitude && $this->longitude) {
+            $link = "https://www.google.com/maps?q={$this->latitude},{$this->longitude}";
+            return "<a href=$link target='_blank' class='btn btn-warning'>Joylashuv</a>";
+        }
+        return "-";
     }
 }
