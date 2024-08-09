@@ -131,7 +131,7 @@ class PointController extends Controller
         $pointsQuery = Point::with('lastReason')->whereNotIn('id', $tasks);
 
         if ($filter === 'yesterday') {
-            $pointsQuery->whereDate('filter_expire_date', now()->subDay());
+            $pointsQuery->whereDate('filter_expire_date', '<=', now()->subDay()->toDateString());
         } elseif ($filter === 'tomorrow') {
             $pointsQuery->whereDate('filter_expire_date', now()->addDay()->toDateString());
         } elseif ($filter === 'week') {
