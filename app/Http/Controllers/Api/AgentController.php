@@ -98,7 +98,6 @@ class AgentController extends Controller
                 'sms_code' => null,
                 'sms_expire_time' => null,
                 'is_completed' => true,
-                'service_time' => now()
             ]);
 
             return response()->json([
