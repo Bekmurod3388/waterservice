@@ -11,10 +11,12 @@ if (! function_exists('getUser')) {
 }
 
 if (! function_exists('checkPermission')) {
-    function checkPermission($name): void
+    function checkPermission($name): bool
     {
         if (!auth()->user()->can($name)) {
-            abort(403);
+            return false;
         }
+
+        return true;
     }
 }

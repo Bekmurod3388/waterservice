@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function login(LoginRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $user = User::query()->where('phone', $data['phone'])->first();
+        $user = User::query()->where('phone', $data['phone'])->role($data['role'])->first();
 
         if ($user && Hash::check($data['password'], $user->password)) {
             Auth::login($user);

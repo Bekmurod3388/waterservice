@@ -4,25 +4,42 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\TaskProduct;
+use App\Services\AgentTaskService;
 use Illuminate\Http\JsonResponse;
 use App\Services\MessageService;
 use Illuminate\Http\Request;
 use App\Models\AgentProduct;
 use App\Models\Product;
 use App\Models\Task;
+use Illuminate\Support\Carbon;
 
 class AgentController extends Controller
 {
     public function __construct(
-        protected MessageService $service
+        protected MessageService   $service,
+        protected AgentTaskService $taskService
     )
     {
+    }
+
+    public function getAgentProducts(): JsonResponse
+    {
+        return response()->json([
+            'products' => AgentProduct::query()
+                ->with('product:id,name,type')
+                ->where('agent_id', auth()->id())
+                ->get()
+        ]);
     }
 
     public function getTasks(): JsonResponse
     {
         return response()->json([
-            'tasks' => Task::with('point', 'client')->where('agent_id', auth()->id())->get()
+            'tasks' => Task::query()
+                ->with('point', 'client')
+                ->whereIn('status', [Task::INITIAL, Task::WAITING])
+                ->where('agent_id', auth()->id())
+                ->get()
         ]);
     }
 
@@ -46,39 +63,18 @@ class AgentController extends Controller
     public function complete(Request $request, Task $task): JsonResponse
     {
         $request->validate([
-            'products' => 'array'
+            'products' => 'array',
+            'products.*.id' => 'int',
+            'products.*.isFree' => 'bool',
+            'products.*.price' => 'int',
+            'products.*.servicePrice' => 'int'
         ]);
 
+        $message = $this->taskService->complete($task, $request->get('products'));
 
-        foreach ($request->get('products') as $product) {
-            TaskProduct::query()->create([
-                'agent_id' => auth()->id(),
-                'task_id' => $task->id,
-                'is_free' => $product['isFree'],
-                'is_checked' => 0, // bazada default barib berdan o`chirish garak
-                'product_id' => $product['id'],
-                'quantity' => 1,
-                'product_cost' => $product['price']
-            ]);
-
-            AgentProduct::query()
-                ->where('product_id', $product['id'])
-                ->where('agent_id', auth()->id())
-                ->decrement('quantity');
-        }
-
-        $code = mt_rand(100000, 999999);
-
-        $task->update([
-            'service_cost_sum',
-            'product_cost_sum',
-            'status' => Task::WAITING,
-            'sms_code' => $code,
-            'sms_expire_time' => now()->addMinutes(5)
-        ]);
 
         $phone = $task->client?->phone;
-//        $this->service->sendMessage($phone, "Tasdiqlash kodi: $code");
+        $this->service->sendMessage($phone, $message);
 
         return response()->json([
             'success' => true
@@ -93,12 +89,10 @@ class AgentController extends Controller
 
         if (now()->lessThan($task->sms_expire_time) && $request->get('code') == $task->sms_code) {
 
-            $task->update([
-                'status' => Task::COMPLETED,
-                'sms_code' => null,
-                'sms_expire_time' => null,
-                'is_completed' => true
-            ]);
+            $message = $this->taskService->verify($task);
+
+            $phone = $task->client?->phone;
+            $this->service->sendMessage($phone, $message);
 
             return response()->json([
                 'success' => true
@@ -108,5 +102,27 @@ class AgentController extends Controller
                 'success' => false
             ]);
         }
+    }
+
+    public function completedTasks(Request $request): JsonResponse
+    {
+        $request->validate([
+            'completed_time' => 'required|string'
+        ]);
+
+        $completedTime = \DateTime::createFromFormat('d/m/Y', $request['completed_time']);
+
+        if (!$completedTime) {
+            abort(400, 'Invalid date format. Please use dd/mm/yyyy.');
+        }
+
+        return response()->json([
+            'tasks' => Task::query()
+                ->with('client:id,name,phone,description', 'point.region', 'services')
+                ->where('status', Task::COMPLETED)
+                ->where('agent_id', auth()->id())
+                ->whereDate('service_time', $completedTime->format('Y-m-d'))
+                ->get()
+        ]);
     }
 }

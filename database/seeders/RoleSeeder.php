@@ -15,13 +15,17 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $admin = Role::findOrCreate('admin');
-        $admin->syncPermissions(Permission::query()->pluck('id'));
+        $admin->syncPermissions(Permission::query()
+            ->whereIn('name',[
+                'dashboard', 'all_clients', 'create_client', 'edit_client', 'client_points', 'client_tasks', 'work_list', 'work_change_expire', 'create_task', 'all_agents', 'all_users', 'all_services', 'all_products', 'show_map', 'show_log'
+            ])
+            ->pluck('id'));
 
         $manager = Role::findOrCreate('manager');
         $manager->syncPermissions(
             Permission::query()
                 ->whereIn('name',[
-                    'own_clients', 'create_client', 'client_tasks', 'client_points'
+                    'own_clients', 'create_client', 'client_tasks', 'client_points', 'all_products', 'show_map', 'show_log', 'all_services', 'all_agents', 'work_list', 'work_change_expire'
                 ])
                 ->pluck('id')
         );
@@ -31,14 +35,22 @@ class RoleSeeder extends Seeder
         $operatorDealer->syncPermissions(
             Permission::query()
                 ->whereIn('name',[
-                    'own_clients', 'create_client', 'client_points'
+                    'all_clients', 'own_clients', 'create_client', 'client_points', 'client_tasks'
+                ])
+                ->pluck('id')
+        );
+
+        $operatorCashier = Role::findOrCreate('operator_cashier');//to'lov operatori
+        $operatorCashier->syncPermissions(
+            Permission::query()
+                ->whereIn('name',[
+                    'own_clients', 'create_client', 'client_points', 'all_clients', 'dashboard', 'work_list', 'all_agents', 'work_change_expire'
                 ])
                 ->pluck('id')
         );
 
 
         $operatorAgent = Role::findOrCreate('operator_agent');//servis operatori
-        $operatorCashier = Role::findOrCreate('operator_cashier');//to'lov operatori
         $dealer= Role::findOrCreate('dealer');//diller
         $agent = Role::findOrCreate('agent');//servischik
         $cashier = Role::findOrCreate('cashier');//kassir

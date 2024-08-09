@@ -125,36 +125,40 @@ class PointController extends Controller
 
     public function workList(Request $request)
     {
+        if (!checkPermission('work_list')) {
+            abort(403);
+        }
+
         $search = $request->input('search');
         $filter = $request->input('filter');
 
         $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
 
-        $pointsQuery = Point::with('lastReason')
-            ->whereDate('filter_expire_date', '<=', now())
-            ->whereNotIn('id', $tasks);
+        $pointsQuery = Point::with('lastReason')->whereNotIn('id', $tasks);
 
         if ($filter === 'yesterday') {
             $pointsQuery->whereDate('filter_expire_date', now()->subDay());
-        } elseif ($filter === 'today') {
-            $pointsQuery->whereDate('filter_expire_date', now());
         } elseif ($filter === 'tomorrow') {
-            $pointsQuery->whereDate('filter_expire_date', now()->addDay());
+            $pointsQuery->whereDate('filter_expire_date', now()->addDay()->toDateString());
         } elseif ($filter === 'week') {
             $pointsQuery->whereBetween('filter_expire_date', [now()->startOfWeek(), now()->endOfWeek()]);
+        } else {
+            $pointsQuery->whereDate('filter_expire_date', now()->toDateString());
         }
 
         if ($search) {
             $pointsQuery->where(function ($query) use ($search) {
-                $query->whereAny(['id', 'address'], 'LIKE', "%{$search}%");
-            });
 
-            $pointsQuery->orWhereHas('client', function ($query) use ($search) {
-                $query->whereAny(['name',], 'LIKE', "%{$search}%");
-            });
+                $query->whereAny(['id', 'address'], 'LIKE', "%$search%");
 
-            $pointsQuery->orWhereHas('region', function ($query) use ($search) {
-                $query->whereAny(['name',], 'LIKE', "%{$search}%");
+                $query->orWhereHas('client', function ($q) use ($search) {
+                    $q->whereAny(['name'], 'LIKE', "%$search%");
+                });
+
+                $query->orWhereHas('region', function ($q) use ($search) {
+                    $q->whereAny(['name'], 'LIKE', "%$search%");
+                });
+
             });
         }
 
