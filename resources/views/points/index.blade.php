@@ -10,8 +10,7 @@
             <div class="card-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
                 <!-- Search -->
                 <form action="" method="GET" class="d-flex align-items-center mb-2 mb-sm-0 me-sm-2">
-                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search"
-                           value="{{ request('search') ? request('search') : '' }}">
+                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="{{ request('search') ? request('search') : '' }}">
 
                     <button class="btn btn-primary me-2" type="submit">
                         <i class="bx bx-search"></i>
@@ -31,12 +30,12 @@
                         <th>Mijoz</th>
                         <th>Telefon raqami</th>
                         <th>Tuman</th>
-                        <th>Joylashuv</th>
+                        <th>Lat/Long</th>
                         <th>Manzil</th>
                         @unlessrole('operator_dealer')
-                        <th>Muddati</th>
-                        <th>contract_date</th>
-                        <th>installation_date</th>
+                            <th>Muddati</th>
+                            <th>Shartnoma sanasi </th>
+                            <th>Filter o'rnatilgan sana</th>
                         @endunlessrole
                         <th>Amallar</th>
                     </tr>
@@ -48,12 +47,12 @@
                             <td>{{ $point->client->name }}</td>
                             <td>{{ $point->client->phone }}</td>
                             <td>{{ $point->region->name }}</td>
-                            <td>{!! $point->showLocation() !!}</td>
+                            <td>{{ $point->latitude }}/{{ $point->longitude }}</td>
                             <td>{{ $point->address }}</td>
                             @unlessrole('operator_dealer')
-                            <td>{{ $point->filter_expire_date->format('Y-m-d') }}</td>
-                            <td>{{ $point->contract_date }}</td>
-                            <td>{{ $point->installation_date }}</td>
+                                <td>{{ $point->filter_expire_date->format('m-d-Y') }}</td>
+                                <td>{{ $point->contract_date}}</td>
+                                <td>{{ $point->installation_date}}</td>
                             @endunlessrole
                             <td>
                                 <div class="d-flex">
@@ -61,7 +60,7 @@
                                 </div>
                             </td>
                             @empty
-                                <td colspan="10" class="text-center">Ma'lumot yo'q</td>
+                                <td colspan="7" class="text-center">Ma'lumot yo'q</td>
                         </tr>
                     @endforelse
                     </tbody>
