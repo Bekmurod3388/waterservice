@@ -77,7 +77,7 @@ class AgentController extends Controller
     public function agent_tasks(User $agent)
     {
         return view('agents.tasks.index', [
-            'tasks' => Task::with('point', 'client')->where('agent_id', $agent->id)->get()
+            'tasks' => Task::with('point', 'client', 'products.product')->where('agent_id', $agent->id)->get()
         ]);
     }
 }

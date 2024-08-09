@@ -58,10 +58,10 @@ class Task extends Model
         $productsInfoText = "";
 
         foreach ($this->products as $product) {
-            if ($product['isFree'])
-                $productsInfoText .= $product->name . " - Bepul\n";
+            if ($product->is_free)
+                $productsInfoText .= $product->product->name . " - Bepul\n";
             else
-                $productsInfoText .= $product->name . ' - ' . $product['price'] . " so'm\n";
+                $productsInfoText .= $product->product->name . ' - ' . $product->product_cost . " so'm\n";
         }
 
         return $productsInfoText;
