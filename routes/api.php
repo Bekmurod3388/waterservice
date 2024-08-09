@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('tasks/{task}', [AgentController::class, 'task']);
     Route::post('tasks/{task}/complete', [AgentController::class, 'complete']);
     Route::post('tasks/{task}/verify', [AgentController::class, 'verify']);
-    Route::post('tasks/competed', [AgentController::class, 'completedTasks']);
+    Route::get('tasks/competed', [AgentController::class, 'completedTasks']);
 
     // DEALER API
     Route::get('demos', [DealerController::class, 'getDemos']);
