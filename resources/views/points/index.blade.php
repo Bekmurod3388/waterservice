@@ -50,7 +50,7 @@
                             <td>{{ $point->latitude }}/{{ $point->longitude }}</td>
                             <td>{{ $point->address }}</td>
                             @unlessrole('operator_dealer')
-                                <td>{{ $point->filter_expire_date->format('d-m-Y') }}</td>
+                                <td>{{ $point->filter_expire_date }}</td>
                                 <td>{{ $point->contract_date}}</td>
                                 <td>{{ $point->installation_date}}</td>
                             @endunlessrole
