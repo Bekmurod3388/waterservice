@@ -134,18 +134,16 @@ class PointController extends Controller
 
         $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
 
-        $pointsQuery = Point::with('lastReason')
-            ->whereDate('filter_expire_date', '<=', now()->toDateString())
-            ->whereNotIn('id', $tasks);
+        $pointsQuery = Point::with('lastReason')->whereNotIn('id', $tasks);
 
         if ($filter === 'yesterday') {
             $pointsQuery->whereDate('filter_expire_date', now()->subDay());
-        } elseif ($filter === 'today') {
-            $pointsQuery->whereDate('filter_expire_date', now());
         } elseif ($filter === 'tomorrow') {
-            $pointsQuery->whereDate('filter_expire_date', now()->addDay());
+            $pointsQuery->whereDate('filter_expire_date', now()->addDay()->toDateString());
         } elseif ($filter === 'week') {
             $pointsQuery->whereBetween('filter_expire_date', [now()->startOfWeek(), now()->endOfWeek()]);
+        } else {
+            $pointsQuery->whereDate('filter_expire_date', now()->toDateString());
         }
 
         if ($search) {
