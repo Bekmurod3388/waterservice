@@ -37,6 +37,11 @@ class Point extends Model
         return $this->belongsTo(Region::class);
     }
 
+    public function filter()
+    {
+        return $this->belongsTo(Product::class, 'filter_id');
+    }
+
     public function lastReason()
     {
         return $this->hasOne(TaskReason::class)->latestOfMany();

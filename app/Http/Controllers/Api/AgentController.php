@@ -70,11 +70,11 @@ class AgentController extends Controller
             'products.*.servicePrice' => 'int'
         ]);
 
-        $code = $this->taskService->complete($task, $request->get('products'));
+        $message = $this->taskService->complete($task, $request->get('products'));
 
 
         $phone = $task->client?->phone;
-//        $this->service->sendMessage($phone, "Tasdiqlash kodi: $code");
+        $this->service->sendMessage($phone, $message);
 
         return response()->json([
             'success' => true
@@ -89,7 +89,10 @@ class AgentController extends Controller
 
         if (now()->lessThan($task->sms_expire_time) && $request->get('code') == $task->sms_code) {
 
-            $this->taskService->verify($task);
+            $message = $this->taskService->verify($task);
+
+            $phone = $task->client?->phone;
+            $this->service->sendMessage($phone, $message);
 
             return response()->json([
                 'success' => true
