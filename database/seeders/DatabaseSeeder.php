@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             AgentProductSeeder::class,
             ResponsiblePersonSeeder::class,
+            InstallmentSeeder::class,
         ]);
     }
 }

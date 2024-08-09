@@ -59,7 +59,7 @@ class MockDataSeeder extends Seeder
 
             foreach ($points as $pointData) {
                 $client = Client::query()->where('phone', $pointData['client_phone'])->first();
-                $filter = Product::query()->inRandomOrder()->first();
+                $filter = Product::query()->inRandomOrder()->where('type',Product::TYPE_FILTER)->first();
                 $region = Region::query()->inRandomOrder()->first();
 
                 if ($client && $filter && $region) {

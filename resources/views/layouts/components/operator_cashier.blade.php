@@ -1,1 +1,1 @@
-<li class="menu-item @if(request()->routeIs('clients.index','clients.tasks.index')) active @endif">    <a href="{{ route('clients.index') }}" class="menu-link">        <i class="menu-icon tf-icons bx bx-user"></i>        <div data-i18n="Analytics">Mijozlar</div>    </a></li>
+<li class="menu-item @if(request()->routeIs('installments.index')) active @endif">    <a href="{{ route('installments.index') }}" class="menu-link">        <i class="menu-icon tf-icons bx bxl-paypal"></i>        <div data-i18n="Analytics">To'lovlar</div>    </a></li>

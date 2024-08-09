@@ -22,8 +22,6 @@ class ResponsibleController extends Controller
     {
         $search = $request->input('search');
 
-//        $responsibles = Responsible::with('operator','cashier')->get();
-
         $responsible = Responsible::query()->with('operator','cashier');
 
         if($search){

@@ -10,6 +10,7 @@ use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResponsibleController;
+use App\Http\Controllers\InstallmentsController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
@@ -32,6 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('clients', ClientController::class);
     Route::resource('client/{client}/points', PointController::class)->names('client.points');
     Route::resource('/responsible', ResponsibleController::class)->names("responsible");
+    Route::resource('/installments', InstallmentsController::class)->names("installments");
+
 //    client tasks
 
     Route::get('client/{client}/tasks', [TaskController::class, 'clientTasks'])->name('clients.tasks.index');

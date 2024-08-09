@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\AgentProduct;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class AgentProductSeeder extends Seeder
@@ -16,13 +17,12 @@ class AgentProductSeeder extends Seeder
 
         foreach (range(1, 10) as $index) {
             AgentProduct::query()->forceCreate([
-                'agent_id' => rand(6,9),
-                'product_id' => $index,
+                'agent_id' => User::query()->role('agent')->inRandomOrder()->first()->id,
+                'product_id' => Product::query()->inRandomOrder()->first()->id,
                 'quantity' => rand(1, 10),
                 'price' => rand(1, 100),
                 'service_price' => rand(1, 100),
             ]);
         }
-
     }
 }
