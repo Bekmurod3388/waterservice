@@ -22,9 +22,7 @@ class AgentController extends Controller
 
     public function index(Request $request)
     {
-        if (!checkPermission('all_agents')) {
-            abort(403);
-        }
+
 
         $search = $request->input('search');
 
@@ -77,7 +75,13 @@ class AgentController extends Controller
     public function agent_tasks(User $agent)
     {
         return view('agents.tasks.index', [
-            'tasks' => Task::with('point', 'client', 'products.product')->where('agent_id', $agent->id)->get()
+            'tasks' => Task::with('point', 'client', 'products.product')->where('agent_id', $agent->id)->get(),
+            'agent' => $agent
         ]);
+    }
+    public function agent_tasks_confirm(User $agent, Task $task){
+        $task->status = Task::PAYED;
+        $task->save();
+        return redirect()->route('agent.tasks',$agent->id);
     }
 }
