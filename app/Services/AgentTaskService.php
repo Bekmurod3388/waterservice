@@ -92,6 +92,10 @@ class AgentTaskService
                 'is_completed' => true
             ]);
 
+            $task->point()->update([
+                'filter_expire_date' => now()->addMonths($task->point->filter_expire)
+            ]);
+
             DB::commit();
             $response = ['key' => 'success', 'message' => $this->textService->taskCompleted()];
 
