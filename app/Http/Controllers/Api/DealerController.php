@@ -16,7 +16,7 @@ class DealerController extends Controller
     {
         return response()->json([
             'demos' => Point::query()
-                ->with('client')
+                ->with('client:id,name,phone,description')
                 ->where('dealer_id', auth()->id())
                 ->where('status', Point::STATUS_NEW)
                 ->get()
