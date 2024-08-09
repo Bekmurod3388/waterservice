@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Cache;
 
 class AgentTaskService
 {
+    public function __construct(
+        protected TextService $textService
+    )
+    {
+    }
+
     public function complete(Task $task, $items = [])
     {
         $agentId = auth()->id();
@@ -30,7 +36,7 @@ class AgentTaskService
         }
 
         Cache::put("agent_task_complete_$agentId", [
-            'products' => $products,
+            'products' => $items,
             'product_cost_sum' => $productsPrice,
             'service_cost_sum' => $servicePrice,
             'productsInfoText' => $productsInfoText
@@ -45,7 +51,10 @@ class AgentTaskService
             'sms_expire_time' => now()->addMinutes(5)
         ]);
 
-        return $code;
+        return $task->type == Task::TYPE_INSTALL ?
+                $this->textService->taskInstallCode($task->point->filter?->name, $code)
+                :
+                $this->textService->taskServiceCode($productsInfoText, $code);
     }
 
     public function verify(Task $task)
@@ -77,6 +86,8 @@ class AgentTaskService
             'sms_expire_time' => null,
             'is_completed' => true
         ]);
+
+        return $this->textService->taskCompleted();
     }
 
 

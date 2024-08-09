@@ -42,6 +42,10 @@ class TaskController extends Controller
             'service_time' => 'required|date_format:Y-m-d\TH:i',
         ]);
 
+        // Bolib tolashda 2 oy to'lamagan bolsa task yaratib bilmasliki garak
+        // TODO check
+
+
         DB::transaction(function() use ($request) {
             // Fetching the services and calculating the total cost
             $services = Service::query()->whereIn('id', $request->get('service_ids') ?? [])->pluck('cost', 'id')->toArray();
