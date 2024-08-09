@@ -30,7 +30,7 @@ class AgentTaskService
         }
 
         Cache::put("agent_task_complete_$agentId", [
-            'products' => $products,
+            'products' => $items,
             'product_cost_sum' => $productsPrice,
             'service_cost_sum' => $servicePrice,
             'productsInfoText' => $productsInfoText
