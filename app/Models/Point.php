@@ -62,7 +62,7 @@ class Point extends Model
         }
     }
 
-    public function scoperSearch($query, $search)
+    public function scopeSearch($query, $search)
     {
         if ($search) {
             $query->where(function ($query) use ($search) {
