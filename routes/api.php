@@ -21,10 +21,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     // AGENT API
+    Route::get('products', [AgentController::class, 'getAgentProducts']);
     Route::get('tasks', [AgentController::class, 'getTasks']);
     Route::get('tasks/{task}', [AgentController::class, 'task']);
-    Route::post('task/{task}/complete', [AgentController::class, 'complete']);
-    Route::post('task/{task}/verify', [AgentController::class, 'verify']);
+    Route::post('tasks/{task}/complete', [AgentController::class, 'complete']);
+    Route::post('tasks/{task}/verify', [AgentController::class, 'verify']);
 
 
     // DEALER API
