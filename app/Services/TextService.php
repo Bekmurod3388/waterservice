@@ -43,7 +43,7 @@ class TextService
      */
     public function taskServiceCode($productDetails, $code)
     {
-        return "Xurmatli mijoz! Sizga quyidagi xizmatlar ko'rsatildi: $productDetails RGD platformasida xizmatni qabul qilish uchun tasdiqlash kodi: $code";
+        return "Xurmatli mijoz! Sizga quyidagi xizmatlar ko'rsatildi:\n$productDetails RGD platformasida xizmatni qabul qilish uchun tasdiqlash kodi: $code";
     }
 
     /**
