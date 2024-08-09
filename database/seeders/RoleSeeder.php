@@ -25,7 +25,7 @@ class RoleSeeder extends Seeder
         $manager->syncPermissions(
             Permission::query()
                 ->whereIn('name',[
-                    'own_clients', 'create_client', 'client_tasks', 'client_points', 'all_products', 'show_map', 'show_log', 'all_services', 'all_agents', 'work_list', 'work_change_expire'
+                    'all_clients', 'create_client', 'client_tasks', 'client_points', 'all_products', 'show_map', 'all_services', 'all_agents', 'work_list', 'work_change_expire'
                 ])
                 ->pluck('id')
         );
