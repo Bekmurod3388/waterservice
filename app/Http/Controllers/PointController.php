@@ -119,9 +119,7 @@ class PointController extends Controller
 
     public function workList(Request $request)
     {
-        if (!checkPermission('work_list')) {
-            abort(403);
-        }
+
 
         $tasks = Task::query()->where('is_completed', 0)->pluck('point_id')->toArray();
 

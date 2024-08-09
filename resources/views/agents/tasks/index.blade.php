@@ -53,9 +53,11 @@
                             <td>{{ $task->service_time }}</td>
                             <td>
                                 <div class="d-flex">
-{{--                                     @include('agents.products.edit')--}}
-{{--                                     @include('agents.tasks.index')--}}
 
+                                    @if($task->status == \App\Models\Task::COMPLETED)
+                                     @include('agents.tasks.confirm')
+{{--                                     @include('agents.tasks.index')--}}
+                                    @endif
                                 </div>
                             </td>
                         </tr>
