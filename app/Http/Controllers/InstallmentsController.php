@@ -20,7 +20,8 @@ class InstallmentsController extends Controller
                 $query->where('operator_id', auth()->id());
             })
             ->where('is_finished', false)
-            ->whereDate('payment_day', '<=', now());
+            ->whereDate('payment_day', '<=', now())
+            ->orderBy('payment_day', 'asc');
 
         if ($search) {
             $installments->where(function ($query) use ($search) {

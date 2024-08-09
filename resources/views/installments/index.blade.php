@@ -42,16 +42,65 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <?php
+                        $months = [
+                            '01' => 'yanvar',
+                            '02' => 'fevral',
+                            '03' => 'mart',
+                            '04' => 'aprel',
+                            '05' => 'may',
+                            '06' => 'iyun',
+                            '07' => 'iyul',
+                            '08' => 'avgust',
+                            '09' => 'sentyabr',
+                            '10' => 'oktyabr',
+                            '11' => 'noyabr',
+                            '12' => 'dekabr',
+                        ];
+                    ?>
                     @forelse($installments as $val)
                         <tr>
                             <td>{{$val->id}}</td>
-                            <td>{{$val->filter_cost}}</td>
-                            <td>{{$val->period_month}}</td>
-                            <td>{{$val->initial_fee}}</td>
-                            <td>{{$val->remaining_amount}}</td>
-                            <td>{{$val->status}}</td>
-                            <td>{{$val->payment_day}}</td>
+                            <td>{{$val->filter_cost}} so'm</td>
+                            <td>{{$val->period_month}} oy</td>
+                            <td>{{$val->initial_fee}} so'm</td>
+                            <td>{{$val->remaining_amount}} so'm</td>
+                            <td>
+                                @switch($val->status)
+                                    @case(\App\Models\Installments::STATUS_START)
+                                        Yangi
+                                        @break
+                                    @case(\App\Models\Installments::STATUS_INITIAL)
+                                        Muddatli to'lov
+                                        @break
+                                    @case(\App\Models\Installments::STATUS_CHANGE_TIME)
+                                        Surilgan to'lov
+                                        @break
+                                    @case(\App\Models\Installments::STATUS_FINISHED)
+                                        Yakunlangan
+                                        @break
+                                    @default
+                                        Noma'lum holat
+                                @endswitch
+                            </td>
+                            <td>{{ltrim(\Carbon\Carbon::createFromFormat('Y-m-d', $val->payment_day)->format('d'),'0')."-".$months[\Carbon\Carbon::createFromFormat('Y-m-d', $val->payment_day)->format('m')]}}</td>
                             <td>{{$val->responsible->cashier->name}}</td>
+                            <td>
+                                <button
+                                    type="button"
+                                    class="btn btn-success me-2"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editModal">
+                                    Tasdiqlash
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-warning me-2"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editModal">
+                                    Qoldirish
+                                </button>
+                            </td>
                             @empty
                                 <td colspan="7" class="text-center">Ma'lumot yo'q</td>
                         </tr>
