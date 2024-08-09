@@ -34,7 +34,7 @@
                         <th>ID</th>
                         <th>Operator</th>
                         <th>Kassir</th>
-                        <th>Date</th>
+                        <th>Oyi</th>
                         <th>Amallar</th>
                     </tr>
                     </thead>

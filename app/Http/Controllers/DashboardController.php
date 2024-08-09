@@ -11,7 +11,6 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-
         if (auth()->user()->hasRole([ 'admin' ])) {
             return view('dashboard', [
                 'number_client' => Client::count(),
@@ -25,6 +24,9 @@ class DashboardController extends Controller
                     }
                 ])->get(),
             ]);
+        }
+        if (auth()->user()->hasRole('operator_cashier')) {
+            return redirect()->route('installments.index');
         }
         return redirect()->route('clients.index');
     }
