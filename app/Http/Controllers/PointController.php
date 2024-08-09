@@ -150,15 +150,17 @@ class PointController extends Controller
 
         if ($search) {
             $pointsQuery->where(function ($query) use ($search) {
-                $query->whereAny(['id', 'address'], 'LIKE', "%{$search}%");
-            });
 
-            $pointsQuery->orWhereHas('client', function ($query) use ($search) {
-                $query->whereAny(['name',], 'LIKE', "%{$search}%");
-            });
+                $query->whereAny(['id', 'address'], 'LIKE', "%$search%");
 
-            $pointsQuery->orWhereHas('region', function ($query) use ($search) {
-                $query->whereAny(['name',], 'LIKE', "%{$search}%");
+                $query->orWhereHas('client', function ($q) use ($search) {
+                    $q->whereAny(['name'], 'LIKE', "%$search%");
+                });
+
+                $query->orWhereHas('region', function ($q) use ($search) {
+                    $q->whereAny(['name'], 'LIKE', "%$search%");
+                });
+
             });
         }
 
