@@ -42,15 +42,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($installments as $client)
+                    @forelse($installments as $val)
                         <tr>
-                            <td>{{ $client->id }}</td>
-                            <td>{{ $client->name }}</td>
-                            <td>{{ $client->phone }}</td>
-                            <td>{{ $client->operator?->name }}</td>
-                            <td>{{ $client->telegram_id }}</td>
-                            <td>{{ $client->description }}</td>
-                            <td></td>
+                            <td>{{$val->id}}</td>
+                            <td>{{$val->filter_cost}}</td>
+                            <td>{{$val->period_month}}</td>
+                            <td>{{$val->initial_fee}}</td>
+                            <td>{{$val->remaining_amount}}</td>
+                            <td>{{$val->status}}</td>
+                            <td>{{$val->payment_day}}</td>
+                            <td>{{$val->responsible->cashier->name}}</td>
                             @empty
                                 <td colspan="7" class="text-center">Ma'lumot yo'q</td>
                         </tr>
@@ -58,9 +59,9 @@
                     </tbody>
                 </table>
                 <!-- Basic Pagination -->
-{{--                <div class="card-body">--}}
-{{--                    {{ $installments->links('pagination::bootstrap-5') }}--}}
-{{--                </div>--}}
+                <div class="card-body">
+                    {{ $installments->links('pagination::bootstrap-5') }}
+                </div>
                 <!--/ Basic Pagination -->
             </div>
         </div>
