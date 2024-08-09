@@ -41,6 +41,7 @@ class AgentProductService
 
                 if ($agentProduct) {
                     $agentProduct->quantity += $data['quantity'];
+                    $agentProduct->service_price = $product->service_price;
                     $agentProduct->save();
 
                     AgentProductHistory::query()->create([
