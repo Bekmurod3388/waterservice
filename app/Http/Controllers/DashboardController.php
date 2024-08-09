@@ -11,10 +11,6 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        if (!checkPermission('dashboard')) {
-            abort(403);
-        }
-
         if (auth()->user()->hasRole([ 'admin' ])) {
             return view('dashboard', [
                 'number_client' => Client::count(),
