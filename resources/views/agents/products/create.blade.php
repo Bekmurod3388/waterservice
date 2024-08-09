@@ -30,7 +30,7 @@
                             <label for="product" class="form-label">Mahsulot tanlang</label>
                             <select name="product_id" class="form-control" id="product">
                                 @foreach($products as $product)
-                                    <option value="{{ $product->id }}">{{$product->name}}</option>
+                                    <option value="{{ $product->id }}">{{$product->name . '(' . $product->quantity . ')'}}</option>
                                 @endforeach
                             </select>
                         </div>
