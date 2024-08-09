@@ -53,6 +53,37 @@ class Task extends Model
         return $this->hasMany(TaskProduct::class);
     }
 
+    public function scopeFilterSearch($query, $search)
+    {
+        if ($search)
+            $query->where(function ($q) use ($search) {
+
+                $q->whereHas('point', function ($q) use ($search) {
+                    $q->whereAny(['address'], 'LIKE', "%$search%");
+                });
+
+                $q->orWhereHas('client', function ($q) use ($search) {
+                    $q->whereAny(['name', 'phone'], 'LIKE', "%$search%");
+                });
+
+                $q->orWhereHas('region', function ($q) use ($search) {
+                    $q->whereAny(['name'], 'LIKE', "%$search%");
+                });
+            });
+    }
+
+    public function scopeFilterFrom($query, $from)
+    {
+        if ($from)
+            $query->whereDate('service_time', '>=', $from);
+    }
+
+    public function scopeFilterTo($query, $to)
+    {
+        if ($to)
+            $query->whereDate('service_time', '<=', $to);
+    }
+
     public function showProducts()
     {
         $productsInfoText = "";

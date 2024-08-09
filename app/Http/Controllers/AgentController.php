@@ -74,10 +74,16 @@ class AgentController extends Controller
         return redirect()->back()->with($res['key'], $res['message']);
     }
 
-    public function agent_tasks(User $agent)
+    public function agent_tasks(Request $request, User $agent)
     {
         return view('agents.tasks.index', [
-            'tasks' => Task::with('point', 'client', 'products.product')->where('agent_id', $agent->id)->get()
+            'tasks' => Task::query()
+                ->with('point', 'client', 'products.product')
+                ->where('agent_id', $agent->id)
+                ->filterSearch($request->get('search'))
+                ->filterFrom($request->get('from'))
+                ->filterTo($request->get('to'))
+                ->paginate(10)
         ]);
     }
 }

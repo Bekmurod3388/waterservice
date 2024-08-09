@@ -11,6 +11,8 @@
                 <!-- Search -->
                 <form action="" method="GET" class="d-flex align-items-center mb-2 mb-sm-0 me-sm-2">
                     <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="">
+                    <input type="date" class="form-control me-2" name="from" value="">
+                    <input type="date" class="form-control me-2" name="to" value="">
 
                     <button class="btn btn-primary me-2" type="submit">
                         <i class="bx bx-search"></i>
@@ -42,7 +44,7 @@
                             <td>{{ $task->point->address }}</td>
                             <td>{{ $task->client->phone }}</td>
                             <td>{{ $task->comment }}</td>
-                            <td>{{ $task->is_completed }}</td>
+                            <td>{{ $task->is_completed ? 'Xa' : 'Yo\'q'}}</td>
                             <td>{{ $task->service_cost_sum }}</td>
                             <td>
                                 <span style="font-weight: bold">{{ $task->product_cost_sum }}</span> <br>
@@ -64,7 +66,9 @@
                     @endforelse
                     </tbody>
                 </table>
-
+                <div class="card-body">
+                    {{ $tasks->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>
