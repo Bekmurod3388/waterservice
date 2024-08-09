@@ -15,19 +15,28 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
-        checkPermission('all_clients');
-
         $search = $request->input('search');
         $operatorDealerId = Auth::id();
         $startOfMonth = Carbon::now()->startOfMonth();
 
-        $query = Client::with('operator')
-            ->withCount('tasks')
-            ->where('operator_dealer_id', $operatorDealerId)
-            ->where('created_at', '>=', $startOfMonth);
+        if (checkPermission('own_clients')) {
+            $query = Client::with('operator')
+                ->withCount('tasks')
+                ->where('operator_dealer_id', $operatorDealerId)
+                ->where('created_at', '>=', $startOfMonth);
+        }
+        elseif (checkPermission('all_clients')) {
+            $query = Client::with('operator')
+                ->withCount('tasks')
+                ->where('created_at', '>=', $startOfMonth);
+        }
+        else {
+            abort(403);
+        }
+
 
         if ($search) {
-            $query->where(function($query) use ($search) {
+            $query->where(function ($query) use ($search) {
                 $query->whereAny(['id', 'name', 'phone', 'description'], 'LIKE', "%$search%");
             });
 

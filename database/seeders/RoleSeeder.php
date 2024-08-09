@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
         $admin = Role::findOrCreate('admin');
         $admin->syncPermissions(Permission::query()
             ->whereIn('name',[
-                'dashboard', 'all_clients', 'own_clients', 'create_client', 'edit_client', 'client_points', 'client_tasks', 'work_list', 'work_change_expire', 'create_task', 'all_agents', 'all_users', 'all_services', 'all_products', 'show_map', 'show_log'
+                'dashboard', 'all_clients', 'create_client', 'edit_client', 'client_points', 'client_tasks', 'work_list', 'work_change_expire', 'create_task', 'all_agents', 'all_users', 'all_services', 'all_products', 'show_map', 'show_log'
             ])
             ->pluck('id'));
 
