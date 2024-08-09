@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('agent_id');
             $table->bigInteger('task_id');
-            $table->tinyInteger('is_free');
+            $table->tinyInteger('is_free')->default(0);
             $table->bigInteger('product_id');
-            $table->bigInteger('quantity');
-            $table->bigInteger('product_cost');
-            $table->bigInteger('is_checked');
+            $table->bigInteger('quantity')->default(0);
+            $table->bigInteger('product_cost')->default(0);
+            $table->bigInteger('is_checked')->default(0);
             $table->timestamps();
         });
     }

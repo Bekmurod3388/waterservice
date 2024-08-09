@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,10 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('purchase_price');
-            $table->bigInteger('cost_price')->default(0);
             $table->integer('quantity')->default(0);
-            $table->tinyInteger('type')->default(0);
+            $table->bigInteger('cost_price')->default(0);
             $table->integer('service_price')->default(0);
+            $table->tinyInteger('type')->default(Product::TYPE_FILTER);
             $table->timestamps();
         });
     }

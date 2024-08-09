@@ -96,7 +96,7 @@
 
                         <div class="row g-2">
                             <div class="col mb-3">
-                                <label for="filter_expire" class="form-label"> Shartnoma sanasi </label>
+                                <label for="filter_expire" class="form-label">  Shartnoma sanasi  </label>
                                 <input type="date" id="filter_expire" class="form-control" name="contract_date" value="{{ old('contract_date')}}"
                                        required min="1" max="12"/>
                             </div>
@@ -104,8 +104,8 @@
 
                         <div class="row g-2">
                             <div class="col mb-3">
-                                <label for="filter_expire" class="form-label">Filter o'rnatilgan sana </label>
-                                <input type="date" id="filter_expire" class="form-control" name="installation_date" value="{{ old('installation_date')}}"
+                                <label for="filter_expire" class="form-label"> Filter o'rnatilgan sana </label>
+                                <input type="date"  id="filter_expire" class="form-control" name="installation_date" value="{{ old('installation_date')}}"
                                        required min="1" max="12"/>
                             </div>
                         </div>
