@@ -18,8 +18,8 @@ class MockDataSeeder extends Seeder
     public function run(): void
     {
         $filters = [
-            ['name' => 'test filter', 'purchase_price' => 123000, 'quantity' => 10, 'type' => 1],
-            ['name' => 'test2 filter', 'purchase_price' => 456000, 'quantity' => 10, 'type' => 1]
+            ['name' => 'test filter', 'purchase_price' => 123000, 'quantity' => 10, 'type' => Product::TYPE_FILTER],
+            ['name' => 'test2 filter', 'purchase_price' => 456000, 'quantity' => 10, 'type' => Product::TYPE_FILTER]
         ];
 
         foreach ($filters as $filterData) {
@@ -35,14 +35,12 @@ class MockDataSeeder extends Seeder
             Service::query()->firstOrCreate($serviceData);
         }
 
-        $operator = User::whereHas('roles', function($q) {
-            $q->where('name', 'operator_dealer');
-        })->first();
+        $operator = User::role('operator_dealer')->first();
 
         if ($operator) {
             $clients = [
-                ['name' => 'test client', 'phone' => '991324657', 'operator_dealer_id' => $operator->id],
-                ['name' => 'test2 client', 'phone' => '991324651', 'operator_dealer_id' => $operator->id]
+                ['name' => 'Bekmurad', 'phone' => '977913883', 'operator_dealer_id' => $operator->id],
+                ['name' => 'Azamat', 'phone' => '920810048', 'operator_dealer_id' => $operator->id]
             ];
 
             foreach ($clients as $clientData) {
@@ -56,8 +54,8 @@ class MockDataSeeder extends Seeder
             ];
 
             foreach ($points as $pointData) {
-                $client = Client::where('name', $pointData['client_name'])->first();
-                $filter = Product::where('name', $pointData['filter_name'])->first();
+                $client = Client::query()->where('name', $pointData['client_name'])->first();
+                $filter = Product::query()->where('name', $pointData['filter_name'])->first();
                 $region = Region::query()->inRandomOrder()->first();
 
                 if ($client && $filter && $region) {

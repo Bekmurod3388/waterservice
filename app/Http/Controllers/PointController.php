@@ -125,6 +125,8 @@ class PointController extends Controller
 
     public function workList(Request $request)
     {
+        checkPermission('work_list');
+
         $search = $request->input('search');
         $filter = $request->input('filter');
 

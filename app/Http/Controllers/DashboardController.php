@@ -31,6 +31,8 @@ class DashboardController extends Controller
 
     public function logs()
     {
+        checkPermission('show_log');
+
         return view('logs', [
             'logs' => Log::query()->latest()->paginate(15)
         ]);
@@ -38,6 +40,8 @@ class DashboardController extends Controller
 
     public function map()
     {
+        checkPermission('show_map');
+
         return view('map', [
             'users' => User::query()->whereHas('roles', function ($q) {
                 $q->whereIn('name', ['dealer', 'agent', 'cashier']);
