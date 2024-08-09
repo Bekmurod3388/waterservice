@@ -8,16 +8,26 @@
 
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center flex-column flex-sm-row">
-                <!-- Search -->
-                <form action="{{ route('clients.index') }}" method="GET" class="d-flex align-items-center mb-2 mb-sm-0 me-sm-2">
-                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search" value="{{ request('search') ? request('search') : '' }}">
+                <form action="{{ route('clients.index') }}" method="GET"
+                      class="d-flex align-items-center mb-2 mb-sm-0 me-sm-5">
+                    <input type="text" class="form-control me-2" placeholder="Izlash" name="search"
+                           value="{{ request('search') ? request('search') : '' }}">
                     <button class="btn btn-primary me-2" type="submit">
                         <i class="bx bx-search"></i>
                     </button>
                 </form>
 
-                @include('clients.create')
+                <div class="d-flex align-items-center flex-grow-1 justify-content-between">
+                    <div class="card-title mb-0">
+                        @can('operator_dealer')
+                            <h5 class="m-0 me-5">Oylik mijozlar soni</h5>
+                            <small class="text-muted">{{ $clientCount }}</small>
+                        @endcannot
+                    </div>
 
+
+                    @include('clients.create')
+                </div>
             </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
@@ -44,7 +54,10 @@
                             <td>
                                 <div class="d-flex">
                                     @include('clients.edit')
-                                    <a href="{{route('client.points.index',$client->id)}}" class="btn btn-success me-2"><i class="bx bx-map"></i></a><!--Lokatsiyalar Client Filter-->
+                                    <a href="{{route('client.points.index',$client->id)}}" class="btn btn-success me-2">
+                                        <i class="bx bx-map"></i>
+                                    </a>
+
                                     <a href="{{route('clients.tasks.index',$client->id)}}" class="btn btn-primary me-2">
                                         <i class="bx bx-list-check"></i>
                                         <span class="badge bg-white text-primary ms-1">{{ $client->tasks_count }}</span>
