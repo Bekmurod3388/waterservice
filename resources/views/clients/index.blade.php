@@ -19,12 +19,14 @@
 
                 <div class="d-flex align-items-center flex-grow-1 justify-content-between">
                     <div class="card-title mb-0">
-                        <h5 class="m-0 me-5">Oylik mijozlar soni</h5>
-                        <small class="text-muted">{{ $clientCount }}</small>
+                        @can('operator_dealer')
+                            <h5 class="m-0 me-5">Oylik mijozlar soni</h5>
+                            <small class="text-muted">{{ $clientCount }}</small>
+                        @endcannot
                     </div>
-                    @unless (Auth::user()->hasRole('operator_dealer'))
-                        @include('clients.create')
-                    @endunless
+
+
+                    @include('clients.create')
                 </div>
             </div>
             <div class="table-responsive text-nowrap">
@@ -50,19 +52,17 @@
                             <td>{{ $client->telegram_id }}</td>
                             <td>{{ $client->description }}</td>
                             <td>
-                                @if(Auth::user()->can('operator_agent') || Auth::user()->can('admin'))
-                                    <div class="d-flex">
-                                        @include('clients.edit')
-                                        <a href="{{route('client.points.index',$client->id)}}" class="btn btn-success me-2">
-                                            <i class="bx bx-map"></i>
-                                        </a>
+                                <div class="d-flex">
+                                    @include('clients.edit')
+                                    <a href="{{route('client.points.index',$client->id)}}" class="btn btn-success me-2">
+                                        <i class="bx bx-map"></i>
+                                    </a>
 
-                                        <a href="{{route('clients.tasks.index',$client->id)}}" class="btn btn-primary me-2">
-                                            <i class="bx bx-list-check"></i>
-                                            <span class="badge bg-white text-primary ms-1">{{ $client->tasks_count }}</span>
-                                        </a>
-                                    </div>
-                                @endif
+                                    <a href="{{route('clients.tasks.index',$client->id)}}" class="btn btn-primary me-2">
+                                        <i class="bx bx-list-check"></i>
+                                        <span class="badge bg-white text-primary ms-1">{{ $client->tasks_count }}</span>
+                                    </a>
+                                </div>
                             </td>
                             @empty
                                 <td colspan="7" class="text-center">Ma'lumot yo'q</td>

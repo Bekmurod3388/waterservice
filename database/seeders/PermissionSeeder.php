@@ -45,5 +45,8 @@ class PermissionSeeder extends Seeder
 
         // MAP
         Permission::query()->firstOrCreate(['name' => 'show_map']);
+
+        // LOG
+        Permission::query()->firstOrCreate(['name' => 'show_log']);
     }
 }

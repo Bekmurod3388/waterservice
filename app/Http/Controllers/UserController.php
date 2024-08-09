@@ -16,6 +16,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        checkPermission('all_users');
+
         $search = $request->input('search');
 
         $usersQuery = User::query()->whereDoesntHave('roles', function ($query) {

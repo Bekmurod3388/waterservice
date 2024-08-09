@@ -15,6 +15,8 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
+        checkPermission('all_clients');
+
         $search = $request->input('search');
         $operatorDealerId = Auth::id();
         $startOfMonth = Carbon::now()->startOfMonth();

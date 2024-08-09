@@ -14,6 +14,8 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
+        checkPermission('all_services');
+
         $search = $request->input('search');
 
         $servicesQuery = Service::query();
