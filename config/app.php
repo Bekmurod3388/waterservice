@@ -19,6 +19,7 @@ return [
 
     'sms_password' => env('SMS_SERVICE_PASSWORD'),
 
+    'phone' => "+998977913883",
     /*
     |--------------------------------------------------------------------------
     | Application Environment
