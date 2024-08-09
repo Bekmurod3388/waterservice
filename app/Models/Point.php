@@ -51,7 +51,7 @@ class Point extends Model
     public function showLocation(){
         if($this->latitude && $this->longitude){
             $link = "https://www.google.com/maps?q={$this->latitude},{$this->longitude}";
-            return "<a href=$link class='btn btn-warning'>Joylashuv</a>";
+            return "<a href=$link target='_blank' class='btn btn-warning'>Joylashuv</a>";
         }
         return "-";
     }
