@@ -34,6 +34,8 @@
                         <th>Manzil</th>
                         @unlessrole('operator_dealer')
                             <th>Muddati</th>
+                            <th>contract_date</th>
+                            <th>installation_date</th>
                         @endunlessrole
                         <th>Amallar</th>
                     </tr>
@@ -49,6 +51,8 @@
                             <td>{{ $point->address }}</td>
                             @unlessrole('operator_dealer')
                                 <td>{{ $point->filter_expire_date->format('Y-m-d') }}</td>
+                                <td>{{ $point->contract_date }}</td>
+                                <td>{{ $point->installation_date }}</td>
                             @endunlessrole
                             <td>
                                 <div class="d-flex">

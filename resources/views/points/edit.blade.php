@@ -56,7 +56,8 @@
                     <div class="row g-2">
                         <div class="col mb-3">
                             <label for="comment" class="form-label">Izoh</label>
-                            <input type="text" id="comment" class="form-control" name="comment" value="{{ $point->comment }}"
+                            <input type="text" id="comment" class="form-control" name="comment"
+                                   value="{{ $point->comment }}"
                                    placeholder="Izoh"/>
                         </div>
                     </div>
@@ -81,6 +82,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="row g-2">
                             <div class="col mb-3">
                                 <label for="filter_expire" class="form-label">Almashtirish sanasi</label>
@@ -89,6 +91,37 @@
                                        required min="1" max="12"/>
                             </div>
                         </div>
+
+
+
+{{--                        <div class="row g-2">--}}
+{{--                            <div class="col mb-3">--}}
+{{--                                <label for="filter_expire" class="form-label">filter_expire_date</label>--}}
+{{--                                <input type="date" id="filter_expire" class="form-control" name="filter_expire_date"--}}
+{{--                                       value="{{ $product->filter_expire_date }}"--}}
+{{--                                       required min="1" max="12"/>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="row g-2">--}}
+{{--                            <div class="col mb-3">--}}
+{{--                                <label for="filter_expire" class="form-label"> contract_date </label>--}}
+{{--                                <input type="date" id="filter_expire" class="form-control" name="contract_date"--}}
+{{--                                       value="{{ $product->contract_date}}"--}}
+{{--                                       required min="1" max="12"/>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="row g-2">--}}
+{{--                            <div class="col mb-3">--}}
+{{--                                <label for="filter_expire" class="form-label"> installation_date </label>--}}
+{{--                                <input type="date" id="filter_expire" class="form-control" name="installation_date"--}}
+{{--                                       value="{{  $product-> installation_date}}"--}}
+{{--                                       required min="1" max="12"/>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+
                         @endrole
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Yopish
