@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Models\Task;
 use App\Models\User;
 use App\Services\AgentProductService;
-use App\Services\SearchService;
 use Illuminate\Http\Request;
 use App\Http\Requests\AgentProducts\StoreRequest;
 use App\Http\Requests\AgentProducts\UpdateRequest;
@@ -62,7 +61,7 @@ class AgentController extends Controller
         return redirect()->route('agent.products', [$agent->id])->with($res);
     }
     public function product_update(UpdateRequest $request, User $agent, AgentProduct $product){
-        $res = $this->service->update($request->validated(),$agent, $product);
+        $res = $this->productService->update($request->validated(),$agent, $product);
         return redirect()->back()->with($res['key'], $res['message']);
     }
     public function agent_tasks(User $agent){

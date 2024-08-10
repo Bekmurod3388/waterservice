@@ -55,7 +55,7 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $this->service->create($request->validated());
+        $this->serviceProduct->create($request->validated());
 
         return back()->with('success', 'Servis muvaffaqiyatli yaratildi!');
     }
